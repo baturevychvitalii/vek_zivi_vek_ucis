@@ -70,3 +70,4 @@ I couldn’t lift any weight. | No podía levantar ningún peso.<br>No podía mo
 I thought it was going to rain. | Pensé que iba a llover.<br>Used for a prediction or expectation in the past. | level::A2 cardtype::production grammar::structure::ir_a grammar::tense::preterite
 We spoke about a simple topic and at a slower speed. | Hablamos acerca de un tema sencillo y a una velocidad más lenta. | level::A2 cardtype::production vocab::adjective::sencillo freq::top2000
 Besides, there are many mushrooms in the forest. | Además, hay muchas setas en el bosque.<br>Además, el bosque es muy bonito. | level::A2 cardtype::production vocab::connector::ademas freq::top1000
+Bring the girl, and you will pay off your debt. | Trae a la chica, y saldarás tu deuda.<br>saldar = to settle/pay off a debt. | level::B1 cardtype::production vocab::verb::traer grammar::imperative
