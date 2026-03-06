@@ -1,0 +1,75 @@
+I want to learn Spanish. | Quiero aprender español.<br>Quiero hablar mejor. | level::A1 cardtype::production freq::top500 vocab::verb::querer
+I need more time. | Necesito más tiempo.<br>Necesito ayuda. | level::A1 cardtype::production freq::top500 vocab::verb::necesitar
+I don’t understand. | No entiendo.<br>No entiendo la pregunta. | level::A1 cardtype::production freq::top500 vocab::verb::entender
+Can you help me? | ¿Puedes ayudarme?<br>¿Puedes repetir? | level::A1 cardtype::production vocab::verb::poder
+I am tired today. | Estoy cansado hoy.<br>Estoy muy cansado. | level::A1 cardtype::production grammar::ser_estar vocab::adjective::cansado
+I am at home. | Estoy en casa.<br>Estoy en el trabajo. | level::A1 cardtype::production grammar::ser_estar vocab::place::casa
+I have a problem. | Tengo un problema.<br>Tengo una idea. | level::A1 cardtype::production vocab::verb::tener
+I am going to study now. | Voy a estudiar ahora.<br>Voy a llamar a María. | level::A1 cardtype::production grammar::tense::present vocab::verb::ir
+I went yesterday. | Fui ayer.<br>Fui al supermercado. | level::A1 cardtype::production grammar::tense::preterite vocab::verb::ir
+I want to eat something. | Quiero comer algo.<br>Quiero beber agua. | level::A1 cardtype::production vocab::verb::querer
+No tengo dinero. | I don’t have money.<br>Common confusion: “dinero” is uncountable. | level::A1 cardtype::production vocab::noun::dinero
+¿Dónde estás? | Where are you?<br>Uses estar for location. | level::A1 cardtype::production grammar::ser_estar
+Vamos al cine. | We are going to the cinema.<br>Ir + a for movement. | level::A1 cardtype::production vocab::verb::ir grammar::structure::ir_a
+Hace mucho frío. | It is very cold.<br>Uses hacer for weather. | level::A1 cardtype::production vocab::verb::hacer grammar::structure::weather
+Me gusta el café. | I like coffee.<br>Literally: Coffee pleases me. | level::A1 cardtype::production grammar::structure::gustar
+How to express future plans (going to) | Ir a + infinitivo<br>Voy a estudiar.<br>Vamos a salir. | level::A1 cardtype::pattern grammar::structure::ir_a
+How to say what you like | Me gusta(n) + noun/infinitive<br>Me gusta el libro.<br>Me gustan los libros. | level::A1 cardtype::pattern grammar::structure::gustar
+How to talk about possession | Tener + noun<br>Tengo un coche.<br>Tengo dos hermanos. | level::A1 cardtype::pattern vocab::verb::tener
+How to describe temporary states | Estar + adjective<br>Estoy cansado.<br>Estoy feliz. | level::A1 cardtype::pattern grammar::ser_estar
+Then we can eat. | Entonces podemos comer.<br>Entonces hablamos. | level::A1 cardtype::production vocab::connector::entonces
+I was tired, so I went home. | Estaba cansado, entonces fui a casa.<br>Llovía, entonces no salí. | level::A1 cardtype::production vocab::connector::entonces grammar::tense::preterite
+Are you having fun? | ¿Te diviertes?<br>¿Te diviertes en la fiesta? | level::A1 cardtype::production grammar::pronouns::reflexive grammar::structure::divertirse
+I have fun on weekends. | Me divierto los fines de semana.<br>Me divierto con mis amigos. | level::A1 cardtype::production grammar::pronouns::reflexive grammar::structure::divertirse
+We have to study. | Hay que estudiar.<br>Hay que practicar todos los días. | level::A1 cardtype::production grammar::structure::hay_que
+You have to work tomorrow. | Hay que trabajar mañana.<br>Hay que llegar temprano. | level::A1 cardtype::production grammar::structure::hay_que
+Express obligation in general (no specific subject) | Hay que + infinitivo<br>Hay que comer bien.<br>Hay que dormir más. | level::A1 cardtype::pattern grammar::structure::hay_que
+I see it. | Lo veo.<br>No lo entiendo. | level::A1 cardtype::production grammar::pronouns::direct
+I buy them (feminine things). | Las compro.<br>Las necesito hoy. | level::A1 cardtype::production grammar::pronouns::direct
+I give him the book. | Le doy el libro.<br>Le mando un mensaje. | level::A1 cardtype::production grammar::pronouns::indirect
+I give it to him. | Se lo doy.<br>Se lo explico después. | level::A1 cardtype::production grammar::pronouns::direct grammar::pronouns::indirect
+Indirect object pronouns (to me, to you, to him/her) | me, te, le, nos, os, les<br>Me ayudas.<br>Le hablo. | level::A1 cardtype::pattern grammar::pronouns::indirect
+Direct object pronouns (it, them) | lo, la, los, las<br>Lo quiero.<br>Las veo. | level::A1 cardtype::pattern grammar::pronouns::direct
+I do my homework every day. | Yo hago la tarea todos los días.<br>Hago ejercicio también. | level::A1 cardtype::production grammar::tense::present vocab::verb::hacer freq::top500
+I made dinner yesterday. | Ayer hice la cena.<br>Hice la compra antes. | level::A1 cardtype::production grammar::tense::preterite vocab::verb::hacer freq::top500
+Do you know the answer? | ¿Sabes la respuesta?<br>¿Sabes dónde está? | level::A1 cardtype::production grammar::tense::present vocab::verb::saber freq::top500
+I don’t know the correct answer. | No sé la respuesta correcta.<br>No sé qué hacer. | level::A1 cardtype::production grammar::tense::present vocab::verb::saber freq::top500
+If you knew the truth, you would change your mind. | Si supieras la verdad, cambiarías de opinión.<br>Si supieras lo que pasó, vendrías. | level::B2 cardtype::production grammar::tense::subjunctive vocab::verb::saber freq::less_common
+More of the same. | Otro de lo mismo.<br>Siempre es otro de lo mismo con él. | level::B1 cardtype::production vocab::expression::otro_de_lo_mismo freq::top2000
+Otro de lo mismo. | More of the same.<br>Se queja, pero es otro de lo mismo. | level::B1 cardtype::recognition vocab::expression::otro_de_lo_mismo freq::top2000
+The food was absolutely delicious. | La comida estuvo riquísima.<br>La cena estuvo riquísima. | level::A2 cardtype::production grammar::adjective::superlative vocab::adjective::rico
+What would you like to order? | ¿Qué vas a pedir?<br>Note: In Spain: ¿Qué quieres pedir? | level::A2 cardtype::production grammar::structure::ir_a
+I would like a glass of water. | Me gustaría un vaso de agua.<br>Quisiera un vaso de agua. | level::A2 cardtype::production grammar::modal_verbs::querer
+May I have the menu? | ¿Me traés el menú?<br>Note: In Spain: ¿Me traes el menú? | level::A2 cardtype::production grammar::structure::voseo
+How much is it? | ¿Cuánto cuesta?<br>¿Cuánto sale? | level::A1 cardtype::production vocab::verb::costar freq::top1000
+Cash or card? | ¿Efectivo o tarjeta?<br>¿Pagás en efectivo o con tarjeta? | level::A1 cardtype::production vocab::noun::efectivo freq::top1000
+¿Querés algo más? | Would you like anything else?<br>Note: In Spain: ¿Quieres algo más? | level::A2 cardtype::recognition grammar::structure::voseo
+To ask the price | ¿Cuánto cuesta?<br>¿Cuánto sale? | level::A1 cardtype::pattern vocab::verb::costar freq::top1000
+No lo estoy diciendo, pero bueno, lo estás diciendo tú. | I’m not saying it, but well, you are saying it.<br>Note: Emphasizes contrast. | level::B1 cardtype::recognition grammar::tense::present
+La casa no está muy limpia, la verdad. | The house is not very clean, really.<br>La oficina tampoco está muy limpia. | level::A2 cardtype::production grammar::structure::ser_estar
+¿Qué te molesta tanto? | What bothers you so much?<br>¿Qué te molesta más? | level::A2 cardtype::production grammar::adjective_adverb::intensifier vocab::adverb::tanto
+Bueno, mira, cambiemos de tema. | Well, look, let’s change the topic.<br>Bueno, mira, cambiemos de plan. | level::B1 cardtype::production grammar::tense::subjunctive vocab::verb::cambiar
+¿Puedo darte un abrazo? | Can I give you a hug?<br>Puedo darte un consejo. | level::A2 cardtype::production grammar::pronouns::indirect vocab::verb::dar
+¿Qué comieron? | What did you (plural) eat?<br>¿Qué tomaron? | level::A2 cardtype::recognition grammar::tense::preterite
+¿Y qué hicieron para celebrar su cumpleaños? | And what did you do to celebrate your birthday?<br>¿Qué hicieron anoche? | level::A2 cardtype::recognition grammar::tense::preterite
+I danced with a friend. | Bailé con una amiga.<br>Bailé toda la noche. | level::A2 cardtype::production grammar::tense::preterite vocab::verb::bailar
+I waited maybe half an hour. | Esperé tal vez media hora.<br>Esperé veinte minutos. | level::A2 cardtype::production grammar::tense::preterite vocab::verb::esperar
+No podía levantar ningún peso. | I couldn’t lift any weight.<br>No podía mover el brazo. | level::B1 cardtype::recognition grammar::tense::imperfect grammar::modal_verbs::poder
+Completed past actions | Pretérito = finished action in the past.<br>Bailé.<br>Comieron. | level::A2 cardtype::pattern grammar::tense::preterite
+Ongoing or repeated past situations | Imperfecto = background, repeated, or ongoing past.<br>Podía.<br>Era difícil. | level::B1 cardtype::pattern grammar::tense::imperfect
+Less than I would like. | Menos de lo que me gustaría.<br>Más de lo que esperaba. | level::B1 cardtype::production grammar::tense::conditional
+Structure to compare with desire | Menos/más de lo que + verbo.<br>Menos de lo que pensaba.<br>Más de lo que creía. | level::B1 cardtype::pattern grammar::structure::comparatives
+If you put it to me that way... | Si me lo pones así...<br>Si me lo explicás así... | level::B1 cardtype::production grammar::pronouns::indirect
+Pronoun order with two objects | (me/te/le/nos) + (lo/la/los/las) + verbo.<br>Me lo decís.<br>Te la mando. | level::B1 cardtype::pattern grammar::pronouns::direct grammar::pronouns::indirect
+You can feel the cold wind. | Se siente el viento frío.<br>Se siente el aire frío. | level::A2 cardtype::production vocab::noun::viento freq::top2000
+It rains often here in Barcelona. | Aquí en Barcelona llueve seguido.<br>Aquí llueve mucho en invierno. | level::B1 cardtype::production vocab::adverb::seguido freq::less_common
+I thought it was going to rain. | Pensé que iba a llover.<br>Pensé que iba a nevar. | level::A2 cardtype::production grammar::structure::ir_a grammar::tense::preterite
+Pensé que iba a llover. | I thought it was going to rain.<br>Used for a prediction or expectation in the past. | level::A2 cardtype::recognition grammar::structure::ir_a grammar::tense::preterite
+We spoke about a simple topic and at a slower speed. | Hablamos acerca de un tema sencillo y a una velocidad más lenta.<br>Hablamos de algo sencillo. | level::A2 cardtype::production vocab::adjective::sencillo freq::top2000
+Hablamos acerca de un tema sencillo y a una velocidad más lenta. | We spoke about a simple topic and at a slower speed. | level::A2 cardtype::recognition vocab::adjective::sencillo freq::top2000
+Spring, summer, autumn, winter | primavera, verano, otoño, invierno<br>Me gusta el otoño. | level::A1 cardtype::production vocab::noun::estaciones freq::top1000
+primavera, verano, otoño, invierno | spring, summer, autumn, winter | level::A1 cardtype::recognition vocab::noun::estaciones freq::top1000
+Structure to add information | Además + oración.<br>Además, hay muchas setas.<br>Además, quiero aprender más. | level::A2 cardtype::pattern vocab::connector::ademas freq::top1000
+Además, hay muchas setas en el bosque. | Besides, there are many mushrooms in the forest.<br>Además, el bosque es muy bonito. | level::A2 cardtype::recognition vocab::connector::ademas freq::top1000
+Weather description sentence | No hace frío, no hace calor, hace viento y llueve un poco.<br>Hace sol y no llueve. | level::A1 cardtype::production vocab::expression::weather freq::top1000
+No hace frío, no hace calor, hace viento y llueve un poco. | It’s not cold, it’s not hot, it’s windy and it rains a bit. | level::A1 cardtype::recognition vocab::expression::weather freq::top1000

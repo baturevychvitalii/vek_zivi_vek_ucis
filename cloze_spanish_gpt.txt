@@ -1,0 +1,33 @@
+Yo {{c1::soy::verbo ser, identidad}} estudiante. | Use “ser” for identity and permanent characteristics. | level::A1 cardtype::cloze grammar::ser_estar grammar::tense::present
+Madrid {{c1::está::verbo estar, ubicación}} en España. | Use “estar” for location. | level::A1 cardtype::cloze grammar::ser_estar grammar::tense::present
+Ayer {{c1::fui::verbo ir, pasado}} al trabajo. | “Ir” in preterite is irregular. | level::A1 cardtype::cloze grammar::tense::preterite vocab::verb::ir
+No tengo tiempo {{c1::para::indica propósito}} estudiar. | “Para” expresses purpose. | level::A1 cardtype::cloze grammar::structure::para vocab::connector::para
+Este regalo es {{c1::para::indica destinatario}} ti. | Use “para” for recipient. | level::A1 cardtype::cloze grammar::structure::para vocab::connector::para
+Siempre desayuno {{c1::antes de::expresión de tiempo}} trabajar. | Common time connector. | level::A1 cardtype::cloze vocab::connector::antes_de grammar::structure::time
+{{c1::se::cambio obligatorio antes de lo/la/los/las}} lo doy. | “Le/les” becomes “se” before a direct object pronoun. | level::A1 cardtype::cloze grammar::pronouns::indirect grammar::pronouns::direct
+{{c1::Me::pronombre indirecto}} das el dinero. | Means “You give me the money.” | level::A1 cardtype::cloze grammar::pronouns::indirect
+No {{c1::lo::pronombre directo masculino}} entiendo. | Refers to a masculine singular object. | level::A1 cardtype::cloze grammar::pronouns::direct
+¿{{c1::Te::pronombre reflexivo}} diviertes aquí? | “Divertirse” is reflexive. | level::A1 cardtype::cloze grammar::pronouns::reflexive grammar::structure::divertirse
+Yo {{c1::hago::verbo hacer, presente}} la tarea todos los días. | I do my homework every day. | level::A1 cardtype::cloze grammar::tense::present vocab::verb::hacer freq::top500
+Ayer {{c1::hice::verbo hacer, pasado}} la cena. | I made dinner yesterday. | level::A1 cardtype::cloze grammar::tense::preterite vocab::verb::hacer freq::top500
+Si {{c1::supieras::verbo saber, subjuntivo}} la verdad, cambiarías de opinión. | If you knew the truth, you would change your mind. | level::B2 cardtype::cloze grammar::tense::subjunctive vocab::verb::saber freq::less_common
+No {{c1::sé::verbo saber, presente}} la respuesta correcta. | I don’t know the correct answer. | level::A1 cardtype::cloze grammar::tense::present vocab::verb::saber freq::top500
+Que justo en la raya afloja {{c1::al::contracción de a + el}} llegar. | “Al” = a + el, used before infinitive to express “upon doing something”. | level::B1 cardtype::cloze grammar::structure::al_plus_infinitive vocab::connector::al freq::top1000
+{{c1::Otro de lo mismo::expresión para repetir lo anterior}}. | Expression meaning “more of the same” or “the same again”. | level::B1 cardtype::cloze vocab::expression::otro_de_lo_mismo freq::top2000
+La comida estuvo {{c1::riquísima::superlativo de rica}}. | “Riquísima” = very / absolutely delicious. Superlative formed with -ísimo/a. | level::A2 cardtype::cloze grammar::adjective::superlative vocab::adjective::rico freq::top2000
+¿Qué {{c1::vas a pedir::voseo, ir a + inf (syn. solicitar, requerir)}}? | Used in Argentina with voseo to ask what someone will order. | level::A2 cardtype::cloze grammar::structure::ir_a grammar::structure::voseo
+¿Pagás en {{c1::efectivo::dinero físico}} o con tarjeta? | “Efectivo” means cash. | level::A1 cardtype::cloze vocab::noun::efectivo freq::top1000
+Que te molesta {{c1::tanto::adverbio de cantidad}}? | “Tanto” emphasizes degree/amount. | level::A2 cardtype::cloze grammar::adjective_adverb::intensifier vocab::adverb::tanto
+Bueno, mira, {{c1::cambiemos::subjuntivo de cambiar}} de tema. | “Cambiemos” = let’s change (subjunctive first person plural). | level::B1 cardtype::cloze grammar::tense::subjunctive vocab::verb::cambiar
+Puedo {{c1::darte::pronombre reflexivo combinado}} un abrazo? | “Darte” = give you (reflexive/indirect object pronoun attached to infinitive). | level::A2 cardtype::cloze grammar::pronouns::indirect vocab::verb::dar
+¿Qué {{c1::comieron::pretérito de comer (ustedes)}}? | Preterite 3rd person plural. Action completed in the past. | level::A2 cardtype::cloze grammar::tense::preterite vocab::verb::comer freq::top1000
+¿Y qué {{c1::hicieron::pretérito irregular de hacer}} para celebrar su cumpleaños? | Irregular preterite: hacer → hice, hiciste, hizo, hicimos, hicieron. | level::A2 cardtype::cloze grammar::tense::preterite vocab::verb::hacer freq::top500
+No {{c1::podía::imperfecto de poder}} levantar ningún peso. | Imperfect expresses ongoing/continuous past ability. | level::B1 cardtype::cloze grammar::tense::imperfect grammar::modal_verbs::poder
+Menos de lo que me {{c1::gustaría::condicional de gustar}}. | Conditional expresses hypothetical or desire (“would like”). | level::B1 cardtype::cloze grammar::tense::conditional
+Si me {{c1::lo::pronombre directo}} pones así... | “Lo” refers to an idea/situation already mentioned. | level::B1 cardtype::cloze grammar::pronouns::direct
+Se siente el viento {{c1::frío::adjetivo que describe el viento}}. | “Frío” describes the noun “viento”. | level::A2 cardtype::cloze vocab::adjective::frio freq::top2000
+Aquí en Barcelona llueve {{c1::seguido::adverbio, significa con frecuencia}}. | “Seguido” = often / frequently. | level::B1 cardtype::cloze vocab::adverb::seguido freq::less_common
+Pensé que {{c1::iba a llover::ir a + infinitivo para predicción pasada}}. | “Iba a + infinitivo” expresses a future seen from the past. | level::B1 cardtype::cloze grammar::structure::ir_a grammar::tense::preterite
+Hablamos acerca de un tema {{c1::sencillo::adjetivo, fácil}} y a una velocidad más lenta. | “Sencillo” = simple, easy to understand. | level::A2 cardtype::cloze vocab::adjective::sencillo freq::top2000
+{{c1::Además::conector que añade información}}, hay muchas setas en el bosque. | “Además” adds extra information, similar to “also / furthermore”. | level::A2 cardtype::cloze vocab::connector::ademas freq::top1000
+No hace frío, no hace calor, {{c1::hace viento::expresión meteorológica}} y llueve un poco. | Weather in Spanish often uses “hacer”: hace frío, hace calor, hace viento. | level::A1 cardtype::cloze vocab::expression::hace_viento freq::top1000
