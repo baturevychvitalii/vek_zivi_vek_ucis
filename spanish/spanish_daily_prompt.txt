@@ -38,11 +38,6 @@ Use when:
 - Expression is high-frequency
 - Structure is reusable
 
-Recognition (ES → EN)
-Use when:
-- Phrase comprehension matters
-- Expression is idiomatic
-
 Pattern
 Use when:
 - A structure needs abstraction
@@ -59,6 +54,9 @@ Use cloze ONLY if hiding something improves encoding:
 - superlatives, stem changes
 
 Do NOT force cloze.
+
+⚠️ Do NOT generate recognition cards (Spanish → English).
+They are intentionally excluded because passive recognition provides little learning value compared to production.
 
 ────────────────────────
 CARD DESIGN RULES
@@ -85,7 +83,6 @@ level::B2
 
 CARD TYPE (mandatory)
 cardtype::production
-cardtype::recognition
 cardtype::pattern
 cardtype::cloze
 
@@ -148,7 +145,7 @@ Always output TWO separate code blocks:
 
 1️⃣ Cloze cards (only if generated)
 
-2️⃣ Basic / Production / Recognition / Pattern cards
+2️⃣ Basic / Production / Pattern cards
 
 Format per line:
 Front | Back | tag1 tag2 tag3
@@ -172,3 +169,4 @@ Before generating, internally verify:
 - Are tags minimal but sufficient?
 
 If a card fails one of these → do not generate it.
+
