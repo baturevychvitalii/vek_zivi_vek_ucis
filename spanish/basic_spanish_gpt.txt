@@ -8,11 +8,6 @@ I have a problem. | Tengo un problema.<br>Tengo una idea. | level::A1 cardtype::
 I am going to study now. | Voy a estudiar ahora.<br>Voy a llamar a María. | level::A1 cardtype::production grammar::tense::present vocab::verb::ir
 I went yesterday. | Fui ayer.<br>Fui al supermercado. | level::A1 cardtype::production grammar::tense::preterite vocab::verb::ir
 I want to eat something. | Quiero comer algo.<br>Quiero beber agua. | level::A1 cardtype::production vocab::verb::querer
-No tengo dinero. | I don’t have money.<br>Common confusion: “dinero” is uncountable. | level::A1 cardtype::production vocab::noun::dinero
-¿Dónde estás? | Where are you?<br>Uses estar for location. | level::A1 cardtype::production grammar::ser_estar
-Vamos al cine. | We are going to the cinema.<br>Ir + a for movement. | level::A1 cardtype::production vocab::verb::ir grammar::structure::ir_a
-Hace mucho frío. | It is very cold.<br>Uses hacer for weather. | level::A1 cardtype::production vocab::verb::hacer grammar::structure::weather
-Me gusta el café. | I like coffee.<br>Literally: Coffee pleases me. | level::A1 cardtype::production grammar::structure::gustar
 How to express future plans (going to) | Ir a + infinitivo<br>Voy a estudiar.<br>Vamos a salir. | level::A1 cardtype::pattern grammar::structure::ir_a
 How to say what you like | Me gusta(n) + noun/infinitive<br>Me gusta el libro.<br>Me gustan los libros. | level::A1 cardtype::pattern grammar::structure::gustar
 How to talk about possession | Tener + noun<br>Tengo un coche.<br>Tengo dos hermanos. | level::A1 cardtype::pattern vocab::verb::tener
@@ -36,7 +31,6 @@ Do you know the answer? | ¿Sabes la respuesta?<br>¿Sabes dónde está? | level
 I don’t know the correct answer. | No sé la respuesta correcta.<br>No sé qué hacer. | level::A1 cardtype::production grammar::tense::present vocab::verb::saber freq::top500
 If you knew the truth, you would change your mind. | Si supieras la verdad, cambiarías de opinión.<br>Si supieras lo que pasó, vendrías. | level::B2 cardtype::production grammar::tense::subjunctive vocab::verb::saber freq::less_common
 More of the same. | Otro de lo mismo.<br>Siempre es otro de lo mismo con él. | level::B1 cardtype::production vocab::expression::otro_de_lo_mismo freq::top2000
-Otro de lo mismo. | More of the same.<br>Se queja, pero es otro de lo mismo. | level::B1 cardtype::recognition vocab::expression::otro_de_lo_mismo freq::top2000
 The food was absolutely delicious. | La comida estuvo riquísima.<br>La cena estuvo riquísima. | level::A2 cardtype::production grammar::adjective::superlative vocab::adjective::rico
 What would you like to order? | ¿Qué vas a pedir?<br>Note: In Spain: ¿Qué quieres pedir? | level::A2 cardtype::production grammar::structure::ir_a
 I would like a glass of water. | Me gustaría un vaso de agua.<br>Quisiera un vaso de agua. | level::A2 cardtype::production grammar::modal_verbs::querer
@@ -54,7 +48,6 @@ Bueno, mira, cambiemos de tema. | Well, look, let’s change the topic.<br>Bueno
 ¿Y qué hicieron para celebrar su cumpleaños? | And what did you do to celebrate your birthday?<br>¿Qué hicieron anoche? | level::A2 cardtype::recognition grammar::tense::preterite
 I danced with a friend. | Bailé con una amiga.<br>Bailé toda la noche. | level::A2 cardtype::production grammar::tense::preterite vocab::verb::bailar
 I waited maybe half an hour. | Esperé tal vez media hora.<br>Esperé veinte minutos. | level::A2 cardtype::production grammar::tense::preterite vocab::verb::esperar
-No podía levantar ningún peso. | I couldn’t lift any weight.<br>No podía mover el brazo. | level::B1 cardtype::recognition grammar::tense::imperfect grammar::modal_verbs::poder
 Completed past actions | Pretérito = finished action in the past.<br>Bailé.<br>Comieron. | level::A2 cardtype::pattern grammar::tense::preterite
 Ongoing or repeated past situations | Imperfecto = background, repeated, or ongoing past.<br>Podía.<br>Era difícil. | level::B1 cardtype::pattern grammar::tense::imperfect
 Less than I would like. | Menos de lo que me gustaría.<br>Más de lo que esperaba. | level::B1 cardtype::production grammar::tense::conditional
@@ -64,12 +57,16 @@ Pronoun order with two objects | (me/te/le/nos) + (lo/la/los/las) + verbo.<br>Me
 You can feel the cold wind. | Se siente el viento frío.<br>Se siente el aire frío. | level::A2 cardtype::production vocab::noun::viento freq::top2000
 It rains often here in Barcelona. | Aquí en Barcelona llueve seguido.<br>Aquí llueve mucho en invierno. | level::B1 cardtype::production vocab::adverb::seguido freq::less_common
 I thought it was going to rain. | Pensé que iba a llover.<br>Pensé que iba a nevar. | level::A2 cardtype::production grammar::structure::ir_a grammar::tense::preterite
-Pensé que iba a llover. | I thought it was going to rain.<br>Used for a prediction or expectation in the past. | level::A2 cardtype::recognition grammar::structure::ir_a grammar::tense::preterite
 We spoke about a simple topic and at a slower speed. | Hablamos acerca de un tema sencillo y a una velocidad más lenta.<br>Hablamos de algo sencillo. | level::A2 cardtype::production vocab::adjective::sencillo freq::top2000
-Hablamos acerca de un tema sencillo y a una velocidad más lenta. | We spoke about a simple topic and at a slower speed. | level::A2 cardtype::recognition vocab::adjective::sencillo freq::top2000
 Spring, summer, autumn, winter | primavera, verano, otoño, invierno<br>Me gusta el otoño. | level::A1 cardtype::production vocab::noun::estaciones freq::top1000
-primavera, verano, otoño, invierno | spring, summer, autumn, winter | level::A1 cardtype::recognition vocab::noun::estaciones freq::top1000
 Structure to add information | Además + oración.<br>Además, hay muchas setas.<br>Además, quiero aprender más. | level::A2 cardtype::pattern vocab::connector::ademas freq::top1000
-Además, hay muchas setas en el bosque. | Besides, there are many mushrooms in the forest.<br>Además, el bosque es muy bonito. | level::A2 cardtype::recognition vocab::connector::ademas freq::top1000
-Weather description sentence | No hace frío, no hace calor, hace viento y llueve un poco.<br>Hace sol y no llueve. | level::A1 cardtype::production vocab::expression::weather freq::top1000
-No hace frío, no hace calor, hace viento y llueve un poco. | It’s not cold, it’s not hot, it’s windy and it rains a bit. | level::A1 cardtype::recognition vocab::expression::weather freq::top1000
+Not colod, not hot, windy & rains a bit | No hace frío, no hace calor, hace viento y llueve un poco.<br>Hace sol y no llueve. | level::A1 cardtype::production vocab::expression::weather freq::top1000
+I don’t have money. | No tengo dinero.<br>Common confusion: “dinero” is uncountable. | level::A1 cardtype::production vocab::noun::dinero
+Where are you? | ¿Dónde estás?<br>Uses estar for location. | level::A1 cardtype::production grammar::ser_estar
+We are going to the cinema. | Vamos al cine.<br>Ir + a for movement. | level::A1 cardtype::production vocab::verb::ir grammar::structure::ir_a
+It is very cold. | Hace mucho frío.<br>Uses hacer for weather. | level::A1 cardtype::production vocab::verb::hacer grammar::structure::weather
+I like coffee. | Me gusta el café.<br>Literally: Coffee pleases me. | level::A1 cardtype::production grammar::structure::gustar
+I couldn’t lift any weight. | No podía levantar ningún peso.<br>No podía mover el brazo. | level::B1 cardtype::production grammar::tense::imperfect grammar::modal_verbs::poder
+I thought it was going to rain. | Pensé que iba a llover.<br>Used for a prediction or expectation in the past. | level::A2 cardtype::production grammar::structure::ir_a grammar::tense::preterite
+We spoke about a simple topic and at a slower speed. | Hablamos acerca de un tema sencillo y a una velocidad más lenta. | level::A2 cardtype::production vocab::adjective::sencillo freq::top2000
+Besides, there are many mushrooms in the forest. | Además, hay muchas setas en el bosque.<br>Además, el bosque es muy bonito. | level::A2 cardtype::production vocab::connector::ademas freq::top1000
