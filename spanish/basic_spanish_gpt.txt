@@ -71,3 +71,7 @@ I thought it was going to rain. | Pensé que iba a llover.<br>Used for a predict
 We spoke about a simple topic and at a slower speed. | Hablamos acerca de un tema sencillo y a una velocidad más lenta. | level::A2 cardtype::production vocab::adjective::sencillo freq::top2000
 Besides, there are many mushrooms in the forest. | Además, hay muchas setas en el bosque.<br>Además, el bosque es muy bonito. | level::A2 cardtype::production vocab::connector::ademas freq::top1000
 Bring the girl, and you will pay off your debt. | Trae a la chica, y saldarás tu deuda.<br>saldar = to settle/pay off a debt. | level::B1 cardtype::production vocab::verb::traer grammar::imperative
+This is my metro card. I have two rides left. | Esta es mi tarjeta del metro. Me quedan dos viajes.<br>Me quedan tres intentos. | level::A2 cardtype::production vocab::verb::quedar freq::top1000
+The Sagrada Familia is over there. | La Sagrada Familia queda por allá.<br>El museo queda cerca. | level::A2 cardtype::production vocab::verb::quedar freq::top1000
+Let’s go to an Italian restaurant about two blocks from here. | Vamos a un restaurante italiano que queda acá como a dos cuadritas.<br>El café queda a dos cuadras. | level::A2 cardtype::production vocab::verb::quedar freq::top1000
+I can walk around the city during the day and then stay at a friend’s house. | Puedo caminar por la ciudad durante el día y luego me quedo a dormir en la casa de un amigo.<br>Me quedo a dormir en tu casa. | level::A2 cardtype::production grammar::pronouns::reflexive vocab::verb::quedar freq::top1000
