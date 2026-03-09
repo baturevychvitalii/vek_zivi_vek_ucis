@@ -37,15 +37,7 @@ I would like a glass of water. | Me gustaría un vaso de agua.<br>Quisiera un va
 May I have the menu? | ¿Me traés el menú?<br>Note: In Spain: ¿Me traes el menú? | level::A2 cardtype::production grammar::structure::voseo
 How much is it? | ¿Cuánto cuesta?<br>¿Cuánto sale? | level::A1 cardtype::production vocab::verb::costar freq::top1000
 Cash or card? | ¿Efectivo o tarjeta?<br>¿Pagás en efectivo o con tarjeta? | level::A1 cardtype::production vocab::noun::efectivo freq::top1000
-¿Querés algo más? | Would you like anything else?<br>Note: In Spain: ¿Quieres algo más? | level::A2 cardtype::recognition grammar::structure::voseo
 To ask the price | ¿Cuánto cuesta?<br>¿Cuánto sale? | level::A1 cardtype::pattern vocab::verb::costar freq::top1000
-No lo estoy diciendo, pero bueno, lo estás diciendo tú. | I’m not saying it, but well, you are saying it.<br>Note: Emphasizes contrast. | level::B1 cardtype::recognition grammar::tense::present
-La casa no está muy limpia, la verdad. | The house is not very clean, really.<br>La oficina tampoco está muy limpia. | level::A2 cardtype::production grammar::structure::ser_estar
-¿Qué te molesta tanto? | What bothers you so much?<br>¿Qué te molesta más? | level::A2 cardtype::production grammar::adjective_adverb::intensifier vocab::adverb::tanto
-Bueno, mira, cambiemos de tema. | Well, look, let’s change the topic.<br>Bueno, mira, cambiemos de plan. | level::B1 cardtype::production grammar::tense::subjunctive vocab::verb::cambiar
-¿Puedo darte un abrazo? | Can I give you a hug?<br>Puedo darte un consejo. | level::A2 cardtype::production grammar::pronouns::indirect vocab::verb::dar
-¿Qué comieron? | What did you (plural) eat?<br>¿Qué tomaron? | level::A2 cardtype::recognition grammar::tense::preterite
-¿Y qué hicieron para celebrar su cumpleaños? | And what did you do to celebrate your birthday?<br>¿Qué hicieron anoche? | level::A2 cardtype::recognition grammar::tense::preterite
 I danced with a friend. | Bailé con una amiga.<br>Bailé toda la noche. | level::A2 cardtype::production grammar::tense::preterite vocab::verb::bailar
 I waited maybe half an hour. | Esperé tal vez media hora.<br>Esperé veinte minutos. | level::A2 cardtype::production grammar::tense::preterite vocab::verb::esperar
 Completed past actions | Pretérito = finished action in the past.<br>Bailé.<br>Comieron. | level::A2 cardtype::pattern grammar::tense::preterite
@@ -75,3 +67,11 @@ This is my metro card. I have two rides left. | Esta es mi tarjeta del metro. Me
 The Sagrada Familia is over there. | La Sagrada Familia queda por allá.<br>El museo queda cerca. | level::A2 cardtype::production vocab::verb::quedar freq::top1000
 Let’s go to an Italian restaurant about two blocks from here. | Vamos a un restaurante italiano que queda acá como a dos cuadritas.<br>El café queda a dos cuadras. | level::A2 cardtype::production vocab::verb::quedar freq::top1000
 I can walk around the city during the day and then stay at a friend’s house. | Puedo caminar por la ciudad durante el día y luego me quedo a dormir en la casa de un amigo.<br>Me quedo a dormir en tu casa. | level::A2 cardtype::production grammar::pronouns::reflexive vocab::verb::quedar freq::top1000
+Would you like anything else? | ¿Querés algo más?<br>Note: In Spain: ¿Quieres algo más? | level::A2 cardtype::production grammar::structure::voseo
+I’m not saying it, but well, you are saying it. | No lo estoy diciendo, pero bueno, lo estás diciendo tú.<br>Emphasizes contrast. | level::B1 cardtype::production grammar::tense::present
+The house is not very clean, honestly. | La casa no está muy limpia, la verdad.<br>La oficina tampoco está muy limpia. | level::A2 cardtype::production grammar::structure::ser_estar
+What bothers you so much? | ¿Qué te molesta tanto?<br>¿Qué te molesta más? | level::A2 cardtype::production vocab::adverb::tanto
+Well, look, let’s change the topic. | Bueno, mira, cambiemos de tema.<br>Bueno, mira, cambiemos de plan. | level::B1 cardtype::production grammar::tense::subjunctive vocab::verb::cambiar
+Can I give you a hug? | ¿Puedo darte un abrazo?<br>Puedo darte un consejo. | level::A2 cardtype::production grammar::pronouns::indirect vocab::verb::dar
+What did you (plural) eat? | ¿Qué comieron?<br>¿Qué tomaron? | level::A2 cardtype::production grammar::tense::preterite
+And what did you do to celebrate your birthday? | ¿Y qué hicieron para celebrar su cumpleaños?<br>¿Qué hicieron anoche? | level::A2 cardtype::production grammar::tense::preterite
