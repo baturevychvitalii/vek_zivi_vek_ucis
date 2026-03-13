@@ -75,3 +75,24 @@ Well, look, let’s change the topic. | Bueno, mira, cambiemos de tema.<br>Bueno
 Can I give you a hug? | ¿Puedo darte un abrazo?<br>Puedo darte un consejo. | level::A2 cardtype::production grammar::pronouns::indirect vocab::verb::dar
 What did you (plural) eat? | ¿Qué comieron?<br>¿Qué tomaron? | level::A2 cardtype::production grammar::tense::preterite
 And what did you do to celebrate your birthday? | ¿Y qué hicieron para celebrar su cumpleaños?<br>¿Qué hicieron anoche? | level::A2 cardtype::production grammar::tense::preterite
+The movie was very boring. | La película fue muy aburrida.<br>La película fue muy interesante. | level::A1 cardtype::production vocab::adjective::aburrido freq::top2000
+We went to the cinema yesterday. | Nosotros fuimos al cine ayer.<br>Fuimos al restaurante ayer. | level::A1 cardtype::production grammar::tense::preterite vocab::verb::ir
+I am the big bad wolf! | ¡Yo soy el lobo feroz!<br>Él es el lobo feroz del cuento. | level::A1 cardtype::production vocab::expression::lobo_feroz
+I can’t open the window. | No puedo abrir la ventana.<br>No puedo cerrar la puerta. | level::A1 cardtype::production grammar::modal_verbs::poder
+I can’t turn on the light. | No puedo encender la luz.<br>No puedo apagar la luz. | level::A1 cardtype::production grammar::modal_verbs::poder
+Do you want to discover them? | ¿Querés descubrirlas?<br>Note: In Spain: ¿Quieres descubrirlas? | level::A2 cardtype::production grammar::pronouns::direct
+There’s no need to say anything more than: “man!” | No hace falta decir nada más que: ¡hombre!<br>No hace falta explicar más. | level::B1 cardtype::production vocab::expression::hace_falta
+Man, we can’t go to dinner at 6 pm because restaurants aren’t open yet. | Hombre, no podemos ir a cenar a las seis de la tarde porque aún no están abiertos los restaurantes. | level::B1 cardtype::production grammar::modal_verbs::poder
+Cool / stylish | chulo<br>Ese coche es chulo. | level::A2 cardtype::production vocab::adjective::chulo
+Some people say “cute”: | Algunas personas dicen: “chuli”.<br>Es una versión más informal de “chulo”. | level::A2 cardtype::production vocab::expression::chuli
+You’re awesome. The best in Spain. | Eres la caña. La caña de España.<br>In Spain, “ser la caña” means something is amazing or great. | level::B1 cardtype::production vocab::expression::ser_la_cana
+With a lot of effort and encouragement | Con mucho esfuerzo y muchos ánimos.<br>Lo logró con mucho esfuerzo. | level::A2 cardtype::production vocab::noun::esfuerzo
+Oh, how cute! Everything is charming. | Ay, ¡qué cuqui! Todo es entrañable. | level::B1 cardtype::production vocab::adjective::cuqui
+Oh, I feel bad about it / I’m sorry. | Uy, ¡me sabe mal!<br>Expression used when something makes you feel bad. | level::B1 cardtype::production vocab::expression::saber_mal
+You’re very nice! | ¡Qué majo eres!<br>In Spain “majo” means nice/kind. | level::A2 cardtype::production vocab::adjective::majo
+You are a reading nerd. | Eres un friki de la lectura.<br>Es un friki del cine. | level::B1 cardtype::production vocab::noun::friki
+Because it seems like a very funny sentence to us. | Porque nos parece una frase superdivertida.<br>Porque nos parece una idea interesante. | level::A2 cardtype::production vocab::verb::parecer freq::top1000
+I keep asking myself the same thing every day. | Me sigo preguntando lo mismo a diario.<br>Sigo pensando en lo mismo. | level::B1 cardtype::production grammar::structure::reflexive vocab::verb::preguntar
+Having the people you love by your side. | Tener a la gente que quieres a tu lado.<br>Tener a los amigos cerca. | level::A2 cardtype::production vocab::expression::a_tu_lado
+What do you do to enjoy life? | ¿Qué hacés vos para disfrutar la vida?<br>Note: In Spain: ¿Qué haces tú para disfrutar la vida? | level::A2 cardtype::production grammar::structure::voseo
+Because, after all, you can have fun. | Porque, al final de cuentas, puedes tener diversión.<br>Al final de cuentas, todo salió bien. | level::B1 cardtype::production vocab::expression::al_final_de_cuentas
