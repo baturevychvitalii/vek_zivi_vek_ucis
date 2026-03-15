@@ -89,10 +89,29 @@ You’re awesome. The best in Spain. | Eres la caña. La caña de España.<br>In
 With a lot of effort and encouragement | Con mucho esfuerzo y muchos ánimos.<br>Lo logró con mucho esfuerzo. | level::A2 cardtype::production vocab::noun::esfuerzo
 Oh, how cute! Everything is charming. | Ay, ¡qué cuqui! Todo es entrañable. | level::B1 cardtype::production vocab::adjective::cuqui
 Oh, I feel bad about it / I’m sorry. | Uy, ¡me sabe mal!<br>Expression used when something makes you feel bad. | level::B1 cardtype::production vocab::expression::saber_mal
-You’re very nice! | ¡Qué majo eres!<br>In Spain “majo” means nice/kind. | level::A2 cardtype::production vocab::adjective::majo
+You’re very nice!<br>You are so nice!!!<br>How nice you are!!! | ¡Qué majo eres!<br>In Spain “majo” means nice/kind. | level::A2 cardtype::production vocab::adjective::majo
 You are a reading nerd. | Eres un friki de la lectura.<br>Es un friki del cine. | level::B1 cardtype::production vocab::noun::friki
 Because it seems like a very funny sentence to us. | Porque nos parece una frase superdivertida.<br>Porque nos parece una idea interesante. | level::A2 cardtype::production vocab::verb::parecer freq::top1000
 I keep asking myself the same thing every day. | Me sigo preguntando lo mismo a diario.<br>Sigo pensando en lo mismo. | level::B1 cardtype::production grammar::structure::reflexive vocab::verb::preguntar
 Having the people you love by your side. | Tener a la gente que quieres a tu lado.<br>Tener a los amigos cerca. | level::A2 cardtype::production vocab::expression::a_tu_lado
 What do you do to enjoy life? | ¿Qué hacés vos para disfrutar la vida?<br>Note: In Spain: ¿Qué haces tú para disfrutar la vida? | level::A2 cardtype::production grammar::structure::voseo
 Because, after all, you can have fun. | Porque, al final de cuentas, puedes tener diversión.<br>Al final de cuentas, todo salió bien. | level::B1 cardtype::production vocab::expression::al_final_de_cuentas
+I had German classes when I was about 13. | Tenía clases de alemán cuando tenía unos trece años.<br>Tenía clases de inglés en el colegio. | level::A2 cardtype::production grammar::tense::imperfect
+Don’t you think there are already too many potatoes? | ¿No te parece que ya hay patatas de sobra?<br>¿No te parece demasiado? | level::A2 cardtype::production vocab::expression::de_sobra
+The room smells bad. | La habitación huele mal.<br>La cocina huele raro. | level::A1 cardtype::production vocab::verb::oler
+I wanted to tell you earlier. It was bad luck. | Te lo quería contar antes. Ha sido mala suerte.<br>Quería decírtelo antes. | level::B1 cardtype::production grammar::tense::imperfect
+I feel sorry / it saddens me. | Me da pena.<br>Me da mucha pena. | level::A2 cardtype::production vocab::expression::dar_pena
+Was that a compliment or a backstab? | ¿Eso era un halago o era una puñalada trapera?<br>Fue un halago sincero. | level::B1 cardtype::production vocab::expression::punalada_trapera
+I feel a bit overwhelmed. | Me siento un poco agobiado.<br>Estoy bastante agobiado. | level::B1 cardtype::production vocab::adjective::agobiado
+Okay / alright. | Vale.<br>Vale, lo entiendo. | level::A1 cardtype::production vocab::expression::vale
+What’s your budget? | ¿Qué presupuesto tienes?<br>¿Cuál es tu presupuesto? | level::A2 cardtype::production vocab::noun::presupuesto
+That would be a luxury for me. | Eso sería un lujo para mí.<br>Sería un lujo tener más espacio. | level::B1 cardtype::production grammar::tense::conditional
+You are right. | Tienes razón.<br>Tienes toda la razón. | level::A1 cardtype::production vocab::expression::tener_razon
+I don’t need much more than a bed and a place for my clothes. | No necesito mucho más que una cama y un lugar para dejar mi ropa.<br>Solo necesito una cama. | level::A2 cardtype::production vocab::expression::no_necesitar_mucho
+We live in a fourth floor without an elevator. | Vivimos en un cuarto sin ascensor.<br>Vivimos en un quinto sin ascensor. | level::A2 cardtype::production vocab::noun::ascensor
+The only way to find a flat is through contacts, by word of mouth. | La única manera de encontrar un piso es por contactos, por el boca a boca.<br>Todo funciona por boca a boca. | level::B1 cardtype::production vocab::expression::boca_a_boca
+Why didn’t I think of it before? | ¿Por qué no lo he pensado antes?<br>¿Por qué no lo pensé antes? | level::A2 cardtype::production grammar::tense::preterite
+Wow, but that’s a bit risky, right? | Ostras, pero eso es un poco arriesgado, ¿no?<br>Eso parece arriesgado. | level::B1 cardtype::production vocab::adjective::arriesgado
+Phew, I don’t even know where to start. | Fuf, no sé ni por dónde empezar.<br>No sé por dónde empezar. | level::B1 cardtype::production vocab::expression::no_saber_por_donde_empezar
+You have to be very careful. | Tienes que ir con mucho ojo.<br>Ve con mucho ojo. | level::B1 cardtype::production vocab::expression::ir_con_ojo
+Good luck with the flat search. | Ánimo con la búsqueda de piso.<br>Ánimo con la búsqueda de trabajo. | level::A2 cardtype::production vocab::expression::animo

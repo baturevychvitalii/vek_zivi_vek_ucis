@@ -15,7 +15,6 @@ No {{c1::sé::verbo saber, presente}} la respuesta correcta. | I don’t know th
 Que justo en la raya afloja {{c1::al::contracción de a + el}} llegar. | “Al” = a + el, used before infinitive to express “upon doing something”. | level::B1 cardtype::cloze grammar::structure::al_plus_infinitive vocab::connector::al freq::top1000
 {{c1::Otro de lo mismo::expresión para repetir lo anterior}}. | Expression meaning “more of the same” or “the same again”. | level::B1 cardtype::cloze vocab::expression::otro_de_lo_mismo freq::top2000
 La comida estuvo {{c1::riquísima::superlativo de rica}}. | “Riquísima” = very / absolutely delicious. Superlative formed with -ísimo/a. | level::A2 cardtype::cloze grammar::adjective::superlative vocab::adjective::rico freq::top2000
-¿Qué {{c1::vas a pedir::voseo, ir a + inf (syn. solicitar, requerir)}}? | Used in Argentina with voseo to ask what someone will order. | level::A2 cardtype::cloze grammar::structure::ir_a grammar::structure::voseo
 ¿Pagás en {{c1::efectivo::dinero físico}} o con tarjeta? | “Efectivo” means cash. | level::A1 cardtype::cloze vocab::noun::efectivo freq::top1000
 Que te molesta {{c1::tanto::adverbio de cantidad}}? | “Tanto” emphasizes degree/amount. | level::A2 cardtype::cloze grammar::adjective_adverb::intensifier vocab::adverb::tanto
 Bueno, mira, {{c1::cambiemos::subjuntivo de cambiar}} de tema. | “Cambiemos” = let’s change (subjunctive first person plural). | level::B1 cardtype::cloze grammar::tense::subjunctive vocab::verb::cambiar
@@ -40,3 +39,6 @@ La película {{c1::fue::ser pretérito}} muy {{c2::aburrida::adjetivo = boring}}
 Nosotros {{c1::fuimos::pretérito de ir}} {{c2::al::a + el}} cine ayer. | We went to the cinema yesterday.<br>“Al” = contraction of *a + el*. | level::A1 cardtype::cloze grammar::tense::preterite vocab::verb::ir
 Esta semana está lloviendo {{c1::a cántaros::muy fuerte}} aquí en España. | “Llover a cántaros” = to rain very heavily (like “pouring”). | level::A2 cardtype::cloze vocab::idiom::llover_a_cantaros freq::less_common
 Porque, {{c1::al final de cuentas::en conclusión / después de todo}}, puedes tener diversión. | Common expression meaning “after all / in the end”. | level::B1 cardtype::cloze vocab::expression::al_final_de_cuentas freq::less_common
+la única manera de encontrar un piso es por contactos, {{c1::boca a boca::recomendaciones informales}}. | “Boca a boca” = word of mouth. | level::B1 cardtype::cloze vocab::expression::boca_a_boca freq::top2000
+¿Qué {{c1::presupuesto::dinero disponible}} tienes? | “Presupuesto” = budget. | level::A2 cardtype::cloze vocab::noun::presupuesto freq::top2000
+¿Qué {{c1::vas a pedir::ordenar comida}}? | Used to ask what someone will order in a restaurant.<br>Note: “Pedir” = to order/request from the waiter. “Tomar” = to have/drink/eat (what you consume). | level::A2 cardtype::cloze grammar::structure::ir_a grammar::structure::voseo
