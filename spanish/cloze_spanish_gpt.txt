@@ -42,3 +42,6 @@ Porque, {{c1::al final de cuentas::en conclusión / después de todo}}, puedes t
 la única manera de encontrar un piso es por contactos, {{c1::boca a boca::recomendaciones informales}}. | “Boca a boca” = word of mouth. | level::B1 cardtype::cloze vocab::expression::boca_a_boca freq::top2000
 ¿Qué {{c1::presupuesto::dinero disponible}} tienes? | “Presupuesto” = budget. | level::A2 cardtype::cloze vocab::noun::presupuesto freq::top2000
 ¿Qué {{c1::vas a pedir::ordenar comida}}? | Used to ask what someone will order in a restaurant.<br>Note: “Pedir” = to order/request from the waiter. “Tomar” = to have/drink/eat (what you consume). | level::A2 cardtype::cloze grammar::structure::ir_a grammar::structure::voseo
+Los amigos {{c1::caprichosos::personas que cambian de opinión fácilmente}} (un verano en Nueva York). | “Caprichoso” = whimsical / picky / driven by sudden desires. | level::B1 cardtype::cloze vocab::adjective::caprichoso freq::less_common
+¡Qué {{c1::sorpresa::algo inesperado}}! ¡Cuánto tiempo sin verte! | “¡Qué sorpresa!” expresses surprise when seeing someone. | level::A1 cardtype::cloze vocab::noun::sorpresa freq::top1000
+El cajero {{c1::se ha tragado::ha retenido}} mi tarjeta. | “Tragarse” (reflexive) = to swallow/keep (machine keeps the card). | level::B1 cardtype::cloze grammar::pronouns::reflexive vocab::verb::tragar
