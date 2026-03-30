@@ -128,3 +128,9 @@ What has been occupying your thoughts lately? | ¿Qué ha estado ocupando tus pe
 I was glad to see you. | Me alegró verte.<br>Me hizo ilusión verte. | level::A2 cardtype::production grammar::tense::preterite
 The ATM swallowed my card. | El cajero se ha tragado mi tarjeta.<br>El cajero no devuelve la tarjeta. | level::B1 cardtype::production vocab::verb::tragar
 Is there a chessboard here? | ¿Hay un tablero de ajedrez aquí?<br>¿Hay un tablero disponible? | level::A2 cardtype::production vocab::noun::tablero
+I am an exceptionally lazy man. | Soy un hombre excepcionalmente perezoso.<br>Soy bastante perezoso. | level::A2 cardtype::production vocab::adjective::perezoso
+Everyone crosses the river safe and sound. | Todos cruzan el río sanos y salvos.<br>Todos llegaron sanos y salvos. | level::B1 cardtype::production vocab::expression::sano_y_salvo
+Sometimes I talk to myself. | A veces hablo conmigo mismo.<br>A veces pienso en voz alta. | level::A2 cardtype::production grammar::pronouns::reflexive
+How can I help you? (formal) | ¿En qué puedo ayudarle?<br>¿En qué puedo ayudarte? | level::A1 cardtype::production vocab::expression::ayudar
+I remember that it was a leap in my understanding. | Me acuerdo de que fue un salto en mi comprensión.<br>Me acuerdo de ese momento. | level::B1 cardtype::production grammar::pronouns::reflexive
+It depends a lot on each person’s situation. | Depende muchísimo de la situación de cada uno.<br>Depende de muchos factores. | level::A2 cardtype::production vocab::verb::depender

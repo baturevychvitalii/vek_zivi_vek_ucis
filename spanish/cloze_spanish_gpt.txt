@@ -45,3 +45,5 @@ la única manera de encontrar un piso es por contactos, {{c1::boca a boca::recom
 Los amigos {{c1::caprichosos::personas que cambian de opinión fácilmente}} (un verano en Nueva York). | “Caprichoso” = whimsical / picky / driven by sudden desires. | level::B1 cardtype::cloze vocab::adjective::caprichoso freq::less_common
 ¡Qué {{c1::sorpresa::algo inesperado}}! ¡Cuánto tiempo sin verte! | “¡Qué sorpresa!” expresses surprise when seeing someone. | level::A1 cardtype::cloze vocab::noun::sorpresa freq::top1000
 El cajero {{c1::se ha tragado::ha retenido}} mi tarjeta. | “Tragarse” (reflexive) = to swallow/keep (machine keeps the card). | level::B1 cardtype::cloze grammar::pronouns::reflexive vocab::verb::tragar
+Soy un hombre {{c1::excepcionalmente::muy}} perezoso. | “Excepcionalmente” intensifies the adjective (very / extremely). | level::A2 cardtype::cloze vocab::adverb::excepcionalmente freq::less_common
+Todos cruzan el río {{c1::sanos y salvos::sin daño}}. | Fixed expression meaning “safe and sound”. | level::B1 cardtype::cloze vocab::expression::sano_y_salvo
