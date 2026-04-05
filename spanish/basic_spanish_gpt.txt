@@ -16,7 +16,7 @@ Then we can eat. | Entonces podemos comer.<br>Entonces hablamos. | level::A1 car
 I was tired, so I went home. | Estaba cansado, entonces fui a casa.<br>Llovía, entonces no salí. | level::A1 cardtype::production vocab::connector::entonces grammar::tense::preterite
 Are you having fun? | ¿Te diviertes?<br>¿Te diviertes en la fiesta? | level::A1 cardtype::production grammar::pronouns::reflexive grammar::structure::divertirse
 I have fun on weekends. | Me divierto los fines de semana.<br>Me divierto con mis amigos. | level::A1 cardtype::production grammar::pronouns::reflexive grammar::structure::divertirse
-We have to study. | Hay que estudiar.<br>Hay que practicar todos los días. | level::A1 cardtype::production grammar::structure::hay_que
+One has to study (there is a need to study)| Hay que estudiar.<br>Hay que practicar todos los días. | level::A1 cardtype::production grammar::structure::hay_que
 You have to work tomorrow. | Hay que trabajar mañana.<br>Hay que llegar temprano. | level::A1 cardtype::production grammar::structure::hay_que
 Express obligation in general (no specific subject) | Hay que + infinitivo<br>Hay que comer bien.<br>Hay que dormir más. | level::A1 cardtype::pattern grammar::structure::hay_que
 I see it. | Lo veo.<br>No lo entiendo. | level::A1 cardtype::production grammar::pronouns::direct
@@ -88,7 +88,7 @@ Some people say “cute”: | Algunas personas dicen: “chuli”.<br>Es una ver
 You’re awesome. The best in Spain. | Eres la caña. La caña de España.<br>In Spain, “ser la caña” means something is amazing or great. | level::B1 cardtype::production vocab::expression::ser_la_cana
 With a lot of effort and encouragement | Con mucho esfuerzo y muchos ánimos.<br>Lo logró con mucho esfuerzo. | level::A2 cardtype::production vocab::noun::esfuerzo
 Oh, how cute! Everything is charming. | Ay, ¡qué cuqui! Todo es entrañable. | level::B1 cardtype::production vocab::adjective::cuqui
-Oh, I feel bad about it / I’m sorry. | Uy, ¡me sabe mal!<br>Expression used when something makes you feel bad. | level::B1 cardtype::production vocab::expression::saber_mal
+Oh, I feel bad about it (guilt / regret).<br>I’m sorry. | Me sabe mal no ayudarte.<br>Expression used when something makes you feel bad.<br>Feeling: guilt / regret (softer, more personal than “lo siento”) | level::B1 cardtype::production vocab::expression::saber_mal
 You’re very nice!<br>You are so nice!!!<br>How nice you are!!! | ¡Qué majo eres!<br>In Spain “majo” means nice/kind. | level::A2 cardtype::production vocab::adjective::majo
 You are a reading nerd. | Eres un friki de la lectura.<br>Es un friki del cine. | level::B1 cardtype::production vocab::noun::friki
 Because it seems like a very funny sentence to us. | Porque nos parece una frase superdivertida.<br>Porque nos parece una idea interesante. | level::A2 cardtype::production vocab::verb::parecer freq::top1000
@@ -100,7 +100,7 @@ I had German classes when I was about 13. | Tenía clases de alemán cuando ten�
 Don’t you think there are already too many potatoes? | ¿No te parece que ya hay patatas de sobra?<br>¿No te parece demasiado? | level::A2 cardtype::production vocab::expression::de_sobra
 The room smells bad. | La habitación huele mal.<br>La cocina huele raro. | level::A1 cardtype::production vocab::verb::oler
 I wanted to tell you earlier. It was bad luck. | Te lo quería contar antes. Ha sido mala suerte.<br>Quería decírtelo antes. | level::B1 cardtype::production grammar::tense::imperfect
-I feel sorry / it saddens me. | Me da pena.<br>Me da mucha pena. | level::A2 cardtype::production vocab::expression::dar_pena
+I feel sorry / it saddens me.<br>sadness / compassion | Me da pena.<br>Me da mucha pena.<br>Me da pena verlo así.<br>Me da pena que te vayas.| level::A2 cardtype::production vocab::expression::dar_pena
 Was that a compliment or a backstab? | ¿Eso era un halago o era una puñalada trapera?<br>Fue un halago sincero. | level::B1 cardtype::production vocab::expression::punalada_trapera
 I feel a bit overwhelmed. | Me siento un poco agobiado.<br>Estoy bastante agobiado. | level::B1 cardtype::production vocab::adjective::agobiado
 Okay / alright. | Vale.<br>Vale, lo entiendo. | level::A1 cardtype::production vocab::expression::vale
@@ -134,3 +134,32 @@ Sometimes I talk to myself. | A veces hablo conmigo mismo.<br>A veces pienso en 
 How can I help you? (formal) | ¿En qué puedo ayudarle?<br>¿En qué puedo ayudarte? | level::A1 cardtype::production vocab::expression::ayudar
 I remember that it was a leap in my understanding. | Me acuerdo de que fue un salto en mi comprensión.<br>Me acuerdo de ese momento. | level::B1 cardtype::production grammar::pronouns::reflexive
 It depends a lot on each person’s situation. | Depende muchísimo de la situación de cada uno.<br>Depende de muchos factores. | level::A2 cardtype::production vocab::verb::depender
+I am going (right now / currently). | Yo estoy yendo.<br>Estoy trabajando ahora. | level::A2 cardtype::production grammar::tense::present_continuous
+Do you usually go to the gym? | ¿Sueles ir al gimnasio?<br>¿Sueles comer fuera? | level::A2 cardtype::production vocab::verb::soler
+I usually study at night. | Suelo estudiar por la noche.<br>Suelo leer antes de dormir. | level::A2 cardtype::production vocab::verb::soler
+I often go to the cinema. | Voy al cine a menudo.<br>Voy a correr a menudo. | level::A1 cardtype::production vocab::expression::a_menudo
+I’ve gone two weeks without eating carrots. | Llevo dos semanas sin comer zanahorias.<br>Llevo un mes sin salir. | level::A2 cardtype::production grammar::structure::llevar_tiempo
+I’ve spent several weeks without taking off my sunglasses. | Llevo varias semanas sin quitarme las gafas de sol.<br>Llevo días sin dormir bien. | level::A2 cardtype::production grammar::structure::llevar_tiempo
+There are quite a lot of things on the table. | Hay bastantes cosas sobre la mesa.<br>Hay muchas cosas aquí. | level::A1 cardtype::production vocab::expression::hay
+You copied me. Me too, at the same time. | Me has copiado. Yo, a la misma hora.<br>Yo también lo hice. | level::A2 cardtype::production grammar::tense::present_perfect
+The alarm rang at seven. | El despertador sonó a las siete.<br>Sonó temprano. | level::A1 cardtype::production vocab::noun::despertador
+I take off my pajamas and put on my work clothes. | Me desvisto del pijama, me pongo la ropa del trabajo.<br>Me visto rápido. | level::A2 cardtype::production grammar::pronouns::reflexive
+I face the forest and drink my coffee. | Me pongo mirando el bosque y me tomo mi café.<br>Me siento y tomo café. | level::B1 cardtype::production grammar::pronouns::reflexive
+This way I don’t waste time thinking about what to eat for breakfast. | Así no pierdo el tiempo pensando qué voy a desayunar.<br>No pierdo el tiempo. | level::A2 cardtype::production vocab::expression::perder_el_tiempo
+If you don’t do it, it puts you in a bad mood. | Si no lo haces, te pone de malas.<br>Te pone de mal humor. | level::B1 cardtype::production grammar::structure::conditional
+If I don’t have a routine I know well, I arrive late. | Si no tengo una rutina que me sé muy de memoria, llego tarde.<br>Siempre llego tarde. | level::B1 cardtype::production grammar::structure::conditional
+As a result, it doesn’t mean that if suddenly they tell me “let’s go somewhere”, I drop everything and go. | Con lo cual no quiere decir que, de repente, me digan algo “vamos a tal sitio”, lo dejo todo y voy. | level::B1 cardtype::production vocab::connector::con_lo_cual
+We even feel guilty. | Nos sentimos, incluso, culpables.<br>Me siento culpable. | level::B1 cardtype::production grammar::pronouns::reflexive
+Depending on each person’s personality, one thing or another will suit you better. | Según la personalidad de cada uno, pues, te irá mejor una cosa u otra.<br>Depende de la persona. | level::B1 cardtype::production grammar::tense::future
+I don’t see much difference between the two. | No veo mucha diferencia entre los dos.<br>No hay mucha diferencia. | level::A1 cardtype::production grammar::structure::comparatives
+Sometimes it’s hard to distinguish between reality and fiction. | A veces cuesta distinguir entre realidad y ficción.<br>Es difícil distinguirlos. | level::A2 cardtype::production vocab::verb::distinguir
+Roots are a very important part of trees. | Las raíces son una parte muy importante de los árboles.<br>Las raíces son esenciales. | level::A1 cardtype::production vocab::noun::raiz
+The muscles of the mouth can produce words by themselves. | Los músculos de la boca pueden producir palabras por sí mismos.<br>Podemos hablar gracias a ellos. | level::B1 cardtype::production vocab::noun::musculo
+This company is at the forefront of technology. | Esta empresa está a la vanguardia de la tecnología.<br>Está a la vanguardia del sector. | level::B1 cardtype::production vocab::expression::vanguardia
+I try to stay at the forefront of new technologies. | Intento mantenerme en la vanguardia de las nuevas tecnologías.<br>Intento estar al día. | level::B1 cardtype::production vocab::expression::vanguardia
+There is another part of my being. | Hay otra parte de mi ser.<br>Hay otra parte de mí. | level::A2 cardtype::production vocab::expression::ser
+I adapt myself to the occasion depending on my interests. | Yo me mimetizo con la ocasión, dependiendo de mis intereses.<br>Me adapto a la situación. | level::B1 cardtype::production vocab::verb::mimetizarse
+I learned to be more reserved. Before, I was very open. | Aprendí a ser más reservado. Antes era muy abierto.<br>Antes hablaba mucho. | level::A2 cardtype::production grammar::tense::preterite
+I’m not reading you well today. | No te estoy leyendo bien hoy.<br>No te entiendo bien hoy. | level::B1 cardtype::production grammar::tense::present_continuous
+I don’t get you, I don’t know what you mean. | No te leo, no sé qué quieres decir.<br>No te entiendo. | level::B1 cardtype::production vocab::expression::no_entender
+I wait for the delivery guy with my food for the next two days. | Yo espero al mensajero con mi comida para dos días siguientes.<br>Espero el pedido en casa. | level::A2 cardtype::production vocab::noun::mensajero
