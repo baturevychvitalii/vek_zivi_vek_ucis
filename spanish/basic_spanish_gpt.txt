@@ -163,3 +163,16 @@ I learned to be more reserved. Before, I was very open. | Aprendí a ser más re
 I’m not reading you well today. | No te estoy leyendo bien hoy.<br>No te entiendo bien hoy. | level::B1 cardtype::production grammar::tense::present_continuous
 I don’t get you, I don’t know what you mean. | No te leo, no sé qué quieres decir.<br>No te entiendo. | level::B1 cardtype::production vocab::expression::no_entender
 I wait for the delivery guy with my food for the next two days. | Yo espero al mensajero con mi comida para dos días siguientes.<br>Espero el pedido en casa. | level::A2 cardtype::production vocab::noun::mensajero
+Of course, mate! I always keep my dress shoes impeccable. | ¡De una, che! Siempre tengo los zapatos de vestir impecables. | level::B1 cardtype::production vocab::expression::de_una vocab::noun::zapato freq::top1000
+I get sentimental, I get melancholy. | Me pongo sentimental, me pongo melancólico. | level::A2 cardtype::production vocab::verb::ponerse vocab::adjective::sentimental
+There's no one. I can do what I want. | No hay nadie. Puedo hacer lo que quiero. | level::A2 cardtype::production grammar::structure::negation freq::top500
+First place with a gold medal and second place with a silver medal. | Primer puesto con medalla de oro y segundo puesto con medalla de plata. | level::A1 cardtype::production vocab::noun::medalla freq::top2000
+Can you show me your photo? | ¿Me podés mostrar tu foto? <br>Note: In Spain/Mexico: ¿Me puedes mostrar...? | level::A1 cardtype::production grammar::structure::voseo grammar::pronouns::indirect
+To smoke a good cigar, you need a cutter. | Para fumar un buen puro, hace falta un cortador. | level::B1 cardtype::production vocab::noun::puro vocab::expression::hacer_falta
+The golden rule is to enjoy and make your partner enjoy. | La regla de oro es disfrutar y hacer disfrutar a tu pareja. | level::B1 cardtype::production vocab::expression::idiom freq::top1000
+That suitcase is hers (theirs/yours), mine is black. | Esa maleta es suya, la mía es negra. | level::A2 cardtype::production grammar::pronouns::possessive
+Is it your first time in Cuba? | ¿Es su primera vez en Cuba? | level::A1 cardtype::production grammar::pronouns::possessive
+At first the basic steps were hard for me, but I'm already getting the hang of tango. | Al principio me costaron los pasos básicos, pero ya le estoy agarrando la mano al tango. | level::B2 cardtype::production vocab::expression::agarrar_la_mano vocab::noun::tango
+How's the weather going to be tomorrow? | ¿Cómo va a estar el día mañana? | level::A1 cardtype::production grammar::structure::ir_a freq::top500
+With half an hour on the swings, it's more than enough for the kid to have fun. | Con media hora en los columpios alcanza y sobra para que el niño se divierta. <br>Note: "Alcanza y sobra" is a common way to say "more than enough". | level::B2 cardtype::production vocab::expression::alcanzar_y_sobrar vocab::noun::columpio
+I've been learning Spanish for two months. | Llevo dos meses aprendiendo español. | level::A2 cardtype::production grammar::structure::al_plus_infinitive freq::top500
