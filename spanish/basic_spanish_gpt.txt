@@ -176,3 +176,6 @@ At first the basic steps were hard for me, but I'm already getting the hang of t
 How's the weather going to be tomorrow? | ¿Cómo va a estar el día mañana? | level::A1 cardtype::production grammar::structure::ir_a freq::top500
 With half an hour on the swings, it's more than enough for the kid to have fun. | Con media hora en los columpios alcanza y sobra para que el niño se divierta. <br>Note: "Alcanza y sobra" is a common way to say "more than enough". | level::B2 cardtype::production vocab::expression::alcanzar_y_sobrar vocab::noun::columpio
 I've been learning Spanish for two months. | Llevo dos meses aprendiendo español. | level::A2 cardtype::production grammar::structure::al_plus_infinitive freq::top500
+a very seductive proposition, albeit I have to say no | una propuesta muy seductora, aunque / si bien tengo que decir que no<br><br>¡Es una propuesta muy tentadora, pero tengo que decir que no! | level::B2 cardtype::production vocab::expression::propuesta_seductora
+a seductive / tempting proposition | una propuesta seductora / una oferta tentadora | level::B1 cardtype::production vocab::adjective::seductor
+albeit — even though, although (formal) | si bien / aunque<br><br>Es tentador, si bien tengo que decir que no. — It's tempting, albeit I have to say no. | level::B2 cardtype::production vocab::connector::si_bien freq::less_common
