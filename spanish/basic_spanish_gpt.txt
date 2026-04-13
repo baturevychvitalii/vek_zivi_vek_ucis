@@ -179,3 +179,4 @@ I've been learning Spanish for two months. | Llevo dos meses aprendiendo españo
 a very seductive proposition, albeit I have to say no | una propuesta muy seductora, aunque / si bien tengo que decir que no<br><br>¡Es una propuesta muy tentadora, pero tengo que decir que no! | level::B2 cardtype::production vocab::expression::propuesta_seductora
 a seductive / tempting proposition | una propuesta seductora / una oferta tentadora | level::B1 cardtype::production vocab::adjective::seductor
 albeit — even though, although (formal) | si bien / aunque<br><br>Es tentador, si bien tengo que decir que no. — It's tempting, albeit I have to say no. | level::B2 cardtype::production vocab::connector::si_bien freq::less_common
+What is that? | ¿Qué es eso?<br>— ¡Eso es queso!<br>— No sé qué es eso.<br>— ¿Eso qué es? (spoken, more casual) | level::A1 cardtype::production grammar::structure::question_form freq::top500
