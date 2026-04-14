@@ -1,5 +1,15 @@
 Find all PURPLE-flagged cards in Anki, show them for confirmation, then permanently delete them from Anki and from the source files.
 
+## Step 0 — Build Deck Map
+
+Before doing anything else, scan `decks/` subdirectories and read `context.md` from each one.
+For each deck extract the Deck Config block:
+- `deckName` (the Anki deck name, e.g. "Español")
+- `basicFile` (path to the basic/production cards file)
+- `clozeFile` (path to the cloze cards file)
+
+Build a lookup table: `deckName → {basicFile, clozeFile}`. This replaces any hardcoded mapping.
+
 ## Step 1 — Find PURPLE-flagged Cards
 
 Run each command and parse the JSON output printed to stdout.
@@ -54,13 +64,11 @@ On confirmation:
 python3 .claude/anki.py '{"action": "deleteNotes", "params": {"notes": [<note_ids>]}}'
 ```
 
-**Remove from source files** — for each card, find the line where col1 matches the front/text field (split on ` | `) and delete that line. Do not leave blank lines.
+**Remove from source files** — use the deck map from Step 0 to resolve the file:
+- look up `card["deckName"]` in the deck map
+- `model == "Basic"` → use `basicFile`; `model == "Cloze"` → use `clozeFile`
 
-File mapping:
-- "Español" + "Basic" → `spanish/basic_spanish_gpt.txt`
-- "Español" + "Cloze" → `spanish/cloze_spanish_gpt.txt`
-- "English" + "Basic" → `english/basic.csv`
-- "English" + "Cloze" → `english/cloze.csv`
+For each card, find the line where col1 matches the front/text field (split on ` | `) and delete that line. Do not leave blank lines.
 
 Use Python to rewrite each affected file without the deleted lines:
 ```python
@@ -71,6 +79,7 @@ with open(filepath, "w") as f:
     f.writelines(lines)
 ```
 
+If the deck is not in the map (unknown deck): still delete from Anki, but warn "deck not in map — skipped file update."
 If a card's line is not found in the source file: still delete from Anki, but warn "not found in source file."
 
 ## Step 4 — Report

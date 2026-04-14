@@ -12,10 +12,9 @@ The long-term goal is a fully automated pipeline: capture phrases on a phone →
 
 | Where | What |
 |---|---|
-| `spanish/context.md` | Spanish deck — rules, files, workflow |
-| `english/context.md` | English deck — rules, files, workflow |
-| `/add-spanish` | Generate + append Spanish cards |
-| `/add-english` | Generate + append English cards |
+| `decks/spanish/context.md` | Spanish deck — config, generation rules, files |
+| `decks/english/context.md` | English deck — config, generation rules, files |
+| `/add-cards` | Generate + append cards for any deck |
 
 When working in a deck, read its `context.md` first.
 

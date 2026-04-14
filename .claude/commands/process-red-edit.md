@@ -1,4 +1,17 @@
-Find all RED-flagged cards in Anki, read the `[instruction]` written on the back, apply the requested change in-place, update the source file, then flip the flag to GREEN.
+Find all RED-flagged cards in a specific Anki deck, read the `[instruction]` written on the back, apply the requested change in-place, update the source file, then flip the flag to GREEN.
+
+**Usage:** `/process-red-edit <deck>` — e.g. `/process-red-edit spanish` or `/process-red-edit english`
+
+## Step 0 — Load Deck Context
+
+The argument `<deck>` is a folder name under `decks/` (e.g. `spanish`, `english`).
+
+Read `decks/<deck>/context.md` in full. From the Deck Config block extract:
+- `deckName` (the Anki deck name, e.g. "Español")
+- `basicFile` (path to the basic/production cards file)
+- `clozeFile` (path to the cloze cards file)
+
+The rest of the file contains deck-specific editing guidelines — keep them in context; they inform how to interpret and apply card instructions in Step 3.
 
 ## Step 1 — Find Flagged Cards
 
@@ -17,6 +30,8 @@ Fetch card details (substitute actual IDs):
 python3 .claude/anki.py '{"action": "cardsInfo", "params": {"cards": [<card_ids>]}}'
 ```
 → `result["result"]` is the list of card objects.
+
+Filter to only cards where `card["deckName"] == deckName` (from Step 0). If none remain after filtering: report "No RED-flagged cards found in <deck>." and stop.
 
 Extract `note_ids` as the deduplicated list of `card["note"]` values.
 
@@ -91,13 +106,10 @@ Payload for Cloze card:
 python3 .claude/anki.py '{"action": "setSpecificValueOfCard", "params": {"card": <card_id>, "keys": ["flags"], "newValues": [3]}}'
 ```
 
-**Update source file** — find the line where col1 matches the original front/text value (split on ` | `), replace the entire line with the updated card in `Front | Back | tags` format. Tags come from the existing note tags joined by spaces.
+**Update source file** — use `basicFile` or `clozeFile` from Step 0:
+- `model == "Basic"` → use `basicFile`; `model == "Cloze"` → use `clozeFile`
 
-File mapping:
-- "Español" + "Basic" → `spanish/basic_spanish_gpt.txt`
-- "Español" + "Cloze" → `spanish/cloze_spanish_gpt.txt`
-- "English" + "Basic" → `english/basic.csv`
-- "English" + "Cloze" → `english/cloze.csv`
+Find the line where col1 matches the original front/text value (split on ` | `), replace the entire line with the updated card in `Front | Back | tags` format. Tags come from the existing note tags joined by spaces.
 
 If no matching line is found in the file: append the updated card and warn "line not found in source file — appended."
 

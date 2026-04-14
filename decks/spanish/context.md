@@ -1,11 +1,16 @@
-Generate Spanish Anki cards from the user's input and append them to the correct deck files.
+# Spanish Deck
 
-## Step 1 — Get Input
+## Deck Config
 
-If `$ARGUMENTS` is non-empty, treat it as the card input.
-If `$ARGUMENTS` is empty, ask the user: "What phrases or sentences would you like to turn into cards?"
+```
+deckName:   "Español"
+basicFile:  "decks/spanish/basic_spanish_gpt.txt"
+clozeFile:  "decks/spanish/cloze_spanish_gpt.txt"
+basicModel: "Basic"
+clozeModel: "Cloze"
+```
 
-## Step 2 — Generate Cards
+## Card Generation Rules
 
 You are an elite Spanish language acquisition coach and Anki system architect. Apply all rules below strictly.
 
@@ -83,66 +88,22 @@ Use `grammar` OR `vocab`, not both, unless clearly justified.
 
 If a card fails → note it in an OUTPUT COMMENT after the code blocks.
 
-## Step 3 — Format Output
+## Input Format
 
-Produce two code blocks (omit a block if no cards of that type were generated):
-
-```
-[cloze cards — one per line: Front | Back | tags]
-```
+One phrase or sentence per line. Pass directly or interactively:
 
 ```
-[production/pattern cards — one per line: Front | Back | tags]
+/add-cards spanish extrañar a alguien
 ```
 
-Rules:
-- `|` separates columns
-- `<br>` for line breaks within a cell
-- No commentary inside code blocks
-- **For display only:** prefix each line with a number (`1.`, `2.`, etc.) so the user can read them easily. Strip the numbers before appending to files.
+Optional explicit cloze: wrap word in `{{word}}` or `{{word::cue}}`.
+Optional extra back text: append `| extra text` after the phrase.
 
-## Step 4 — Append to Files
+## Files
 
-After showing the cards to the user and confirming they look good:
-
-- Append cloze cards to `spanish/cloze_spanish_gpt.txt`
-- Append production/pattern cards to `spanish/basic_spanish_gpt.txt`
-
-Do NOT overwrite. Always append.
-
-## Step 5 — Push to AnkiConnect
-
-After appending to files, push the same cards to Anki.
-
-Parse the confirmed cards (strip display line numbers). Split each line on ` | ` → col1 (front/text), col2 (back), col3 (tags, space-separated).
-
-Build the AnkiConnect payload:
-- Cloze cards → `modelName: "Cloze"`, fields: `{"Text": col1, "Back Extra": col2}`, `deckName: "Español"`
-- Production/pattern cards → `modelName: "Basic"`, fields: `{"Front": col1, "Back": col2}`, `deckName: "Español"`
-
-```json
-{
-  "action": "addNotes",
-  "params": {
-    "notes": [
-      {
-        "deckName": "Español",
-        "modelName": "Cloze",
-        "fields": {"Text": "<col1>", "Back Extra": "<col2>"},
-        "tags": ["<tag1>", "<tag2>"]
-      }
-    ]
-  }
-}
-```
-
-Write this JSON to `/tmp/anki_payload.json` using the Write tool, then run:
-
-```bash
-python3 .claude/anki.py /tmp/anki_payload.json
-```
-
-Parse the output: `result["result"]` is a list — non-null = added, null = duplicate/skipped.
-
-If connection fails: warn and continue — files are already updated, nothing is lost.
-Final confirm: "Added X cloze card(s) and Y production/pattern card(s) — pushed to Anki."
+| File | Purpose |
+|---|---|
+| `basic_spanish_gpt.txt` | Production + Pattern cards |
+| `cloze_spanish_gpt.txt` | Cloze cards |
+| `spanish_daily_prompt.txt` | Legacy GPT prompt — reference only |
+| `shadowing.txt` | Shadowing / spoken practice |
