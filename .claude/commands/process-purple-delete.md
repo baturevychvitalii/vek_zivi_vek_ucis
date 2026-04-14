@@ -2,27 +2,29 @@ Find all PURPLE-flagged cards in Anki, show them for confirmation, then permanen
 
 ## Step 1 — Find PURPLE-flagged Cards
 
-```python
-import json, urllib.request
+Run each command and parse the JSON output printed to stdout.
 
-def anki(action, **params):
-    payload = json.dumps({"action": action, "version": 6, "params": params}).encode()
-    req = urllib.request.Request("http://localhost:8765", data=payload, headers={"Content-Type": "application/json"})
-    return json.loads(urllib.request.urlopen(req, timeout=5).read())
-
-card_ids = anki("findCards", query="flag:7")["result"]
+Find PURPLE-flagged cards (flag:7):
+```bash
+python3 .claude/anki.py '{"action": "findCards", "params": {"query": "flag:7"}}'
 ```
+→ `result["result"]` is `card_ids` (list of integers).
 
-If no cards found: report "No PURPLE-flagged cards found." and stop.
+If no card IDs: report "No PURPLE-flagged cards found." and stop.
 
-Fetch details:
-
-```python
-cards = anki("cardsInfo", cards=card_ids)["result"]
-note_ids = list({c["note"] for c in cards})
-notes_list = anki("notesInfo", notes=note_ids)["result"]
-notes = {n["noteId"]: n for n in notes_list}
+Fetch card details (substitute actual IDs):
+```bash
+python3 .claude/anki.py '{"action": "cardsInfo", "params": {"cards": [<card_ids>]}}'
 ```
+→ `result["result"]` is the list of card objects.
+
+Extract `note_ids` as the deduplicated list of `card["note"]` values.
+
+Fetch note details:
+```bash
+python3 .claude/anki.py '{"action": "notesInfo", "params": {"notes": [<note_ids>]}}'
+```
+→ `result["result"]` is the list of note objects. Build a `notes` dict keyed by `noteId`.
 
 ## Step 2 — Show Deletion List
 
@@ -47,9 +49,9 @@ This cannot be undone. Confirm? [yes / no]
 
 On confirmation:
 
-**Delete from Anki** (removes notes and all associated cards):
-```python
-result = anki("deleteNotes", notes=note_ids)
+**Delete from Anki** (removes notes and all associated cards, substitute actual IDs):
+```bash
+python3 .claude/anki.py '{"action": "deleteNotes", "params": {"notes": [<note_ids>]}}'
 ```
 
 **Remove from source files** — for each card, find the line where col1 matches the front/text field (split on ` | `) and delete that line. Do not leave blank lines.

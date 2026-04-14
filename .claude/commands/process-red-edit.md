@@ -2,29 +2,29 @@ Find all RED-flagged cards in Anki, read the `[instruction]` written on the back
 
 ## Step 1 — Find Flagged Cards
 
-Query AnkiConnect for RED-flagged cards (flag:1) across all decks:
+Run each command and parse the JSON output printed to stdout.
 
-```python
-import json, urllib.request
-
-def anki(action, **params):
-    payload = json.dumps({"action": action, "version": 6, "params": params}).encode()
-    req = urllib.request.Request("http://localhost:8765", data=payload, headers={"Content-Type": "application/json"})
-    return json.loads(urllib.request.urlopen(req, timeout=5).read())
-
-card_ids = anki("findCards", query="flag:1")["result"]
+Find RED-flagged cards (flag:1):
+```bash
+python3 .claude/anki.py '{"action": "findCards", "params": {"query": "flag:1"}}'
 ```
+→ `result["result"]` is `card_ids` (list of integers).
 
-If no cards found: report "No RED-flagged cards found." and stop.
+If no card IDs: report "No RED-flagged cards found." and stop.
 
-Fetch card and note details:
-
-```python
-cards = anki("cardsInfo", cards=card_ids)["result"]
-note_ids = list({c["note"] for c in cards})
-notes_list = anki("notesInfo", notes=note_ids)["result"]
-notes = {n["noteId"]: n for n in notes_list}
+Fetch card details (substitute actual IDs):
+```bash
+python3 .claude/anki.py '{"action": "cardsInfo", "params": {"cards": [<card_ids>]}}'
 ```
+→ `result["result"]` is the list of card objects.
+
+Extract `note_ids` as the deduplicated list of `card["note"]` values.
+
+Fetch note details:
+```bash
+python3 .claude/anki.py '{"action": "notesInfo", "params": {"notes": [<note_ids>]}}'
+```
+→ `result["result"]` is the list of note objects. Build a `notes` dict keyed by `noteId`.
 
 ## Step 2 — Extract Instructions
 
@@ -68,20 +68,27 @@ If the user says no or wants to skip individual cards, respect that.
 
 ## Step 4 — Apply Changes
 
-For each confirmed change, run the following in a single Python Bash call:
+For each confirmed change:
 
-**Update note fields in Anki:**
-```python
-# Basic card:
-anki("updateNoteFields", note={"id": note_id, "fields": {"Front": new_front, "Back": new_back}})
+**Update note fields in Anki** — build the payload, write to `/tmp/anki_note_update.json` using the Write tool, then run:
 
-# Cloze card:
-anki("updateNoteFields", note={"id": note_id, "fields": {"Text": new_text, "Back Extra": new_back_extra}})
+```bash
+python3 .claude/anki.py /tmp/anki_note_update.json
 ```
 
-**Flip flag RED → GREEN:**
-```python
-anki("setSpecificValueOfCard", card=card_id, keys=["flags"], newValues=[3])
+Payload for Basic card:
+```json
+{"action": "updateNoteFields", "params": {"note": {"id": <note_id>, "fields": {"Front": "<new_front>", "Back": "<new_back>"}}}}
+```
+
+Payload for Cloze card:
+```json
+{"action": "updateNoteFields", "params": {"note": {"id": <note_id>, "fields": {"Text": "<new_text>", "Back Extra": "<new_back_extra>"}}}}
+```
+
+**Flip flag RED → GREEN** (substitute actual card_id):
+```bash
+python3 .claude/anki.py '{"action": "setSpecificValueOfCard", "params": {"card": <card_id>, "keys": ["flags"], "newValues": [3]}}'
 ```
 
 **Update source file** — find the line where col1 matches the original front/text value (split on ` | `), replace the entire line with the updated card in `Front | Back | tags` format. Tags come from the existing note tags joined by spaces.

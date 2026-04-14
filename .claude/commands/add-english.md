@@ -76,36 +76,37 @@ Do NOT overwrite. Always append.
 
 ## Step 4 — Push to AnkiConnect
 
-After appending to files, push the same cards directly into Anki via AnkiConnect (`http://localhost:8765`).
+After appending to files, push the same cards to Anki.
 
 Parse the confirmed cards. Split each line on ` | ` → col1 (front/text), col2 (back), col3 (tags, space-separated).
 
-Mapping:
+Build the AnkiConnect payload:
 - Cloze cards → `modelName: "Cloze"`, fields: `{"Text": col1, "Back Extra": col2}`, `deckName: "English"`
 - Aesthetic cards → `modelName: "Basic"`, fields: `{"Front": col1, "Back": col2}`, `deckName: "English"`
 
-Use Python via Bash to handle JSON escaping correctly:
-
-```python
-import json, urllib.request
-
-notes = [
-    # one dict per card, using the mapping above
-]
-
-payload = json.dumps({"action": "addNotes", "version": 6, "params": {"notes": notes}}).encode()
-try:
-    req = urllib.request.Request(
-        "http://localhost:8765", data=payload,
-        headers={"Content-Type": "application/json"}
-    )
-    result = json.loads(urllib.request.urlopen(req, timeout=5).read())
-    added = sum(1 for r in result["result"] if r is not None)
-    dupes = sum(1 for r in result["result"] if r is None)
-    print(f"Added {added} card(s) to Anki." + (f" {dupes} duplicate(s) skipped." if dupes else ""))
-except Exception as e:
-    print(f"AnkiConnect unavailable ({e}). Cards are saved to files.")
+```json
+{
+  "action": "addNotes",
+  "params": {
+    "notes": [
+      {
+        "deckName": "English",
+        "modelName": "Cloze",
+        "fields": {"Text": "<col1>", "Back Extra": "<col2>"},
+        "tags": ["<tag1>", "<tag2>"]
+      }
+    ]
+  }
+}
 ```
+
+Write this JSON to `/tmp/anki_payload.json` using the Write tool, then run:
+
+```bash
+python3 .claude/anki.py /tmp/anki_payload.json
+```
+
+Parse the output: `result["result"]` is a list — non-null = added, null = duplicate/skipped.
 
 If connection fails: warn and continue — files are already updated, nothing is lost.
 Final confirm: "Added X cloze card(s) and Y aesthetic card(s) — pushed to Anki."
