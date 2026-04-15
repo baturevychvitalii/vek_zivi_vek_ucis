@@ -28,14 +28,14 @@ Format output in two code blocks (omit a block if no cards of that type were gen
 ```
 
 ```
-[production/pattern/aesthetic cards — one per line: Front | Back | tags]
+[non-cloze cards — one per line: Front | Back | tags]
 ```
 
 Rules:
 - `|` separates columns
 - `<br>` for line breaks within a cell
 - No commentary inside code blocks
-- **For display only:** prefix each line with a number (`1.`, `2.`, etc.) so the user can read them easily. Strip the numbers before appending to files.
+- **For display only:** prefix each line with a number (`1.`, `2.`, etc.). Strip the numbers before appending to files.
 
 ## Step 4 — Append to Files
 
@@ -43,13 +43,13 @@ After the user confirms the cards look good:
 
 - Strip display line numbers from each line
 - Append cloze cards to `clozeFile`
-- Append production/pattern/aesthetic cards to `basicFile`
+- Append non-cloze cards to `basicFile`
 
 Do NOT overwrite. Always append.
 
 ## Step 5 — Push to AnkiConnect
 
-Parse the confirmed cards (strip display line numbers). Split each line on ` | ` → col1 (front/text), col2 (back), col3 (tags, space-separated).
+Use the parsed cards from Step 4 (col1, col2, col3 already split on ` | `).
 
 Build the AnkiConnect payload using values from Deck Config:
 - Cloze cards → `modelName: <clozeModel>`, fields: `{"Text": col1, "Back Extra": col2}`, `deckName: <deckName>`

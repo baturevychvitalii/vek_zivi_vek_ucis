@@ -1,0 +1,12 @@
+# Local Claude settings (machine-specific, ephemeral permissions)
+.claude/settings.local.json
+
+# Anki backups (binary .apkg files, large — restore from AnkiWeb if needed)
+decks/*/backups/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store

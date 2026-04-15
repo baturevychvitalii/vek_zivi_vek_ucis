@@ -2,6 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(python3 .claude/anki.py:*)",
+      "Bash(pwd)",
+      "Bash(ls *)",
       "Write(/tmp/anki_payload.json)",
       "Write(/tmp/anki_note_update.json)"
     ]
