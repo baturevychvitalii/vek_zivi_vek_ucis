@@ -14,12 +14,15 @@ The long-term goal is a fully automated pipeline: capture phrases on a phone →
 |---|---|
 | `decks/spanish/context.md` | Spanish deck — config, generation rules, files |
 | `decks/english/context.md` | English deck — config, generation rules, files |
-| `/add-cards` | Generate + append cards for any deck |
+| `/anki-pipeline-add-cards` | Add cards (sync → backup → generate) |
 | `.claude/meta/security.md` | Skill authoring rules — read before creating or modifying skills |
+| `.claude/pipelines/` | Pipeline definitions |
 
 When working in a deck, read its `context.md` first.
 
 When creating or modifying a skill, read `.claude/meta/security.md` first.
+
+When the user's intent is ambiguous — unclear whether to invoke an atomic skill or a pipeline — default to the pipeline. Pipelines are the safer path. Only invoke an atomic skill directly if the user explicitly names it.
 
 ## Universal Card Format
 
