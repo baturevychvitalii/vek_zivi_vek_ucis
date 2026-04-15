@@ -7,9 +7,14 @@ Usage: `/backup-deck <deck>` — e.g. `/backup-deck spanish`
 Read `decks/<deck>/context.md`. Extract:
 - `deckName` (e.g. `"Español"`)
 
-Determine `PROJECT_ROOT` and `TODAY`:
+Determine `PROJECT_ROOT`:
 ```bash
-echo "$(pwd)" && date +%Y-%m-%d
+pwd
+```
+
+Determine `TODAY`:
+```bash
+date +%Y-%m-%d
 ```
 
 ## Step 1 — Determine Filename

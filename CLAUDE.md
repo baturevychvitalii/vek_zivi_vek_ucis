@@ -15,8 +15,11 @@ The long-term goal is a fully automated pipeline: capture phrases on a phone →
 | `decks/spanish/context.md` | Spanish deck — config, generation rules, files |
 | `decks/english/context.md` | English deck — config, generation rules, files |
 | `/add-cards` | Generate + append cards for any deck |
+| `.claude/meta/security.md` | Skill authoring rules — read before creating or modifying skills |
 
 When working in a deck, read its `context.md` first.
+
+When creating or modifying a skill, read `.claude/meta/security.md` first.
 
 ## Universal Card Format
 
