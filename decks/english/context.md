@@ -4,8 +4,6 @@
 
 ```
 deckName:   "English"
-basicFile:  "decks/english/basic.csv"
-clozeFile:  "decks/english/cloze.csv"
 basicModel: "Basic"
 clozeModel: "Cloze"
 ```
@@ -64,10 +62,3 @@ Pass directly or interactively:
 - No brackets → aesthetic card
 - Multiple `{bracketed}` words on the same line → one card with sequential clozes
 
-## Files
-
-| File | Purpose |
-|---|---|
-| `basic.csv` | Aesthetic cards |
-| `cloze.csv` | Vocabulary cloze cards |
-| `english_gemini_prompt.txt` | Legacy Gemini prompt — reference only |

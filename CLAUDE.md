@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Personal flashcard system for language learning. Currently two decks — Spanish and English — with more potentially added later. Format is Anki-compatible pipe-separated text, but not locked in.
+Personal flashcard system for language learning. Currently two decks — Spanish and English — with more potentially added later. Cards are generated and pushed directly to Anki via AnkiConnect; `.apkg` snapshots serve as the durable archive.
 
 This project also serves as a sandbox for learning Claude Code and automating workflows. Some solutions may be intentionally overengineered for the sake of exploration.
 
@@ -24,7 +24,9 @@ When creating or modifying a skill, read `.claude/meta/security.md` first.
 
 When the user's intent is ambiguous — unclear whether to invoke an atomic skill or a pipeline — default to the pipeline. Pipelines are the safer path. Only invoke an atomic skill directly if the user explicitly names it.
 
-## Universal Card Format
+## Card Generation Format
+
+Cards are generated and displayed in this format during the add-cards workflow before conversion to AnkiConnect payloads:
 
 ```
 Front | Back | tag1 tag2 tag3

@@ -4,8 +4,6 @@
 
 ```
 deckName:   "Español"
-basicFile:  "decks/spanish/basic_spanish_gpt.txt"
-clozeFile:  "decks/spanish/cloze_spanish_gpt.txt"
 basicModel: "Basic"
 clozeModel: "Cloze"
 ```
@@ -103,7 +101,4 @@ Optional extra back text: append `| extra text` after the phrase.
 
 | File | Purpose |
 |---|---|
-| `basic_spanish_gpt.txt` | Production + Pattern cards |
-| `cloze_spanish_gpt.txt` | Cloze cards |
-| `spanish_daily_prompt.txt` | Legacy GPT prompt — reference only |
 | `shadowing.txt` | Shadowing / spoken practice |

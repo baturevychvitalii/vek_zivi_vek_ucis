@@ -1,4 +1,4 @@
-Find all RED-flagged cards in a specific Anki deck, read the `[instruction]` written on the back, apply the requested change in-place, update the source file, then flip the flag to GREEN.
+Find all RED-flagged cards in a specific Anki deck, read the `[instruction]` written on the back, apply the requested change in-place in Anki, then flip the flag to GREEN.
 
 **Usage:** `/process-red-edit <deck>` — e.g. `/process-red-edit spanish` or `/process-red-edit english`
 
@@ -8,8 +8,6 @@ The argument `<deck>` is a folder name under `decks/` (e.g. `spanish`, `english`
 
 Read `decks/<deck>/context.md` in full. From the Deck Config block extract:
 - `deckName` (the Anki deck name, e.g. "Español")
-- `basicFile` (path to the basic/production cards file)
-- `clozeFile` (path to the cloze cards file)
 
 The rest of the file contains deck-specific editing guidelines — keep them in context; they inform how to interpret and apply card instructions in Step 3.
 

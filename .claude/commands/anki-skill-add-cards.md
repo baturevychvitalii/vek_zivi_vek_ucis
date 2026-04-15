@@ -1,4 +1,4 @@
-Generate Anki cards for any deck and append them to the correct files.
+Generate Anki cards for any deck and push them to AnkiConnect.
 
 ## Step 1 — Resolve Deck
 
@@ -7,7 +7,7 @@ Parse `$ARGUMENTS`: the first word is the deck name, everything after is the car
 If no deck name given: list subdirectories of `decks/` and ask the user which deck to use.
 
 Read `decks/<deck>/context.md`. Extract:
-- **Deck Config** block: `deckName`, `basicFile`, `clozeFile`, `basicModel`, `clozeModel`
+- **Deck Config** block: `deckName`, `basicModel`, `clozeModel`
 - **Card Generation Rules** section: the full generation instructions for this deck
 
 If the directory `decks/<deck>/` does not exist: report "Deck '<deck>' not found. Available decks: [list]" and stop.
@@ -35,21 +35,11 @@ Rules:
 - `|` separates columns
 - `<br>` for line breaks within a cell
 - No commentary inside code blocks
-- **For display only:** prefix each line with a number (`1.`, `2.`, etc.). Strip the numbers before appending to files.
+- **For display only:** prefix each line with a number (`1.`, `2.`, etc.). Strip numbers before processing.
 
-## Step 4 — Append to Files
+## Step 4 — Push to AnkiConnect
 
-After the user confirms the cards look good:
-
-- Strip display line numbers from each line
-- Append cloze cards to `clozeFile`
-- Append non-cloze cards to `basicFile`
-
-Do NOT overwrite. Always append.
-
-## Step 5 — Push to AnkiConnect
-
-Use the parsed cards from Step 4 (col1, col2, col3 already split on ` | `).
+After the user confirms the cards look good, strip display line numbers and use the parsed cards (col1, col2, col3 split on ` | `).
 
 Build the AnkiConnect payload using values from Deck Config:
 - Cloze cards → `modelName: <clozeModel>`, fields: `{"Text": col1, "Back Extra": col2}`, `deckName: <deckName>`
@@ -79,5 +69,5 @@ python3 .claude/anki.py /tmp/anki_payload.json
 
 Parse the output: `result["result"]` is a list — non-null = added, null = duplicate/skipped.
 
-If connection fails: warn and continue — files are already updated, nothing is lost.
+If connection fails: warn the user — cards were not added to Anki.
 Final confirm: "Added X cloze card(s) and Y basic card(s) — pushed to Anki."
