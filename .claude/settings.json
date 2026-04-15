@@ -4,6 +4,7 @@
       "Bash(python3 .claude/anki.py:*)",
       "Bash(pwd)",
       "Bash(ls *)",
+      "Bash(date *)",
       "Write(/tmp/anki_payload.json)",
       "Write(/tmp/anki_note_update.json)"
     ]
