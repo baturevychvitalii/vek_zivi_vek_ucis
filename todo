@@ -5,3 +5,5 @@ what to do with cloze?
 AnkiConnect integration
 
 Delete cards (same identification as for editing)
+
+I notice, you are always trying to execute "git -C /home/papa/Documents/ideas/vek_zivi_vek_ucis log" instead of simply 'git log *' which is already whitelisted in @.claude/settings.josn

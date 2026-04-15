@@ -1,6 +1,6 @@
 Back up a single Anki deck to a dated .apkg file.
 
-Usage: `/backup-deck <deck>` — e.g. `/backup-deck spanish`
+Usage: `/skill:anki-backup-deck <deck>` — e.g. `/skill:anki-backup-deck spanish`
 
 ## Step 0 — Resolve Deck Config
 

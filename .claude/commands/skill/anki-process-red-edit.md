@@ -1,6 +1,6 @@
 Find all RED-flagged cards in a specific Anki deck, read the `[instruction]` written on the back, apply the requested change in-place in Anki, then flip the flag to GREEN.
 
-**Usage:** `/process-red-edit <deck>` — e.g. `/process-red-edit spanish` or `/process-red-edit english`
+**Usage:** `/skill:anki-process-red-edit <deck>` — e.g. `/skill:anki-process-red-edit spanish` or `/skill:anki-process-red-edit english`
 
 ## Step 0 — Load Deck Context
 
