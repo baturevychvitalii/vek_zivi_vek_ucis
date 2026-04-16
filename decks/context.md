@@ -6,7 +6,6 @@ Shared rules inherited by all decks. Deck-specific `context.md` files override o
 
 ```
 basicModel: "Basic"
-clozeModel: "Cloze"
 ```
 
 ## Card Generation Rules (shared)
@@ -19,21 +18,22 @@ clozeModel: "Cloze"
 - One learning objective per card
 - No redundant paraphrase cards
 
-### Cloze Syntax
-- Single cloze: `{{c1::word}}`
-- Multiple: `{{c1::word1}} {{c2::word2}}`
-- With cue: `{{c1::word::cue}}`
-
 ### Tagging (shared)
 
-Always include `level::*` and `cardtype::*`. 3–6 tags total. Additional mandatory tags may be defined per deck.
+Always include `cardtype::*`. 3–6 tags total. Additional mandatory tags may be defined per deck or domain.
 
 ```
-level::A1 / A2 / B1 / B2 / C1 / C2     (mandatory)
-cardtype::<type>                         (mandatory — types defined per deck)
+cardtype::<type>     (mandatory — types defined per deck)
 ```
 
-### Formatting
+### Output Format
+
+Cards are previewed before conversion to AnkiConnect payloads:
+
+```
+Front | Back | tag1 tag2 tag3
+```
+
 - `<br>` for line breaks within a cell
 
 ## Directory Structure
