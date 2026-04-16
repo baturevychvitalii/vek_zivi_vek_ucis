@@ -3,9 +3,7 @@
 ## Deck Config
 
 ```
-deckName:   "English"
-basicModel: "Basic"
-clozeModel: "Cloze"
+deckName: "English"
 ```
 
 ## Card Generation Rules
@@ -22,8 +20,7 @@ Text | Book Title | Chapter/Location
 - Process one input per line
 
 ### Cloze Logic
-- MULTI-CLOZE: Multiple `{bracketed}` words on the same line → ONE card with sequential clozes `{{c1::word1}}`, `{{c2::word2}}`, etc.
-- LINE BREAK: Each new line = separate card
+- MULTI-CLOZE: Multiple `{bracketed}` words on the same line → ONE card with sequential clozes
 
 ### Card Types
 
@@ -36,13 +33,11 @@ Text | Book Title | Chapter/Location
 - Front: `[Book Title]: [first 3–5 words of passage]...`
 - Back: full passage + `<br><br>Ref: [Book Title], [Chapter/Canto], [Page/Line]`
 
-### Tagging (strict)
-
-Always include `level::*`, `cardtype::*`, `book::*`, `period::*`. 3–6 tags total.
+### Tagging (deck-specific)
 
 ```
-level::C1 / C2                                           (mandatory — this is classical material)
-cardtype::cloze / aesthetic                              (mandatory)
+level::C1 / C2                                           (classical material — rarely below C1)
+cardtype::cloze / aesthetic
 book::<title>                                            (mandatory)
 period::classical / renaissance / victorian / modern    (mandatory)
 utility::high / niche

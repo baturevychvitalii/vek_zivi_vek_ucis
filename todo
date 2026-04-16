@@ -7,9 +7,3 @@ AnkiConnect integration
 Delete cards (same identification as for editing)
 
 play with hooks, was not visible yesterday
-
-6.  UserPromptSubmit  When the user submits a prompt 
-18. TaskCreated    When a task is being created                                    
-19. TaskCompleted  When a task is being marked as completed    
-23. InstructionsLoaded  When an instruction file (CLAUDE.md or rule) is loaded
-15. PermissionRequest  When a permission dialog is displayed 

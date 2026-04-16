@@ -8,8 +8,9 @@ This project also serves as a sandbox for learning Claude Code and automating wo
 
 | Where | What |
 |---|---|
-| `decks/spanish/context.md` | Spanish deck — config, generation rules, files |
-| `decks/english/context.md` | English deck — config, generation rules, files |
+| `decks/context.md` | Shared deck defaults — models, cloze syntax, tagging, card design |
+| `decks/spanish/context.md` | Spanish deck — dialect, card types, domain tags |
+| `decks/english/context.md` | English deck — card types, domain tags |
 | `/pipe:anki-add-cards` | Add cards (sync → backup → generate) |
 | `.claude/meta/builder/context.md` | Builder mode — read before creating or modifying skills/pipelines |
 | `.claude/meta/architect/context.md` | Architect mode — read before any structural or design decisions |
