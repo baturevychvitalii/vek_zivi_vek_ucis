@@ -13,5 +13,5 @@ if marker in path:
     rel = path.split(marker)[-1]
 
     with open(log_path, "a") as _log:
-        _log.write(f"{datetime.now().isoformat()} [notify-meta-read] {rel}\n")
+        _log.write(f"{datetime.now().isoformat()}\t[notify-meta-read]\t{rel}\n")
 
