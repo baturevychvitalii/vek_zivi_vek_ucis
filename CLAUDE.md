@@ -4,10 +4,6 @@ Personal flashcard system for language learning. Currently two decks — Spanish
 
 This project also serves as a sandbox for learning Claude Code and automating workflows. Some solutions may be intentionally overengineered for the sake of exploration.
 
-## Big Picture
-
-The long-term goal is a fully automated pipeline: capture phrases on a phone → generate cards → inject directly into Anki (via AnkiConnect), no manual steps. The skills and structure here are the foundation for that.
-
 ## Navigation
 
 | Where | What |
@@ -15,12 +11,12 @@ The long-term goal is a fully automated pipeline: capture phrases on a phone →
 | `decks/spanish/context.md` | Spanish deck — config, generation rules, files |
 | `decks/english/context.md` | English deck — config, generation rules, files |
 | `/pipe:anki-add-cards` | Add cards (sync → backup → generate) |
-| `.claude/meta/security.md` | Skill authoring rules — read before creating or modifying skills |
-| `.claude/pipeline-specifications/` | Pipeline definitions |
+| `.claude/meta/builder/context.md` | Builder mode — read before creating or modifying skills/pipelines |
+| `.claude/meta/architect/context.md` | Architect mode — read before any structural or design decisions |
 
 When working in a deck, read its `context.md` first.
 
-When creating or modifying a skill, read `.claude/meta/security.md` first.
+When creating, modifying, or deleting any file under `.claude/commands/` or `.claude/pipeline-specifications/`, read `.claude/meta/builder/context.md` first.
 
 When the user's intent is ambiguous — unclear whether to invoke an atomic skill or a pipeline — default to the pipeline. Pipelines are the safer path. Only invoke an atomic skill directly if the user explicitly names it.
 

@@ -10,5 +10,18 @@
       "Write(/tmp/anki_payload.json)",
       "Write(/tmp/anki_note_update.json)"
     ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/notify-meta-read.py"
+          }
+        ]
+      }
+    ]
   }
 }

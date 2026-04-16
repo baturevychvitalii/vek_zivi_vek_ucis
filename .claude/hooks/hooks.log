@@ -1,0 +1,4 @@
+2026-04-16T12:55:01.101881 [notify-meta-read] path='/home/papa/Documents/ideas/vek_zivi_vek_ucis/README.md' shall skip
+2026-04-16T13:00:27.733402 [notify-meta-read] path='/home/papa/Documents/ideas/vek_zivi_vek_ucis/.claude/meta/architect/design-philosophy.md' shall NOTIFY
+2026-04-16T13:01:07.266548 [notify-meta-read] path='/home/papa/Documents/ideas/vek_zivi_vek_ucis/.claude/rules/skill-authoring.md' shall skip
+2026-04-16T13:11:17.638042 [notify-meta-read] builder/context.md
