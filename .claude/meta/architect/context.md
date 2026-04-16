@@ -108,7 +108,6 @@ domain context files (for modifying decks). No architectural decisions needed.
 
 **Architect mode** — you are here. Changing how the system grows: new layers,
 new primitives, new governance patterns, reconsidering structure.
-Read the historical arc (`why/trajectory-snapshot.md`) alongside this file.
 
 ---
 
@@ -126,6 +125,3 @@ of dependency — upper layers know about lower layers, never the reverse.
 Collapsing layers for convenience is always a short-term gain and a long-term cost.
 
 ---
-
-*Historical arc: `.claude/meta/architect/why/`*
-*Authoring contracts: `.claude/meta/builder/security.md`*

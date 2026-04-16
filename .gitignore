@@ -2,7 +2,7 @@
 .claude/settings.local.json
 
 # Anki backups (binary .apkg files, large — restore from AnkiWeb if needed)
-decks/*/backups/
+decks/**/backups/*.apkg
 
 # Python
 __pycache__/

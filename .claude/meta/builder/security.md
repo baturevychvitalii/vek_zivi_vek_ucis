@@ -4,22 +4,8 @@ Read this before creating or modifying any skill in `.claude/commands/`.
 
 ## Core Rule: One Command Per Bash Block
 
-Each bash block in a skill must contain exactly one command. Never chain with `&&`, `;`, or `|`.
-
-**Wrong:**
-```bash
-echo "$(pwd)" && date +%Y-%m-%d
-```
-
-**Right:**
-```bash
-pwd
-```
-```bash
-date +%Y-%m-%d
-```
-
-**Why:** The permissions system matches the full command string against whitelist rules. Compound commands never match individual entries — they always fall through to a user prompt.
+See `.claude/rules/bash-commands.md` — that is the canonical location. This rule applies
+at both authoring time and execution time.
 
 ---
 
@@ -69,8 +55,9 @@ Pipeline entry points (thin wrappers) live in `.claude/commands/` with the `anki
 
 ## Checklist Before Saving a Skill
 
-- [ ] Every bash block contains exactly one command
+- [ ] Every bash block contains exactly one command (see `.claude/rules/bash-commands.md`)
 - [ ] Every command that runs on every invocation has a matching entry in `.claude/settings.json`
 - [ ] One-time setup steps are left unwhitelisted (prompt is intentional)
 - [ ] No destructive commands are present or whitelisted
 - [ ] Writes are scoped to `/tmp` or the project tree
+- [ ] All bash block paths are project-root-relative (see `.claude/rules/portability.md`)

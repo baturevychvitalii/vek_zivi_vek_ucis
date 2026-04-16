@@ -35,3 +35,11 @@ cardtype::<type>                         (mandatory — types defined per deck)
 
 ### Formatting
 - `<br>` for line breaks within a cell
+
+## Directory Structure
+
+Each deck directory contains:
+- `context.md` — deck rules and config (this file pattern)
+- `backups/` — `.apkg` snapshots (content git-ignored; directory tracked via `.gitkeep`)
+
+Skills derive the backup path from the location of `context.md`: `BACKUP_DIR = dirname(context.md) + /backups`. No path is hardcoded in skill specs.

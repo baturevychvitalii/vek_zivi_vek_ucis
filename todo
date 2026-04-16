@@ -2,8 +2,29 @@ no specification of output.
 what to do with cloze?
 
 
-AnkiConnect integration
-
 Delete cards (same identification as for editing)
 
-play with hooks, was not visible yesterday
+
+● Writing all 7 update payloads in parallel.
+
+● Write(/tmp/anki_update_1.json)
+  ⎿  Wrote 1 lines to /tmp/anki_update_1.json
+
+● Write(/tmp/anki_update_2.json)
+  ⎿  Wrote 1 lines to /tmp/anki_update_2.json
+
+● Write(/tmp/anki_update_3.json)
+  ⎿  Wrote 1 lines to /tmp/anki_update_3.json
+
+● Write(/tmp/anki_update_4.json)
+  ⎿  Wrote 1 lines to /tmp/anki_update_4.json
+
+● Write(/tmp/anki_update_5.json)
+  ⎿  Wrote 1 lines to /tmp/anki_update_5.json
+
+● Write(/tmp/anki_update_6.json)
+  ⎿  Wrote 1 lines to /tmp/anki_update_6.json
+
+● Write(/tmp/anki_update_7.json)
+  ⎿  Wrote 1 lines to /tmp/anki_update_7.json
+
