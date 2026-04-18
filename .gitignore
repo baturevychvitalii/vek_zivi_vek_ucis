@@ -12,3 +12,7 @@ __pycache__/
 .DS_Store
 
 hooks.log
+
+# Depolymorphized context snapshots (generated, not source)
+*.depolymorphized.md
+*.depolymorphized-human.md
