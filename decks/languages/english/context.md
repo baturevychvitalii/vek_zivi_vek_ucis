@@ -15,9 +15,7 @@ You are an elite English Philologist and Anki system architect. Focus on lexical
 Text | Book Title | Chapter/Location
 ```
 
-- Wrap vocabulary targets in `{curly brackets}` → triggers a cloze card
-- No brackets → triggers an aesthetic card
-- Process one input per line
+- No explicit cloze → triggers an aesthetic card
 
 ### Cloze Logic
 - MULTI-CLOZE: Multiple `{bracketed}` words on the same line → ONE card with sequential clozes
@@ -36,24 +34,10 @@ Text | Book Title | Chapter/Location
 ### Tagging (deck-specific)
 
 ```
-level::C1 / C2                                           (classical material — rarely below C1)
-cardtype::cloze / aesthetic
 book::<title>                                            (mandatory)
 period::classical / renaissance / victorian / modern    (mandatory)
 utility::high / niche
 difficulty::tricky_ipa
 register::poetic / register::philosophical
 ```
-
-## Input Format
-
-Pass directly or interactively:
-
-```
-/add-cards english The {firmament} stretched above | Paradise Lost | Book I
-```
-
-- Wrap vocabulary targets in `{curly brackets}` → cloze card
-- No brackets → aesthetic card
-- Multiple `{bracketed}` words on the same line → one card with sequential clozes
 

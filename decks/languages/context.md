@@ -1,18 +1,7 @@
-# Language Deck Defaults
+# Language Deck Extension
 
-Shared rules for all language decks. Extends `decks/context.md`.
+Shared rules for all language decks.
 
-## Models
-
-```
-clozeModel: "Cloze"
-```
-
-## Cloze Syntax
-
-- Single cloze: `{{c1::word}}`
-- Multiple: `{{c1::word1}} {{c2::word2}}`
-- With cue: `{{c1::word::cue}}`
 
 ## Tagging (language-shared)
 

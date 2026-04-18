@@ -6,12 +6,11 @@ Usage: `/skill:anki-backup-deck <deck>` — e.g. `/skill:anki-backup-deck spanis
 
 ## Step 0 — Resolve Deck Config
 
-Read `decks/<deck>/context.md` (following context-inheritance: walk up from `decks/` to the target, reading each `context.md` root-first). Extract:
+Read `context.md` of a specific deck from `CLAUDE.md` roadmap. Extract:
 - `deckName` (e.g. `"Español"`)
 
 Derive variables:
-- `CONTEXT_DIR` = `decks/<deck>` (the directory containing the deck's context.md)
-- `BACKUP_DIR` = `<CONTEXT_DIR>/backups`
+- `BACKUP_DIR` = `dirname(context.md)/backups`
 
 Determine `PROJECT_ROOT`:
 ```bash

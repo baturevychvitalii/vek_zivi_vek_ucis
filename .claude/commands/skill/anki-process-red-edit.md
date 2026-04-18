@@ -104,13 +104,6 @@ Payload for Cloze card:
 python3 .claude/anki.py '{"action": "setSpecificValueOfCard", "params": {"card": <card_id>, "keys": ["flags"], "newValues": [3]}}'
 ```
 
-**Update source file** — use `basicFile` or `clozeFile` from Step 0:
-- `model == "Basic"` → use `basicFile`; `model == "Cloze"` → use `clozeFile`
-
-Find the line where col1 matches the original front/text value (split on ` | `), replace the entire line with the updated card in `Front | Back | tags` format. Tags come from the existing note tags joined by spaces.
-
-If no matching line is found in the file: append the updated card and warn "line not found in source file — appended."
-
 ## Step 5 — Report
 
 ```
