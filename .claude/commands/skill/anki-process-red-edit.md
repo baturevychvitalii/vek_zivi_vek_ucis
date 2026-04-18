@@ -54,11 +54,9 @@ If a card has no `[...]` in the back: skip it, note it in the final report as "n
 
 ## Step 3 — Propose Changes
 
-For each card with an instruction, interpret it and propose the edit. Show:
-
+For each card with an instruction, interpret it and propose the edit.
+Show output according to deck's `context.md` plus:
 ```
-Card N — [front text, truncated to 70 chars if needed]
-Deck: [deckName] | Type: [modelName]
 Instruction: [extracted instruction]
 → Proposed change: [describe exactly what will be updated and show the new field value]
 ```
@@ -75,11 +73,13 @@ The `[...]` instruction text is always removed from the back in the updated vers
 
 If the instruction mentions tags only (e.g., "wrong tag") → note that tag changes are not handled here and leave for manual fix; still flip flag to GREEN.
 
+## Step 4 - User Confirmation
+
 Ask the user: **"Apply these N change(s)? [yes / no]"**
 
 If the user says no or wants to skip individual cards, respect that.
 
-## Step 4 — Apply Changes
+## Step 5 — Apply Changes
 
 For each confirmed change:
 

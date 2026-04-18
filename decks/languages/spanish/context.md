@@ -66,8 +66,5 @@ freq::top500 / top1000 / top2000 / less_common
 
 Use `grammar` OR `vocab`, not both, unless clearly justified.
 
-### Quality Check (before output)
-- Is each card worth reviewing 20+ times?
-- Is cloze actually improving retention?
+### Quality Check
 - Would a real Argentine say this?
-- Are tags minimal but sufficient?

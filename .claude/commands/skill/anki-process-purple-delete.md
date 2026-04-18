@@ -35,21 +35,10 @@ python3 .claude/anki.py '{"action": "notesInfo", "params": {"notes": [<note_ids>
 → `result["result"]` is the list of note objects. Build a `notes` dict keyed by `noteId`.
 
 ## Step 2 — Show Deletion List
-
-For each card collect:
-- `note_id`: `card["note"]`
-- `deck`: `card["deckName"]`
-- `model`: `card["modelName"]`
-- `front`: `note["fields"]["Front"]["value"]` for Basic, or `note["fields"]["Text"]["value"]` for Cloze
-
-Display:
+- Display output according to deck's `context.md`.
 
 ```
 About to permanently delete N card(s):
-
-  1. [Deck] [Model] — [front text, truncated to 70 chars]
-  2. ...
-
 This cannot be undone. Confirm? [yes / no]
 ```
 

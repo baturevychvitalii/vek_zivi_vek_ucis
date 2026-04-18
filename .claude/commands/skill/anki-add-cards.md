@@ -15,29 +15,23 @@ If the directory `decks/<deck>/` does not exist: report "Deck '<deck>' not found
 ## Step 2 — Get Input
 
 If input (the part after the deck name) is non-empty, use it as the card input.
+If input is already in a form of generated cards - jump to ## Preview step
 If empty, ask: "What would you like to turn into cards?"
 
 ## Step 3 — Generate Cards
 
-Apply the Card Generation Rules from `context.md` exactly as written for this deck.
+Apply the Card Generation Rules from deck's `context.md` exactly as written for this deck.
 
-Format output in two code blocks (omit a block if no cards of that type were generated):
+## Step 4 - Preview
+- Display output according to deck's `context.md`.
 
-```
-[cloze cards — one per line: Front | Back | tags]
-```
+## Step 5 - User Confirmation
 
-```
-[non-cloze cards — one per line: Front | Back | tags]
-```
+Ask the user: **"Apply these N change(s)? [yes / no]"**
 
-Rules:
-- `|` separates columns
-- `<br>` for line breaks within a cell
-- No commentary inside code blocks
-- **For display only:** prefix each line with a number (`1.`, `2.`, etc.). Strip numbers before processing.
+If the user says no or wants to skip individual cards, respect that.
 
-## Step 4 — Push to AnkiConnect
+## Step 6 — Push to AnkiConnect
 
 After the user confirms the cards look good, strip display line numbers and use the parsed cards (col1, col2, col3 split on ` | `).
 
