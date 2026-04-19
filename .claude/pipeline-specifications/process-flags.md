@@ -1,22 +1,26 @@
-# Pipeline: process-red-edit
+# Pipeline: process-flags
 
 ## Steps
 
-1. anki-sync [mandatory]
+1. /anki-sync [mandatory]
    Why: ensure local Anki state is current before reading or modifying any cards
    On failure: stop — do not proceed with stale local state
 
-2. anki-backup-deck <deck> [mandatory]
+2. /anki-backup-deck <deck> [mandatory]
    Why: snapshot before any writes; provides rollback point
    On failure: stop — do not proceed without a backup
 
-3. anki-process-red-edit <deck> [mandatory]
+3. /anki-process-red-edit <deck> [mandatory]
    Why: the actual red-flag processing and in-place edits
    On failure: stop and report
 
-4. anki-sync [optional]
-   Why: push edited cards to AnkiWeb immediately
-   On failure: notify user and stop, but edited cards are already saved locally
+3. /anki-process-purple-delete <deck> [mandatory]
+   Why: cleanup unneeded cards
+   On failure: stop and report
+
+5. anki-sync [mandatory]
+   Why: push newly added cards to AnkiWeb immediately
+   On failure: notify user and ask whether to continue
 
 ## Error handling rules
 - mandatory step fails → notify user with the step name and error, stop immediately

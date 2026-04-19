@@ -11,3 +11,8 @@ Delete cards (same identification as for editing)
 /sandbox
 /tasks
 /terminal-setup
+
+tmp files are already present and it doesn't want to overwrite
+● Write(/tmp/anki_payload.json)
+  ⎿  Error writing file
+

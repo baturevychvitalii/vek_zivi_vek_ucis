@@ -25,23 +25,19 @@ If input (the part after the deck name) is non-empty, use it as the card input.
 If input is already in a form of generated cards - jump to ## Preview step
 If empty, ask: "What would you like to turn into cards?"
 
-## Step 3 — Generate Cards (isolated subprocess)
+## Step 3 — Generate Cards (isolated subagent)
 
-The compiled context file exists at `decks/<...>/<deck>/context.md.compiled.md` (produced by the compile step that runs before this skill in the pipeline).
+The compiled context file exists at `decks/<...>/<deck>/context.md.compiled.md`.
 
-Write the user's card input to `/tmp/card-input.txt` using the Write tool.
+Read that file, then write its contents to `/tmp/card-generation-context.md` using the Write tool.
 
-Spawn an isolated subprocess:
+Invoke the `/generate-cards` skill with the card input as its arguments.
 
-```bash
-claude -p --bare --system-prompt-file decks/<...>/<deck>/context.md.compiled.md --tools "" --output-format text --append-system-prompt "Output ONLY the cards in the exact format specified. No preamble, no commentary, no explanation." "$(cat /tmp/card-input.txt)"
-```
+The skill runs in a forked subagent with no conversation history. It reads `/tmp/card-generation-context.md` as its system context and receives the card input as its prompt.
 
-The subprocess sees ONLY the compiled context as its system prompt and the user input as its prompt. No other context is loaded.
+Capture the skill output — this is the generated card output.
 
-Capture the subprocess stdout — this is the generated card output.
-
-If the subprocess fails or returns empty output: report the error and stop.
+If the skill fails or returns empty output: report the error and stop.
 
 ## Step 4 — Preview
 

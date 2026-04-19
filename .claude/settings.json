@@ -10,6 +10,8 @@
       "Write(/tmp/anki_payload*.json)",
       "Write(/tmp/anki_note_update*.json)",
       "Write(/tmp/card-input.txt)",
+      "Write(/tmp/card-generation-context.md)",
+      "Read(/tmp/card-generation-context.md)",
       "Bash(claude -p --bare *)"
     ]
   },
