@@ -1,3 +1,9 @@
+---
+name: anki-process-purple-delete
+description: Find and delete all PURPLE-flagged cards in Anki
+disable-model-invocation: true
+---
+
 Find all PURPLE-flagged cards in Anki, show them for confirmation, then permanently delete them from Anki.
 
 ## Step 0 — Build Deck Map

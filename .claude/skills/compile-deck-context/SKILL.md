@@ -1,8 +1,14 @@
+---
+name: compile-deck-context
+description: Compile a deck's full context chain into a flat compiled file
+disable-model-invocation: true
+---
+
 Compile a deck's full context-inheritance chain into a single flat file for use as an isolated system prompt.
 
-Usage: `/skill:compile-deck-context <deck>`
+Usage: `/compile-deck-context <deck>`
 
-e.g. `/skill:compile-deck-context spanish`
+e.g. `/compile-deck-context spanish`
 
 `<deck>` is a deck name (e.g., `spanish`, `english`, `instruments`).
 
@@ -14,18 +20,18 @@ If no match: report "Deck '<deck>' not found." and stop.
 
 ## Step 2 — Depolymorphize
 
-Run `/skill:depolymorphize <resolved-context-path>`.
+Run `/depolymorphize <resolved-context-path>`.
 
 This produces `<resolved-context-path>.depolymorphized.md` with layer annotations.
 
 ## Step 3 — Merge to Human-Readable
 
-Run `/skill:depolymorphize-human <resolved-context-path>`.
+Run `/compile <resolved-context-path>`.
 
-This produces `<resolved-context-path>.depolymorphized-human.md` — a clean, flat document with no layer markers. This is the compiled output.
+This produces `<resolved-context-path>.compiled.md` — a clean, flat document with no layer markers. This is the compiled output.
 
 ## Step 4 — Report
 
 ```
-✓ Compiled <deck> → <resolved-context-path>.depolymorphized-human.md
+✓ Compiled <deck> → <resolved-context-path>.compiled.md
 ```

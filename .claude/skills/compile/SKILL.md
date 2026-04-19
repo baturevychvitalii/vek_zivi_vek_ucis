@@ -1,10 +1,16 @@
+---
+name: compile
+description: Merge a depolymorphized file into one human-readable document
+disable-model-invocation: true
+---
+
 Merge a depolymorphized context file into a single coherent, human-readable document — no layers, no inheritance markers.
 
-Usage: `/skill:depolymorphize-human <path-to-context.md>`
+Usage: `/compile <path-to-context.md>`
 
-e.g. `/skill:depolymorphize-human decks/languages/spanish/context.md`
+e.g. `/compile decks/languages/spanish/context.md`
 
-**Prerequisite:** The `.depolymorphized.md` file must already exist at `<path>.depolymorphized.md`. If it does not, tell the user to run `/skill:depolymorphize <path>` first.
+**Prerequisite:** The `.depolymorphized.md` file must already exist at `<path>.depolymorphized.md`. If it does not, tell the user to run `/depolymorphize <path>` first.
 
 ## Step 1 — Read the Raw Depolymorphized File
 
@@ -24,9 +30,9 @@ The output should read as a single, self-contained specification that someone un
 
 ## Step 3 — Write Output
 
-Write to `<path>.depolymorphized-human.md` — next to the input file.
+Write to `<path>.compiled.md` — next to the input file.
 
-Example: `decks/languages/spanish/context.md` → `decks/languages/spanish/context.md.depolymorphized-human.md`
+Example: `decks/languages/spanish/context.md` → `decks/languages/spanish/context.md.compiled.md`
 
 ## Step 4 — Report
 

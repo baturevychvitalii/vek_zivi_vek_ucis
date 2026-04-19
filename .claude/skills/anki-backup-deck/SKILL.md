@@ -1,6 +1,12 @@
+---
+name: anki-backup-deck
+description: Back up a single Anki deck to a dated .apkg file
+disable-model-invocation: true
+---
+
 Back up a single Anki deck to a dated .apkg file.
 
-Usage: `/skill:anki-backup-deck <deck>` — e.g. `/skill:anki-backup-deck spanish` or `/skill:anki-backup-deck spanish/dialects/rioplatense`
+Usage: `/anki-backup-deck <deck>` — e.g. `/anki-backup-deck spanish` or `/anki-backup-deck spanish/dialects/rioplatense`
 
 `<deck>` is a path of any depth under `decks/` — the skill reads the context.md at that location.
 

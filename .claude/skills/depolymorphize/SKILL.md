@@ -1,8 +1,14 @@
+---
+name: depolymorphize
+description: Flatten a context.md inheritance chain into a single annotated file
+disable-model-invocation: true
+---
+
 Materialize the full context-inheritance chain for a `context.md` file into a single flat file — raw concatenation with layer annotations.
 
-Usage: `/skill:depolymorphize <path-to-context.md>`
+Usage: `/depolymorphize <path-to-context.md>`
 
-e.g. `/skill:depolymorphize decks/languages/spanish/context.md`
+e.g. `/depolymorphize decks/languages/spanish/context.md`
 
 `<path>` is a project-root-relative path to any `context.md` file.
 

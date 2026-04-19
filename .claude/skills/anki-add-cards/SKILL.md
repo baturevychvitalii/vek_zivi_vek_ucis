@@ -1,3 +1,9 @@
+---
+name: anki-add-cards
+description: Generate Anki cards for a deck and push to AnkiConnect
+disable-model-invocation: true
+---
+
 Generate Anki cards for any deck and push them to AnkiConnect.
 
 Card generation runs in an isolated subprocess with only compiled context — no CLAUDE.md, no memory, no rules.
@@ -21,14 +27,14 @@ If empty, ask: "What would you like to turn into cards?"
 
 ## Step 3 — Generate Cards (isolated subprocess)
 
-The compiled context file exists at `decks/<...>/<deck>/context.md.depolymorphized-human.md` (produced by the compile step that runs before this skill in the pipeline).
+The compiled context file exists at `decks/<...>/<deck>/context.md.compiled.md` (produced by the compile step that runs before this skill in the pipeline).
 
 Write the user's card input to `/tmp/card-input.txt` using the Write tool.
 
 Spawn an isolated subprocess:
 
 ```bash
-claude -p --bare --system-prompt-file decks/<...>/<deck>/context.md.depolymorphized-human.md --tools "" --output-format text --append-system-prompt "Output ONLY the cards in the exact format specified. No preamble, no commentary, no explanation." "$(cat /tmp/card-input.txt)"
+claude -p --bare --system-prompt-file decks/<...>/<deck>/context.md.compiled.md --tools "" --output-format text --append-system-prompt "Output ONLY the cards in the exact format specified. No preamble, no commentary, no explanation." "$(cat /tmp/card-input.txt)"
 ```
 
 The subprocess sees ONLY the compiled context as its system prompt and the user input as its prompt. No other context is loaded.

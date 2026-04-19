@@ -5,33 +5,9 @@ what to do with cloze?
 Delete cards (same identification as for editing)
 
 
-● Writing all 7 update payloads in parallel.
-
-● Write(/tmp/anki_update_1.json)
-  ⎿  Wrote 1 lines to /tmp/anki_update_1.json
-
-● Write(/tmp/anki_update_2.json)
-  ⎿  Wrote 1 lines to /tmp/anki_update_2.json
-
-● Write(/tmp/anki_update_3.json)
-  ⎿  Wrote 1 lines to /tmp/anki_update_3.json
-
-● Write(/tmp/anki_update_4.json)
-  ⎿  Wrote 1 lines to /tmp/anki_update_4.json
-
-● Write(/tmp/anki_update_5.json)
-  ⎿  Wrote 1 lines to /tmp/anki_update_5.json
-
-● Write(/tmp/anki_update_6.json)
-  ⎿  Wrote 1 lines to /tmp/anki_update_6.json
-
-● Write(/tmp/anki_update_7.json)
-  ⎿  Wrote 1 lines to /tmp/anki_update_7.json
-
-
-Parse this repo: https://github.com/baturevychvitalii/vek_zivi_vek_ucis
-It is intended for claude, so get familiar with .claude/ and CLAUDE.md
-Presently - provide me with brief on what can it do for a user (skip author's obsession with architecture).
-
-Afterwards, following decks/ cascade context.md files to spanish/context.md simulate what the output could look like for this input:
-Si te quieres divertir con encanto y con primor...
+/insights
+/permissions
+/plugin
+/sandbox
+/tasks
+/terminal-setup

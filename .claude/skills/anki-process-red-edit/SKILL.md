@@ -1,6 +1,12 @@
+---
+name: anki-process-red-edit
+description: Find RED-flagged cards and apply edit instructions
+disable-model-invocation: true
+---
+
 Find all RED-flagged cards in a specific Anki deck, read the `[instruction]` written on the back, apply the requested change in-place in Anki, then flip the flag to GREEN.
 
-**Usage:** `/skill:anki-process-red-edit <deck>` — e.g. `/skill:anki-process-red-edit spanish` or `/skill:anki-process-red-edit english`
+**Usage:** `/anki-process-red-edit <deck>` — e.g. `/anki-process-red-edit spanish` or `/anki-process-red-edit english`
 
 ## Step 0 — Load Deck Context
 
