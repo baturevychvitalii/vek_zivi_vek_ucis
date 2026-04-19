@@ -1,0 +1,63 @@
+Front: I take off my pajamas.
+Back: Me saco el pijama.
+<cardtype::production vocab::verb::sacar grammar::pronouns::reflexive level::A2 freq::top1000>
+
+Front: Me {{c1::saco::verb}} el pijama.
+Back: Me saco el pijama.
+<cardtype::cloze vocab::verb::sacar grammar::pronouns::reflexive level::A2 freq::top1000>
+
+Front: Right away! / Let's go! / For sure! (Argentine slang — enthusiasm or agreement)
+Back: ¡De una!
+<cardtype::production vocab::expression::de_una level::B1 freq::less_common>
+
+Front: {{c1::Bailar}} es la acción de mover el cuerpo con la música.
+Back: To dance
+<cardtype::cloze vocab::verb::bailar level::A1 freq::top500>
+
+Front: La ciudad también es {{c1::conocida}} por su {{c2::animada}} vida nocturna.
+Back: c1: known — c2: lively / animated<br>znamo kak
+<cardtype::cloze vocab::adjective::conocida vocab::adjective::animada level::B1 freq::top1000>
+
+Front: I didn't know until you told me.
+Back: No lo supe hasta que lo dijiste.<br><br>supe = preterite of saber · dijiste = preterite of decir
+<cardtype::production grammar::tense::preterite level::B1 freq::top500>
+
+Front: No lo {{c1::supe::preterite of saber}} hasta que lo {{c2::dijiste::preterite of decir}}.
+Back: No lo supe hasta que lo dijiste.
+<cardtype::cloze grammar::tense::preterite level::B1 freq::top500>
+
+Front: They ask a friend to listen and give them feedback. (context: actors)
+Back: Le piden a un amigo que escuche y les dé comentarios.<br><br>pedir que + subjunctive: escuche (escuchar), dé (dar)
+<cardtype::production grammar::tense::subjunctive level::B2 freq::top1000>
+
+Front: pedir que + [subjunctive]
+Back: Le piden a un amigo que escuche y les dé comentarios.<br><br>Structure: [subject] asks that [someone] do something — the "something" goes into subjunctive.
+<cardtype::pattern grammar::tense::subjunctive level::B2>
+
+Front: It is so cool that it shall be illegal.
+Back: Es tan genial que debería ser ilegal.
+<cardtype::production grammar::structure::comparatives level::B1 freq::top1000>
+
+Front: "It is so cool that it shall be illegal"
+Back: Es tan genial que debería ser ilegal.
+<cardtype::production grammar::structure::comparatives level::B1 freq::top1000>
+
+Front: "Hacer algo que no se debería hacer" — ¿cómo se dice?
+Back: Tener mucha cara — to have a lot of nerve, to act shamelessly<br>E.g.: "¡Tenés mucha cara!" / "¡Qué cara tiene ese tipo!"<br>Tener mucha cara
+<cardtype::production vocab::idiom::tener_mucha_cara level::B1 freq::less_common>
+
+Front: to put on / to take off (opposite pair)
+Back: poner / quitar<br><br>Ponerse la ropa ↔ quitarse la ropa
+<cardtype::production vocab::verb::poner vocab::verb::quitar level::A2 freq::top500>
+
+Front: to put in / to take out (opposite pair)
+Back: meter / sacar<br><br>Meter en la mochila ↔ sacar de la mochila
+<cardtype::production vocab::verb::meter vocab::verb::sacar level::A2 freq::top500>
+
+Front: "Comer un poco para eliminar {{c1::la sensacion de hombre::what sensation?}}"
+Back: la sensación de hambre [note: typo in source — "hombre" should be "hambre"]<br>Quitarse el hambre
+<cardtype::cloze vocab::expression::quitarse_el_hambre level::B1 freq::less_common>
+
+Front: To eat just enough to take the edge off your hunger
+Back: Quitarse el hambre<br><br>E.g.: "Comé algo para quitarte el hambre."<br>Quitarse el hambre
+<cardtype::production vocab::expression::quitarse_el_hambre grammar::pronouns::reflexive level::B1 freq::less_common>

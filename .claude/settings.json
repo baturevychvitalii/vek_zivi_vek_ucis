@@ -8,7 +8,9 @@
       "Bash(git log *)",
       "Bash(git diff *)",
       "Write(/tmp/anki_payload*.json)",
-      "Write(/tmp/anki_note_update*.json)"
+      "Write(/tmp/anki_note_update*.json)",
+      "Write(/tmp/card-input.txt)",
+      "Bash(claude -p --bare *)"
     ]
   },
   "hooks": {

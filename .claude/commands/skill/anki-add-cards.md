@@ -1,14 +1,15 @@
 Generate Anki cards for any deck and push them to AnkiConnect.
 
+Card generation runs in an isolated subprocess with only compiled context — no CLAUDE.md, no memory, no rules.
+
 ## Step 1 — Resolve Deck
 
 Parse `$ARGUMENTS`: the first word is the deck name, everything after is the card input.
 
 If no deck name given: list subdirectories of `decks/` and ask the user which deck to use.
 
-Read `decks/<deck>/context.md`. Extract:
+Read `decks/<deck>/context.md` (leaf file only — do NOT walk the inheritance chain). Extract:
 - **Deck Config** block: `deckName`, `basicModel`, `clozeModel`
-- **Card Generation Rules** section: the full generation instructions for this deck
 
 If the directory `decks/<deck>/` does not exist: report "Deck '<deck>' not found. Available decks: [list]" and stop.
 
@@ -18,14 +19,29 @@ If input (the part after the deck name) is non-empty, use it as the card input.
 If input is already in a form of generated cards - jump to ## Preview step
 If empty, ask: "What would you like to turn into cards?"
 
-## Step 3 — Generate Cards
+## Step 3 — Generate Cards (isolated subprocess)
 
-Apply the Card Generation Rules from deck's `context.md` exactly as written for this deck.
+The compiled context file exists at `decks/<...>/<deck>/context.md.depolymorphized-human.md` (produced by the compile step that runs before this skill in the pipeline).
 
-## Step 4 - Preview
-- Display output according to deck's `context.md`.
+Write the user's card input to `/tmp/card-input.txt` using the Write tool.
 
-## Step 5 - User Confirmation
+Spawn an isolated subprocess:
+
+```bash
+claude -p --bare --system-prompt-file decks/<...>/<deck>/context.md.depolymorphized-human.md --tools "" --output-format text --append-system-prompt "Output ONLY the cards in the exact format specified. No preamble, no commentary, no explanation." "$(cat /tmp/card-input.txt)"
+```
+
+The subprocess sees ONLY the compiled context as its system prompt and the user input as its prompt. No other context is loaded.
+
+Capture the subprocess stdout — this is the generated card output.
+
+If the subprocess fails or returns empty output: report the error and stop.
+
+## Step 4 — Preview
+
+Display the generated cards to the user. Use the same numbered format as the compiled context specifies.
+
+## Step 5 — User Confirmation
 
 Ask the user: **"Apply these N change(s)? [yes / no]"**
 

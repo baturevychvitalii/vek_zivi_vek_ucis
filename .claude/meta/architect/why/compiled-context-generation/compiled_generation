@@ -1,0 +1,59 @@
+Front: I take off my pajamas.
+Back: Me saco el pijama.<br>sacarse = to take off (clothing/accessories)
+<cardtype::production level::A2 grammar::pronouns::reflexive vocab::verb::sacarse freq::top1000>
+
+Front: Me {{c1::saco::reflexive present 1sg of sacarse}} el pijama.
+Back: sacarse = to take off (clothing) — vos te sacás, él/ella se saca
+<cardtype::cloze level::A2 grammar::pronouns::reflexive vocab::verb::sacarse freq::top1000>
+
+Front: "Absolutely!" / "Sure thing!" / "You bet!" (Argentine slang)
+Back: ¡De una!<br>Ej: ¡De una! "Bailar" es la acción de mover el cuerpo con la música.
+<cardtype::production level::B1 vocab::expression::de_una vocab::idiom::de_una>
+
+Front: The city is also known for its vibrant nightlife.
+Back: La ciudad también es conocida por su animada vida nocturna.<br>znamo kak
+<cardtype::production level::B1 vocab::adjective::conocido vocab::adjective::animado>
+
+Front: La ciudad también es {{c1::conocida}} por su {{c2::animada}} vida nocturna.
+Back: conocida = well-known (pp. of conocer)<br>animada = lively, vibrant<br>znamo kak
+<cardtype::cloze level::B1 vocab::adjective::conocido vocab::adjective::animado>
+
+Front: I didn't know until you told me.
+Back: No lo supe hasta que lo dijiste.<br>supe = preterite of saber | dijiste = preterite of decir
+<cardtype::production level::B1 grammar::tense::preterite freq::top1000>
+
+Front: No lo {{c1::supe::preterite of saber}} hasta que lo {{c2::dijiste::preterite of decir}}.
+Back: supe = I knew/found out | dijiste = you said/told
+<cardtype::cloze level::B1 grammar::tense::preterite freq::top1000>
+
+Front: They ask a friend to listen and give them feedback.
+Back: Le piden a un amigo que escuche y les dé comentarios.<br>pedir que → present subjunctive
+<cardtype::production level::B2 grammar::tense::subjunctive grammar::pronouns::indirect>
+
+Front: Le piden a un amigo que {{c1::escuche::subj. of escuchar}} y les {{c2::dé::subj. of dar}} comentarios.
+Back: pedir que → subjunctive<br>escuche = subj. of escuchar | dé = subj. of dar
+<cardtype::cloze level::B2 grammar::tense::subjunctive grammar::pronouns::indirect>
+
+Front: It's so good it should be illegal.
+Back: Está tan bueno que debería ser ilegal.
+<cardtype::production level::B1 grammar::modal_verbs::deber vocab::expression>
+
+Front: "It is so cool that it shall be illegal"
+Back: Está tan bueno que debería ser ilegal.
+<cardtype::production level::B1 grammar::modal_verbs::deber vocab::expression>
+
+Front: "Hacer algo que no se debería hacer"
+Back: Tener mucha cara<br>(lit: to have a lot of face → to have a lot of nerve / audacity / cheek)<br>Ej: ¡Qué cara tenés! Le pediste plata después de todo lo que pasó.
+<cardtype::production level::B2 vocab::idiom::tener_mucha_cara>
+
+Front: Antonym verb pairs — placement & removal
+Back: poner (to put/place) ↔ quitar (to remove, take off)<br>meter (to put in) ↔ sacar (to take out/pull out)<br>Me puse los zapatos. ↔ Me saqué los zapatos.<br>Metelo en la mochila. ↔ Sacalo de la mochila.
+<cardtype::pattern level::A2 vocab::verb::poner vocab::verb::quitar vocab::verb::meter vocab::verb::sacar freq::top500>
+
+Front: "Comer un poco para eliminar {{c1::la sensación de hambre}}"
+Back: Quitarse el hambre<br>(to take the edge off your hunger / to curb the hunger)
+<cardtype::cloze level::B1 vocab::expression::quitarse_el_hambre vocab::verb::quitar>
+
+Front: To eat a little to take the edge off your hunger.
+Back: Quitarse el hambre<br>Ej: Comé algo para quitarte el hambre antes de cenar.
+<cardtype::production level::B1 vocab::expression::quitarse_el_hambre vocab::verb::quitar>
