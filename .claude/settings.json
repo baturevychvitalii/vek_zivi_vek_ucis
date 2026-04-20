@@ -2,13 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(python3 .claude/anki.py:*)",
+      "Bash(python3 .claude/scripts/*)",
       "Bash(pwd)",
       "Bash(ls *)",
       "Bash(date *)",
       "Bash(git log *)",
       "Bash(git diff *)",
+      "Bash(cp decks/languages/spanish/compiled.md /tmp/card-generation-context.md)",
       "Write(/tmp/anki_payload*.json)",
-      "Write(/tmp/anki_note_update*.json)",
+      "Write(/tmp/anki_note_update.json)",
       "Write(/tmp/card-input.txt)",
       "Write(/tmp/card-generation-context.md)",
       "Read(/tmp/card-generation-context.md)",

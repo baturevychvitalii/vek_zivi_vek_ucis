@@ -33,9 +33,11 @@ python3 .claude/scripts/compiled-is-fresh.py <resolved-deck-dir>
 
 ## Step 2 — Depolymorphize
 
-Run `/depolymorphize <resolved-deck-dir>`.
+```bash
+python3 .claude/scripts/depolymorphize.py <resolved-deck-dir>
+```
 
-This produces `<resolved-deck-dir>/depolymorphized.md` with layer annotations.
+This produces `<resolved-deck-dir>/depolymorphized.md` — raw concatenation of all inheritable files, separated by `---`.
 
 ## Step 3 — Merge to Human-Readable
 

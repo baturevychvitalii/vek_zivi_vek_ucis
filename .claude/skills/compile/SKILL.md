@@ -18,13 +18,11 @@ Read the file at `<path-to-depolymorphized.md>`.
 
 ## Step 2 — Merge into a Single Document
 
-Collapse the layered structure into one flat document:
+Collapse the concatenated layers into one flat document:
 
-- **Unique sections** (exist in only one layer): include as-is.
-- **Overlapping sections** (same heading appears in multiple layers): merge them. The most specific (deepest layer) version wins for conflicting fields. Inherited content that is not overridden is preserved and woven in naturally.
-- **Layer headers** (`# Layer N of M — ...`) and `---` separators: remove entirely.
-- **"Referenced" sub-headers** (`### Referenced: filename`): remove the sub-header, keep the content integrated into the appropriate section.
-- **Override language** ("extends", "narrows", "may override"): remove — the result is the final resolved state, not a description of the process.
+- **Unique sections** (appear under only one file's content): include as-is.
+- **Overlapping sections** (same heading appears in multiple files): last occurrence wins — files are ordered general → specific, so the final copy is the most specific. Inherited content that is not overridden is preserved and woven in naturally.
+- **File name headers** (`# inheritable-*.md`) and `---` separators: remove entirely.
 
 The output should read as a single, self-contained specification that someone unfamiliar with the layering system can understand without any context about how it was assembled.
 
