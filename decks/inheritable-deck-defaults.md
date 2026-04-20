@@ -2,7 +2,6 @@
 
 Shared rules inherited by all decks.
 Apply all rules below strictly.
-Deck-specific `context.md` files extend, or, if conflicting - override these.
 
 
 ## Card Generation Rules (shared)

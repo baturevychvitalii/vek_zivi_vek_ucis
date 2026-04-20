@@ -27,7 +27,7 @@ If empty, ask: "What would you like to turn into cards?"
 
 ## Step 3 — Generate Cards (isolated subagent)
 
-The compiled context file exists at `decks/<...>/<deck>/context.md.compiled.md`.
+The compiled context file exists at `decks/<...>/<deck>/compiled.md`.
 
 Read that file, then write its contents to `/tmp/card-generation-context.md` using the Write tool.
 

@@ -18,9 +18,9 @@
    Why: the actual card generation (isolated subprocess) and injection
    On failure: stop and report
 
-5. anki-sync [mandatory]
-   Why: push newly added cards to AnkiWeb immediately
-   On failure: notify user and ask whether to continue
+5. /anki-sync [mandatory]
+   Why: push changes to anki
+   On failure: stop and report
 
 ## Error handling rules
 - mandatory step fails → notify user with the step name and error, stop immediately

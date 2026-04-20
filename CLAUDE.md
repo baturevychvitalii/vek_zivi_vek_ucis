@@ -8,15 +8,14 @@ This project also serves as a sandbox for learning Claude Code and automating wo
 
 | Where | What |
 |---|---|
-| `decks/languages/spanish/context.md` | Spanish deck — dialect, card types, domain tags |
-| `decks/languages/english/context.md` | English deck — card types, domain tags |
-| `decks/instruments/context.md` | Instruments deck — visual identification, image handling, IPA |
+| `decks/languages/spanish/inheritable-spanish.md` | Spanish deck — dialect, card types, domain tags |
+| `decks/languages/english/inheritable-english.md` | English deck — card types, domain tags |
+| `decks/instruments/inheritable-instruments.md` | Instruments deck — visual identification, image handling, IPA |
 | `/pipe:anki-add-cards` | Add cards  |
 | `/pipe:anki-process-flags` | Process flags / perform regular deck maintenence / cleanup |
 | `.claude/meta/builder/context.md` | Builder mode — read before creating or modifying skills/pipelines |
 | `.claude/meta/architect/context.md` | Architect mode — read before any structural or design decisions |
 
-When working in a deck, read its `context.md` first.
 
 When creating, modifying, or deleting any file under `.claude/commands/` or `.claude/pipeline-specifications/`, read `.claude/meta/builder/context.md` first.
 

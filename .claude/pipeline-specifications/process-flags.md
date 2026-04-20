@@ -10,17 +10,21 @@
    Why: snapshot before any writes; provides rollback point
    On failure: stop — do not proceed without a backup
 
-3. /anki-process-red-edit <deck> [mandatory]
+3. compile-deck-context <deck> [mandatory]
+   Why: flatten the context-inheritance chain into a single compiled file before generation
+   On failure: stop — cannot generate without compiled context
+
+4. /anki-process-red-edit <deck> [mandatory]
    Why: the actual red-flag processing and in-place edits
    On failure: stop and report
 
-3. /anki-process-purple-delete <deck> [mandatory]
+5. /anki-process-purple-delete <deck> [mandatory]
    Why: cleanup unneeded cards
    On failure: stop and report
 
-5. anki-sync [mandatory]
-   Why: push newly added cards to AnkiWeb immediately
-   On failure: notify user and ask whether to continue
+6. /anki-sync [mandatory]
+   Why: push changes to anki
+   On failure: stop and report
 
 ## Error handling rules
 - mandatory step fails → notify user with the step name and error, stop immediately

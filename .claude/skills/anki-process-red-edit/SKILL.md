@@ -58,24 +58,26 @@ For each card, collect:
 
 If a card has no `[...]` in the back: skip it, note it in the final report as "no instruction found — flag left as RED."
 
-## Step 3 — Propose Changes
+## Step 3 — Edit Cards (isolated subagent)
 
-For each card with an instruction, interpret it and propose the edit.
-Show output according to deck's `context.md` plus:
+The compiled context file lives at `decks/<deck>/compiled.md` (same path convention as `anki-add-cards`).
+
+Read that file, then write its contents to `/tmp/card-edit-context.md` using the Write tool.
+
+Invoke the `/edit-card` skill **once** with all cards concatenated as arguments. Format each card block as:
+
 ```
-Instruction: [extracted instruction]
-→ Proposed change: [describe exactly what will be updated and show the new field value]
+[note_id: <note_id>] <model> card
+Front: <front>
+Back: <back> (instruction already stripped)
+Tags: <tags>
+Instruction: <instruction>
+
 ```
 
-Apply instructions using judgment:
-- "cloze too obvious / too easy" → make the hint more specific, or remove the hint entirely
-- "cloze too hard / too cryptic" → add or improve the `::hint` part
-- "wrong translation / wrong word" → correct it
-- "bad example / update example" → replace with a better one
-- "add example" → append a new example to the back
-- Any other natural language instruction → interpret and apply
+The skill returns one edited card per block, each prefixed with `[note_id: <id>]`. Parse the output by matching `note_id` anchors back to the original cards — do not rely on position.
 
-The `[...]` instruction text is always removed from the back in the updated version.
+Display all proposed edits numbered (same output format as the compiled context specifies).
 
 If the instruction mentions tags only (e.g., "wrong tag") → note that tag changes are not handled here and leave for manual fix; still flip flag to GREEN.
 
@@ -87,28 +89,27 @@ If the user says no or wants to skip individual cards, respect that.
 
 ## Step 5 — Apply Changes
 
-For each confirmed change:
-
-**Update note fields in Anki** — build the payload, write to `/tmp/anki_note_update.json` using the Write tool, then run:
+Build a single `multi` payload containing all confirmed changes — field updates and flag flips together — write it to `/tmp/anki_note_update.json` using the Write tool, then run once:
 
 ```bash
 python3 .claude/anki.py /tmp/anki_note_update.json
 ```
 
-Payload for Basic card:
+Payload structure:
 ```json
-{"action": "updateNoteFields", "params": {"note": {"id": <note_id>, "fields": {"Front": "<new_front>", "Back": "<new_back>"}}}}
+{
+  "action": "multi",
+  "params": {
+    "actions": [
+      {"action": "updateNoteFields", "params": {"note": {"id": <note_id>, "fields": {"Front": "<new_front>", "Back": "<new_back>"}}}},
+      {"action": "updateNoteFields", "params": {"note": {"id": <note_id>, "fields": {"Text": "<new_text>", "Back Extra": "<new_back_extra>"}}}},
+      {"action": "setSpecificValueOfCard", "params": {"card": <card_id>, "keys": ["flags"], "newValues": [3]}}
+    ]
+  }
+}
 ```
 
-Payload for Cloze card:
-```json
-{"action": "updateNoteFields", "params": {"note": {"id": <note_id>, "fields": {"Text": "<new_text>", "Back Extra": "<new_back_extra>"}}}}
-```
-
-**Flip flag RED → GREEN** (substitute actual card_id):
-```bash
-python3 .claude/anki.py '{"action": "setSpecificValueOfCard", "params": {"card": <card_id>, "keys": ["flags"], "newValues": [3]}}'
-```
+Include one `updateNoteFields` per confirmed card (Basic or Cloze shape as appropriate) followed by one `setSpecificValueOfCard` per confirmed card.
 
 ## Step 5 — Report
 

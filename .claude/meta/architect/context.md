@@ -5,18 +5,6 @@ anything that shapes how the system grows. Not for everyday card operations.*
 
 ---
 
-## What This Project Actually Is
-
-The output of this project is not an executable file or a deployed service.
-**The output is a running instance of Claude that is already fully capable.**
-
-Skills, pipelines, hooks, and context files are the interfaces through which that
-capability is directed — not the capability itself. Every design decision should
-preserve this: the human + Claude pair, empowered by well-structured context, is the
-end state. There is no further layer needed.
-
----
-
 ## The Skill Being Practiced Here
 
 This project is a sandbox for **context engineering** — the discipline of shaping what

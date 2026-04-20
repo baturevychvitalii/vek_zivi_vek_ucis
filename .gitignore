@@ -14,5 +14,5 @@ __pycache__/
 hooks.log
 
 # Depolymorphized context snapshots (generated, not source)
-*.depolymorphized.md
-*.compiled.md
+depolymorphized.md
+compiled.md
