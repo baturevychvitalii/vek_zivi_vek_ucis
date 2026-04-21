@@ -16,3 +16,6 @@ tmp files are already present and it doesn't want to overwrite
 ● Write(/tmp/anki_payload.json)
   ⎿  Error writing file
 
+
+compilation doesn't work well. Check compiled.md and update instructions
+I'm constantly asked for permissions to /tmp

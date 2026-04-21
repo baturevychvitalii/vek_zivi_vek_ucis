@@ -1,6 +1,7 @@
 ---
 name: compile-deck-context
 description: Compile a deck's full context chain into a flat compiled file
+context: fork
 disable-model-invocation: true
 ---
 
