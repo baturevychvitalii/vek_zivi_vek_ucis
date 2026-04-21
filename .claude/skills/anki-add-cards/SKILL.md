@@ -29,7 +29,7 @@ If empty, ask: "What would you like to turn into cards?"
 
 The compiled context file exists at `decks/<...>/<deck>/compiled.md`.
 
-Read that file, then write its contents to `/tmp/card-generation-context.md` using the Write tool.
+Read that file. Then read `/tmp/card-generation-context.md` (ignore its current contents — this satisfies the Write tool's read-first constraint). Then write the compiled context to `/tmp/card-generation-context.md` using the Write tool.
 
 Invoke the `/generate-cards` skill with the card input as its arguments.
 
@@ -73,10 +73,10 @@ Build the AnkiConnect payload using values from Deck Config:
 }
 ```
 
-Write this JSON to `/tmp/anki_payload.json` using the Write tool, then run:
+Pass the JSON payload as a single-quoted string argument directly:
 
 ```bash
-python3 .claude/anki.py /tmp/anki_payload.json
+python3 .claude/anki.py '<json payload>'
 ```
 
 Parse the output: `result["result"]` is a list — non-null = added, null = duplicate/skipped.

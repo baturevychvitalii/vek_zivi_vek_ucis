@@ -2,7 +2,7 @@
   "permissions": {
     "allow": [
       "Bash(python3 .claude/anki.py:*)",
-      "Bash(python3 .claude/scripts/*)",
+      "Bash(python3 .claude/scripts/*:*)",
       "Bash(pwd)",
       "Bash(ls *)",
       "Bash(date *)",
@@ -14,7 +14,6 @@
       "Read(decks/**/context.md)",
       "Write(/tmp/card-edit-context.md)",
       "Read(/tmp/card-edit-context.md)",
-      "Write(/tmp/anki_payload*.json)",
       "Write(/tmp/anki_note_update.json)",
       "Write(/tmp/card-input.txt)",
       "Write(/tmp/card-generation-context.md)",
