@@ -1,5 +1,3 @@
-# Spanish Deck
-
 ## Deck Config
 
 ```
@@ -44,7 +42,7 @@ Do NOT generate recognition cards (ES → EN).
 - Natural, spoken Argentine Spanish — no textbook tone
 - Reuse input in varied contexts if beneficial
 
-### Tagging (deck-specific)
+### Tagging
 
 ```
 cardtype::production / pattern / cloze

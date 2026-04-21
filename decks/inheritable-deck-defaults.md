@@ -1,10 +1,8 @@
-# Deck Defaults
+## Deck Config
 
-Shared rules inherited by all decks.
-Apply all rules below strictly.
-
-
-## Card Generation Rules (shared)
+```
+basicModel: "Basic"
+```
 
 ### Input Rules
 - One card input per line break — **multiple sentences on one line = one input**
@@ -18,11 +16,10 @@ Apply all rules below strictly.
 ### Card Design Rules
 - Generate as many cards as the input warrants; never fewer than implied; no filler cards
 
-### Tagging (shared)
+### Tagging
 
 - Always include `cardtype::*`.
 - Are tags minimal but sufficient? 3–6 tags total.
-- Additional mandatory tags may be defined per deck or domain.
 
 ```
 cardtype::<type>     (mandatory — types defined per deck)
