@@ -73,6 +73,8 @@ The final file should read as a single, self-contained specification that someon
 
 ## Step 3 — Write Output
 
+Read the existing `compiled.md` if it exists — this satisfies the Write tool's read-first constraint. Ignore its contents entirely; do not compare, diff, or merge.
+
 Write to `<dir>/compiled.md` — in the same directory as the input file.
 
 Example: `decks/languages/spanish/depolymorphized.md` → `decks/languages/spanish/compiled.md`

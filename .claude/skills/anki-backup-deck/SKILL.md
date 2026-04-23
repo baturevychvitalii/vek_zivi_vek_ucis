@@ -41,7 +41,7 @@ ls <BACKUP_DIR>/<TODAY>.apkg 2>/dev/null
 ## Step 2 — Export
 
 ```bash
-python3 .claude/anki.py '{"action": "exportPackage", "params": {"deck": "<deckName>", "path": "<PROJECT_ROOT>/<BACKUP_DIR>/<FILENAME>", "includeSched": true}}'
+python3 .claude/scripts/anki.py '{"action": "exportPackage", "params": {"deck": "<deckName>", "path": "<PROJECT_ROOT>/<BACKUP_DIR>/<FILENAME>", "includeSched": true}}'
 ```
 
 Parse the result:

@@ -20,7 +20,7 @@ Run each command and parse the JSON output printed to stdout.
 
 Find PURPLE-flagged cards (flag:7):
 ```bash
-python3 .claude/anki.py '{"action": "findCards", "params": {"query": "flag:7"}}'
+python3 .claude/scripts/anki.py '{"action": "findCards", "params": {"query": "flag:7"}}'
 ```
 → `result["result"]` is `card_ids` (list of integers).
 
@@ -28,7 +28,7 @@ If no card IDs: report "No PURPLE-flagged cards found." and stop.
 
 Fetch card details (substitute actual IDs):
 ```bash
-python3 .claude/anki.py '{"action": "cardsInfo", "params": {"cards": [<card_ids>]}}'
+python3 .claude/scripts/anki.py '{"action": "cardsInfo", "params": {"cards": [<card_ids>]}}'
 ```
 → `result["result"]` is the list of card objects.
 
@@ -36,7 +36,7 @@ Extract `note_ids` as the deduplicated list of `card["note"]` values.
 
 Fetch note details:
 ```bash
-python3 .claude/anki.py '{"action": "notesInfo", "params": {"notes": [<note_ids>]}}'
+python3 .claude/scripts/anki.py '{"action": "notesInfo", "params": {"notes": [<note_ids>]}}'
 ```
 → `result["result"]` is the list of note objects. Build a `notes` dict keyed by `noteId`.
 
@@ -54,7 +54,7 @@ On confirmation:
 
 **Delete from Anki** (removes notes and all associated cards, substitute actual IDs):
 ```bash
-python3 .claude/anki.py '{"action": "deleteNotes", "params": {"notes": [<note_ids>]}}'
+python3 .claude/scripts/anki.py '{"action": "deleteNotes", "params": {"notes": [<note_ids>]}}'
 ```
 
 ## Step 4 — Report

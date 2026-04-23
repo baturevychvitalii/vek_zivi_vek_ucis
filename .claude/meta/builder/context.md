@@ -7,7 +7,7 @@ specifications. Not for everyday card operations or architectural decisions.*
 
 ## Entry Contract
 
-Before modifying any file under `.claude/commands/` or `.claude/pipeline-specifications/`,
+Before modifying any file under `.claude/skills/` or `.claude/pipeline-specifications/`,
 read `security.md` (in this directory) first.
 
 Before creating or modifying any hook in `.claude/hooks/`,

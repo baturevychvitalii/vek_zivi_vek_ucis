@@ -23,7 +23,7 @@ Run each command and parse the JSON output printed to stdout.
 
 Find RED-flagged cards (flag:1):
 ```bash
-python3 .claude/anki.py '{"action": "findCards", "params": {"query": "flag:1"}}'
+python3 .claude/scripts/anki.py '{"action": "findCards", "params": {"query": "flag:1"}}'
 ```
 → `result["result"]` is `card_ids` (list of integers).
 
@@ -31,7 +31,7 @@ If no card IDs: report "No RED-flagged cards found." and stop.
 
 Fetch card details (substitute actual IDs):
 ```bash
-python3 .claude/anki.py '{"action": "cardsInfo", "params": {"cards": [<card_ids>]}}'
+python3 .claude/scripts/anki.py '{"action": "cardsInfo", "params": {"cards": [<card_ids>]}}'
 ```
 → `result["result"]` is the list of card objects.
 
@@ -41,7 +41,7 @@ Extract `note_ids` as the deduplicated list of `card["note"]` values.
 
 Fetch note details:
 ```bash
-python3 .claude/anki.py '{"action": "notesInfo", "params": {"notes": [<note_ids>]}}'
+python3 .claude/scripts/anki.py '{"action": "notesInfo", "params": {"notes": [<note_ids>]}}'
 ```
 → `result["result"]` is the list of note objects. Build a `notes` dict keyed by `noteId`.
 
@@ -89,10 +89,10 @@ If the user says no or wants to skip individual cards, respect that.
 
 ## Step 5 — Apply Changes
 
-Build a single `multi` payload containing all confirmed changes — field updates and flag flips together — write it to `/tmp/anki_note_update.json` using the Write tool, then run once:
+Build a single `multi` payload containing all confirmed changes — field updates and flag flips together — then pass it as an inline JSON string argument:
 
 ```bash
-python3 .claude/anki.py /tmp/anki_note_update.json
+python3 .claude/scripts/anki.py '<json payload>'
 ```
 
 Payload structure:

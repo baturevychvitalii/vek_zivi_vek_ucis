@@ -76,7 +76,7 @@ Build the AnkiConnect payload using values from Deck Config:
 Pass the JSON payload as a single-quoted string argument directly:
 
 ```bash
-python3 .claude/anki.py '<json payload>'
+python3 .claude/scripts/anki.py '<json payload>'
 ```
 
 Parse the output: `result["result"]` is a list — non-null = added, null = duplicate/skipped.

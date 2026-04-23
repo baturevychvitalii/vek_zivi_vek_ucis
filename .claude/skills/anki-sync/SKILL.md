@@ -11,7 +11,7 @@ Trigger an Anki sync with AnkiWeb via AnkiConnect.
 Run:
 
 ```bash
-python3 .claude/anki.py '{"action": "sync"}'
+python3 .claude/scripts/anki.py '{"action": "sync"}'
 ```
 
 ## Step 2 — Report
