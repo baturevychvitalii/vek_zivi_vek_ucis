@@ -23,12 +23,34 @@
     ]
   },
   "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/observe-session-health.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/detect-health-issues.py"
+          }
+        ]
+      }
+    ],
     "UserPromptSubmit": [
       {
         "hooks": [
           {
             "type": "command",
             "command": "python3 .claude/hooks/turn-tracker.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/observe-skill-start.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/surface-session-health.py"
           }
         ]
       }
@@ -64,6 +86,15 @@
           {
             "type": "command",
             "command": "python3 .claude/hooks/notify-context-read.py"
+          }
+        ]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/observe-skill-start-natural.py"
           }
         ]
       }

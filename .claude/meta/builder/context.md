@@ -8,10 +8,13 @@ specifications. Not for everyday card operations or architectural decisions.*
 ## Entry Contract
 
 Before modifying any file under `.claude/skills/` or `.claude/pipeline-specifications/`,
-read `security.md` (in this directory) first.
+read these:
+    - `./claude/meta/builder/security.md` 
+    - `./claude/meta/builder/user_experience.md`
 
 Before creating or modifying any hook in `.claude/hooks/`,
-read `hooks.md` (in this directory) first.
+read:
+    - `./claude/meta/builder/hooks.md` 
 
 ## What Builder Mode Covers
 

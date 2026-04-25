@@ -17,5 +17,13 @@ tmp files are already present and it doesn't want to overwrite
   ⎿  Error writing file
 
 
-compilation doesn't work well. Check compiled.md and update instructions
-I'm constantly asked for permissions to /tmp
+● Skill(generate-cards)                                                                                                                 
+  ⎿  Initializing…                                                                                                                      
+  ⎿  Error: Skill generate-cards cannot be used with Skill tool due to disable-model-invocation                                         
+
+
+Maybe make some watcher process that is investigating each run on whether there was
+a hiccup during execution and auto apply edits
+
+Let's brainstorm a bit. I don't like the agent being triggered while I'm in a user mode. I would rather it be dormant on the         
+  background and get to the surface only when it finds something or can offer a suggestion.

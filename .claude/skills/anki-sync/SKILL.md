@@ -1,7 +1,7 @@
 ---
 name: anki-sync
 description: Trigger an Anki sync with AnkiWeb via AnkiConnect
-disable-model-invocation: true
+#disable-model-invocation: true
 ---
 
 Trigger an Anki sync with AnkiWeb via AnkiConnect.

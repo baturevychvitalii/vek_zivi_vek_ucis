@@ -12,6 +12,7 @@ __pycache__/
 .DS_Store
 
 hooks.log
+.claude/hooks/run-summary.json
 
 # Depolymorphized context snapshots (generated, not source)
 depolymorphized.md
