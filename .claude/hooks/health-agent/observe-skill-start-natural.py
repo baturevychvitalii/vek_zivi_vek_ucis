@@ -25,6 +25,6 @@ with open(log_path, "a") as log:
 with open(summary_path, "w") as f:
     json.dump({
         "skill": skill,
-        "started_at": datetime.now().isoformat(),
+        "started_at": datetime.utcnow().isoformat() + "Z",
         "transcript_path": transcript_path,
     }, f, indent=2)

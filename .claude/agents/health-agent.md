@@ -28,7 +28,9 @@ unreviewed findings from recent skill runs and propose fixes.
    - **Skill**: which skill
    - **Error**: what failed
    - **Root cause**: why it happened (reference specific files/lines where possible)
+   - **What this means for you**: one plain-language sentence explaining the practical impact (e.g. "this causes false permission prompts every time you run X")
    - **Proposed fix**: the minimal change to prevent recurrence
+   - **Apply this fix?**: ask the user explicitly whether they want the fix applied
 
 5. Rewrite `.claude/agents/health-agent/health-findings.jsonl` with all processed entries updated
    to `"status": "processed"`. Preserve all other fields and all other lines.
@@ -43,7 +45,9 @@ Findings: N processed
 Finding 1 — <skill>
 Error: <what failed>
 Root cause: <diagnosis>
+What this means for you: <plain-language impact>
 Proposed fix: <minimal change>
+Apply this fix? yes / no
 
 Finding 2 — ...
 ```

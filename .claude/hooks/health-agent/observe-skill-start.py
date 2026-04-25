@@ -23,6 +23,6 @@ summary_path = os.path.join(hooks_dir, "run-summary.json")
 with open(summary_path, "w") as f:
     json.dump({
         "skill": command_name,
-        "started_at": datetime.now().isoformat(),
+        "started_at": datetime.utcnow().isoformat() + "Z",
         "transcript_path": transcript_path,
     }, f, indent=2)

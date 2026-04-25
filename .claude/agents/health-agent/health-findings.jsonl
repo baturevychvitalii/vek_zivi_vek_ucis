@@ -1,0 +1,1 @@
+{"id": "anki-sync-permissions-2026-04-25T11:49:06.960473", "timestamp": "2026-04-25T11:39:49.941580", "skill": "anki-sync", "type": "permission_friction", "error": "1 permission prompt(s): /home/papa/Documents/ideas/vek_zivi_vek_ucis/.claude/hooks/detect-health-issues.py", "status": "processed", "diagnosis": "Hook infrastructure edit during analysis session, not skill friction"}

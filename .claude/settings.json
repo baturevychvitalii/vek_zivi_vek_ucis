@@ -28,11 +28,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/observe-session-health.py"
+            "command": "python3 .claude/hooks/health-agent/observe-session-health.py"
           },
           {
             "type": "command",
-            "command": "python3 .claude/hooks/detect-health-issues.py"
+            "command": "python3 .claude/hooks/health-agent/detect-health-issues.py"
           }
         ]
       }
@@ -42,15 +42,19 @@
         "hooks": [
           {
             "type": "command",
+            "command": "python3 .claude/hooks/health-agent/detect-health-issues.py"
+          },
+          {
+            "type": "command",
             "command": "python3 .claude/hooks/turn-tracker.py"
           },
           {
             "type": "command",
-            "command": "python3 .claude/hooks/observe-skill-start.py"
+            "command": "python3 .claude/hooks/health-agent/observe-skill-start.py"
           },
           {
             "type": "command",
-            "command": "python3 .claude/hooks/surface-session-health.py"
+            "command": "python3 .claude/hooks/health-agent/surface-session-health.py"
           }
         ]
       }
@@ -71,6 +75,10 @@
           {
             "type": "command",
             "command": "python3 .claude/hooks/log-permission-request.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/health-agent/log-permission-request.py"
           }
         ]
       }
@@ -94,7 +102,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/observe-skill-start-natural.py"
+            "command": "python3 .claude/hooks/health-agent/observe-skill-start-natural.py"
           }
         ]
       }

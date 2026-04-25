@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 sys.stdin.read()
 
 hooks_dir = os.path.dirname(os.path.abspath(__file__))
-claude_dir = os.path.dirname(hooks_dir)
+claude_dir = os.path.dirname(os.path.dirname(hooks_dir))
 agent_dir = os.path.join(claude_dir, "agents", "health-agent")
 findings_path = os.path.join(agent_dir, "health-findings.jsonl")
 state_path = os.path.join(agent_dir, "health-state.json")
