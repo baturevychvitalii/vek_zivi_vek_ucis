@@ -16,3 +16,6 @@ hooks.log
 # Depolymorphized context snapshots (generated, not source)
 depolymorphized.md
 compiled.md
+
+# Downloaded EPUBs (binary, large — not source)
+cache/

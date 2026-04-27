@@ -9,6 +9,8 @@ This project also serves as a sandbox for learning Claude Code and automating wo
 | Where | What |
 |---|---|
 | `decks/languages/spanish/inheritable-spanish.md` | Spanish deck — dialect, card types, domain tags |
+| `decks/languages/spanish/resources.md` | Spanish lit-search — source registry, search URLs, author coverage |
+| `decks/languages/spanish/reading-log.md` | Spanish reading history — past books, difficulty verdicts |
 | `decks/languages/english/inheritable-english.md` | English deck — card types, domain tags |
 | `decks/instruments/inheritable-instruments.md` | Instruments deck — visual identification, image handling, IPA |
 | `/pipe:anki-add-cards` | Add cards  |
