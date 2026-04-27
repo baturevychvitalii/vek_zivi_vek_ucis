@@ -25,3 +25,15 @@ read `hooks.md` (in this directory) first.
 
 - Adding cards, running pipelines, or other operational tasks (user mode)
 - Changing how the system grows, adding new layers or primitives (out of scope for builder)
+
+## Project State
+
+When entering builder mode in a fresh worktree or session, read:
+
+- `.claude/meta/state/product-vision.md` — the project's forward-looking direction.
+- `.claude/meta/state/active-context.md` — current focus and open threads on this branch
+  (gitignored; may not exist on a clean checkout).
+
+Before finishing the session, update `active-context.md` to reflect what was changed,
+what is still open, and where to resume. Builder pauses mid-build belong here; finalized
+structural decisions belong in `meta/architect/why/`.

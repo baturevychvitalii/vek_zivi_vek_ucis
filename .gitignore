@@ -16,3 +16,6 @@ hooks.log
 # Depolymorphized context snapshots (generated, not source)
 depolymorphized.md
 compiled.md
+
+# Meta state — branch-local development scratchpad
+.claude/meta/state/active-context.md

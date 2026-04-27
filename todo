@@ -1,21 +1,4 @@
-no specification of output.
-what to do with cloze?
 
-
-Delete cards (same identification as for editing)
-
-
-/insights
-/permissions
-/plugin
-/sandbox
-/tasks
-/terminal-setup
-
-tmp files are already present and it doesn't want to overwrite
-● Write(/tmp/anki_payload.json)
-  ⎿  Error writing file
-
-
-compilation doesn't work well. Check compiled.md and update instructions
-I'm constantly asked for permissions to /tmp
+ - No SessionStart hook auto-read — violates "navigation, not injection" (architect/context.md:70-73). The pointers in
+ architect/context.md and builder/context.md are the navigation; the agent reads them when entering those modes (already an observable
+ handoff).

@@ -31,8 +31,6 @@ never repeated.**
 This applies at every level:
 - Skills are generic so a new domain needs only a context file, not a new skill
 - If a rule is in its canonical location, it is not also here or in CLAUDE.md
-- If a decision is documented in `why/`, it is not re-explained elsewhere
-- If a pattern is in the stdlib, new pipelines compose it — they don't inline it
 
 Duplication is a signal that something hasn't found its canonical home yet.
 When you notice it, consolidate — don't patch both copies.
@@ -67,19 +65,10 @@ Authoring rules, security constraints, and operational policies each have a sing
 canonical location. When a new contract is needed, find or create its home — don't
 scatter it. Everything else references, never repeats.
 
-**Context by navigation, not injection (where reliable)**
-Prefer explicit "read X before proceeding" instructions over hook-forced injection.
-Navigation makes compliance observable. Injection makes it invisible.
-Use enforcement only where navigation demonstrably fails and the cost of the gap is high.
-
 **Token economics: lazy-load heavy context**
 Always-loaded context should be minimal. Heavy context loads on demand.
 Any growing file is a candidate for splitting into a thin handle and a full spec.
 Apply this pattern wherever context accumulates.
-
-**Observability before trust**
-The hooks layer is a feedback loop, not just an audit log. Observable compliance is
-more valuable than invisible enforcement. Design for the ability to see what happened.
 
 ---
 
@@ -96,6 +85,20 @@ domain context files (for modifying decks). No architectural decisions needed.
 
 **Architect mode** — you are here. Changing how the system grows: new layers,
 new primitives, new governance patterns, reconsidering structure.
+
+---
+
+## Project State
+
+When entering architect mode in a fresh worktree or session, read:
+
+- `.claude/meta/state/product-vision.md` — the project's forward-looking direction.
+- `.claude/meta/state/active-context.md` — current focus and open threads on this branch
+  (gitignored; may not exist on a clean checkout).
+
+Before finishing the session, update `active-context.md` to reflect what was changed,
+what is still open, and where to resume. This file is a scratchpad — overwrite freely.
+Decisions worth keeping permanently graduate to `why/` before the branch closes.
 
 ---
 
