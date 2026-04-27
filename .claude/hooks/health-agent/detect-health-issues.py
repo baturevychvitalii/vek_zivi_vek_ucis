@@ -7,6 +7,26 @@ agent_dir = os.path.join(claude_dir, "agents", "health-agent")
 summary_path = os.path.join(hooks_dir, "run-summary.json")
 events_path = os.path.join(hooks_dir, "permission-events.jsonl")
 findings_path = os.path.join(agent_dir, "health-findings.jsonl")
+flag_path = os.path.join(hooks_dir, "pending-ai-review.flag")
+log_path = os.path.join(hooks_dir, "hooks.log")
+
+
+def log(msg):
+    with open(log_path, "a") as f:
+        f.write(f"{datetime.now().isoformat()}\t[detect-health-issues]\t{msg}\n")
+
+sys.path.insert(0, hooks_dir)
+from detectors import bash_chaining, git_policy, destructive_ops
+from detectors import whitelist_gap, skill_circumvention, refactoring_rot
+
+ALL_DETECTORS = [
+    bash_chaining,
+    git_policy,
+    destructive_ops,
+    whitelist_gap,
+    skill_circumvention,
+    refactoring_rot,
+]
 
 
 def parse_utc(ts):
@@ -14,14 +34,23 @@ def parse_utc(ts):
     return datetime.fromisoformat(ts).replace(tzinfo=timezone.utc)
 
 
-def analyze(summary):
-    skill = summary.get("skill", "unknown")
-    transcript_path = summary.get("transcript_path", "")
+def _is_internal(detail):
+    """Return True if this permission event is from .claude/ infrastructure."""
+    if not detail:
+        return False
+    cwd = os.environ.get("CLAUDE_CWD", os.getcwd())
+    normalized = os.path.relpath(detail, cwd) if os.path.isabs(detail) else detail
+    return "/.claude/" in normalized or normalized.startswith(".claude/")
+
+
+def _build_context(summary):
+    """Parse transcript and sidecar files into a unified context dict."""
     started_at = parse_utc(summary["started_at"])
+    transcript_path = summary.get("transcript_path", "")
 
-    findings = []
+    tool_uses = []
+    tool_results = []
 
-    # Tool errors from transcript, scoped to skill window
     if transcript_path and os.path.exists(transcript_path):
         with open(transcript_path) as f:
             for line in f:
@@ -35,24 +64,20 @@ def analyze(summary):
                 ts = event.get("timestamp")
                 if ts and parse_utc(ts) < started_at:
                     continue
-                if event.get("type") == "tool_result" and event.get("is_error"):
-                    content = event.get("content", "")
-                    if isinstance(content, list):
-                        content = " ".join(
-                            c.get("text", "") for c in content if isinstance(c, dict)
-                        )
-                    findings.append({
-                        "id": f"{skill}-error-{datetime.utcnow().isoformat()}Z",
-                        "timestamp": datetime.utcnow().isoformat() + "Z",
-                        "skill": skill,
-                        "type": "tool_error",
-                        "error": content[:300],
-                        "status": "unreviewed",
-                    })
 
-    # Permission prompts from sidecar, scoped to skill window
+                # Extract tool_use blocks from assistant messages
+                if event.get("type") == "assistant":
+                    msg = event.get("message") or {}
+                    for block in msg.get("content") or []:
+                        if isinstance(block, dict) and block.get("type") == "tool_use":
+                            tool_uses.append(block)
+
+                # Collect tool_result events
+                if event.get("type") == "tool_result":
+                    tool_results.append(event)
+
+    permission_events = []
     if os.path.exists(events_path):
-        prompts = []
         with open(events_path) as f:
             for line in f:
                 line = line.strip()
@@ -68,27 +93,93 @@ def analyze(summary):
                 if ev_ts and parse_utc(ev_ts) < started_at:
                     continue
                 detail = ev.get("detail") or ev.get("tool_name", "")
-                if "/.claude/" in detail or detail.startswith(".claude/"):
+                if _is_internal(detail):
                     continue
-                prompts.append(ev)
-        if prompts:
+                permission_events.append(ev)
+
+    return {
+        "skill": summary.get("skill", "unknown"),
+        "started_at": started_at,
+        "transcript_path": transcript_path,
+        "tool_uses": tool_uses,
+        "tool_results": tool_results,
+        "permission_events": permission_events,
+        "claude_dir": claude_dir,
+    }
+
+
+def analyze(summary):
+    skill = summary.get("skill", "unknown")
+    ctx = _build_context(summary)
+
+    findings = []
+
+    # Legacy: tool errors from transcript (keep existing signal)
+    for result in ctx["tool_results"]:
+        if result.get("is_error"):
+            content = result.get("content", "")
+            if isinstance(content, list):
+                content = " ".join(
+                    c.get("text", "") for c in content if isinstance(c, dict)
+                )
             findings.append({
-                "id": f"{skill}-permissions-{datetime.utcnow().isoformat()}Z",
+                "id": f"{skill}-error-{datetime.utcnow().isoformat()}Z",
                 "timestamp": datetime.utcnow().isoformat() + "Z",
                 "skill": skill,
-                "type": "permission_friction",
-                "error": f"{len(prompts)} permission prompt(s): "
-                    + ", ".join(p.get("detail") or p.get("tool_name", "") for p in prompts),
+                "type": "tool_error",
+                "rule": "tool_error",
+                "severity": "warning",
+                "error": content[:300],
+                "evidence": content[:300],
+                "suggested_fix": None,
+                "status": "unreviewed",
+            })
+
+    # Detector modules
+    for detector in ALL_DETECTORS:
+        try:
+            for det in detector.detect(ctx):
+                findings.append({
+                    "id": f"{skill}-{det['rule']}-{datetime.utcnow().isoformat()}Z",
+                    "timestamp": datetime.utcnow().isoformat() + "Z",
+                    "skill": skill,
+                    "type": det["severity"],
+                    "rule": det["rule"],
+                    "severity": det["severity"],
+                    "error": det["evidence"],
+                    "evidence": det["evidence"],
+                    "suggested_fix": det.get("suggested_fix"),
+                    "status": "unreviewed",
+                })
+        except Exception as e:
+            # Detector failures must not crash the hook
+            findings.append({
+                "id": f"{skill}-detector-error-{datetime.utcnow().isoformat()}Z",
+                "timestamp": datetime.utcnow().isoformat() + "Z",
+                "skill": skill,
+                "type": "warning",
+                "rule": f"detector_error_{detector.__name__.split('.')[-1]}",
+                "severity": "warning",
+                "error": str(e),
+                "evidence": str(e),
+                "suggested_fix": None,
                 "status": "unreviewed",
             })
 
     if not findings:
+        log(f"analyzed skill={skill}: no findings")
         return
+
+    log(f"analyzed skill={skill}: {len(findings)} finding(s) → {[f['rule'] for f in findings]}")
 
     os.makedirs(agent_dir, exist_ok=True)
     with open(findings_path, "a") as f:
         for finding in findings:
             f.write(json.dumps(finding) + "\n")
+
+    # Signal that AI review is pending
+    with open(flag_path, "w") as f:
+        f.write(datetime.utcnow().isoformat() + "Z\n")
 
 
 def load_summary():
@@ -107,24 +198,19 @@ def mark_analyzed(summary):
         json.dump(summary, f, indent=2)
 
 
-# Detect invocation context: UserPromptSubmit provides JSON on stdin with "prompt";
-# Stop hook provides non-JSON (or empty) stdin.
-raw = sys.stdin.read()
-try:
-    inp = json.loads(raw)
-    # UserPromptSubmit path — only analyze when a new skill is starting
-    prompt = inp.get("prompt", "").strip()
-    if not prompt.startswith("/"):
-        sys.exit(0)
-    summary = load_summary()
-    if not summary or summary.get("analyzed_at") or not summary.get("started_at"):
-        sys.exit(0)
-    analyze(summary)
-    mark_analyzed(summary)
-except (json.JSONDecodeError, ValueError):
-    # Stop path — analyze any pending unanalyzed skill
-    summary = load_summary()
-    if not summary or summary.get("analyzed_at") or not summary.get("started_at"):
-        sys.exit(0)
-    analyze(summary)
-    mark_analyzed(summary)
+sys.stdin.read()  # consume stdin (hook event data; not needed for detection)
+
+summary = load_summary()
+if not summary:
+    log("skip: no run-summary.json")
+    sys.exit(0)
+if summary.get("analyzed_at"):
+    log(f"skip: skill={summary.get('skill')} already analyzed at {summary['analyzed_at']}")
+    sys.exit(0)
+if not summary.get("started_at"):
+    log("skip: run-summary has no started_at")
+    sys.exit(0)
+
+log(f"triggered for skill={summary.get('skill')} started_at={summary.get('started_at')}")
+analyze(summary)
+mark_analyzed(summary)

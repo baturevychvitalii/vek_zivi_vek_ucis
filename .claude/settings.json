@@ -19,7 +19,8 @@
       "Write(/tmp/card-input.txt)",
       "Write(/tmp/card-generation-context.md)",
       "Read(/tmp/card-generation-context.md)",
-      "Bash(claude -p --bare *)"
+      "Bash(claude -p --bare *)",
+      "Write(.claude/agents/health-agent/health-findings.jsonl)"
     ]
   },
   "hooks": {
