@@ -13,41 +13,21 @@ It shall automatically detect 'misbehavior' and propose fixes. Maybe help me, th
 
 ## What this system actually does as of now
 
-Practically Observes skill runs, detects tool errors and unexpected permission prompts,
-accumulates findings, and surfaces them to the user on demand.
+Observes skill runs, runs Python detectors for specific builder rule violations and
+behavioral anomalies, accumulates structured findings, then triggers the health-agent
+to analyze findings silently at the start of the next session. Nudges the user only
+when a real issue is found.
 
 ## Entry points
 
 | File | What it does |
 |---|---|
 | `HOOKS.md` | Hook-by-hook reference: triggers, inputs, outputs |
-| `../../agents/health-agent.md` | Agent definition: how findings are analyzed and reported |
+| `../../agents/health-agent.md` | Agent definition: verdict logic, output format |
+| `detectors/` | One Python module per builder rule; each exports `detect(ctx)` |
+| `../../meta/builder/health-agent-contract.md` | Contract: every new builder rule needs a detector |
 | `../../agents/health-agent/health-findings.jsonl` | Accumulated findings (runtime) |
-| `../../agents/health-agent/health-state.json` | Nudge throttle state (runtime) |
-
-## Tunable knobs
-
-**Ignored skills** — `observe-skill-start.py` and `observe-skill-start-natural.py`
-each have an `IGNORED_SKILLS = []` list. Add skill names here to suppress observation
-for specific pipelines.
-
-**Permission prompt filtering** — `detect-health-issues.py` filters out any prompt
-whose `detail` contains `/.claude/` or starts with `.claude/`. Extend this logic
-to suppress false positives from known-safe tools.
-
-**Nudge throttle** — `surface-session-health.py` waits 7 days between nudges.
-Change `timedelta(days=7)` to adjust cadence.
-
-**Finding TTL** — findings accumulate indefinitely. Consider adding a cleanup pass
-in `detect-health-issues.py` or the agent to expire old processed entries.
-
-## Runtime files (not committed)
-
-| File | Written by | Read by |
-|---|---|---|
-| `run-summary.json` | observe-skill-start, observe-skill-start-natural | observe-session-health, detect-health-issues |
-| `permission-events.jsonl` | log-permission-request.py  | detect-health-issues |
-| `hooks.log` | observe-skill-start-natural | debug inspection |
+| `../../agents/health-agent/health-state.json` | Reminder throttle state (runtime) |
 
 ## Data flow
 
@@ -57,16 +37,54 @@ UserPromptSubmit / PostToolUse(Skill)
 
 Stop
   → observe-session-health.py      stamps completed_at on run-summary.json
-  → detect-health-issues.py        reads summary + transcript + permission-events
+  → detect-health-issues.py        reads transcript + permission-events
+                                   runs all detectors in detectors/
                                    appends findings to health-findings.jsonl
+                                   writes pending-ai-review.flag if findings exist
 
 UserPromptSubmit (next session)
-  → detect-health-issues.py        analyzes previous run if unanalyzed
-  → surface-session-health.py      nudges user if unreviewed findings exist
+  → surface-session-health.py      if flag exists: inject agent trigger (immediate)
+                                   if ai_processed findings exist: periodic reminder (7-day throttle)
 
-on-demand
-  → health-agent                   reads findings, diagnoses, proposes fixes
+  → health-agent (auto)            processes unreviewed findings silently
+                                   sets status → ai_processed + verdict fields
+                                   removes flag
+                                   nudges user only if confirmed_violation or anomaly
+
+on-demand (/health)
+  → health-agent                   surfaces ai_processed findings, asks to apply fixes
+                                   sets status → user_reviewed
 ```
+
+## Finding lifecycle
+
+```
+unreviewed → (agent processes) → ai_processed → (user reviews via /health) → user_reviewed
+```
+
+## Tunable knobs
+
+**Ignored skills** — `observe-skill-start.py` and `observe-skill-start-natural.py`
+each have an `IGNORED_SKILLS = []` list. Add skill names to suppress observation.
+
+**Detectors** — add/remove modules from `detectors/` and update `ALL_DETECTORS`
+in `detect-health-issues.py`. Each detector must follow the contract in
+`../../meta/builder/health-agent-contract.md`.
+
+**Nudge threshold** — `health-agent.md` only nudges for `confirmed_violation` and
+`behavioral_anomaly` verdicts. Adjust the verdict condition to change sensitivity.
+
+**Reminder cadence** — `surface-session-health.py` uses `timedelta(days=7)` for
+the periodic "you have N unreviewed findings" reminder. Adjust to taste.
+
+## Runtime files (not committed)
+
+| File | Written by | Read by |
+|---|---|---|
+| `run-summary.json` | observe-skill-start, observe-skill-start-natural | observe-session-health, detect-health-issues |
+| `permission-events.jsonl` | log-permission-request.py | detect-health-issues |
+| `pending-ai-review.flag` | detect-health-issues | surface-session-health, health-agent |
+| `hooks.log` | observe-skill-start-natural | debug inspection |
 
 ## Before modifying
 
@@ -75,3 +93,5 @@ on-demand
   `../log-permission-request.py` writes only to `../hooks.log` for session-wide auditing.
 - All paths in hooks use `os.path.dirname(os.path.abspath(__file__))` as the base,
   so they work regardless of where Claude Code is invoked from.
+- False-positive filter uses `os.path.relpath()` to normalize absolute paths before
+  checking for `.claude/` prefix — covers both relative and absolute path forms.
