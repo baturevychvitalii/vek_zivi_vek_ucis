@@ -4,9 +4,16 @@ from datetime import datetime
 sys.stdin.read()  # consume stdin (Stop hook provides it; fields not documented)
 
 hooks_dir = os.path.dirname(os.path.abspath(__file__))
+log_path = os.path.join(hooks_dir, "hooks.log")
 summary_path = os.path.join(hooks_dir, "run-summary.json")
 
+
+def log(msg):
+    with open(log_path, "a") as f:
+        f.write(f"{datetime.now().isoformat()}\t[observe-session-health]\t{msg}\n")
+
 if not os.path.exists(summary_path):
+    log("skip: no run-summary.json found")
     sys.exit(0)
 
 with open(summary_path) as f:
@@ -31,3 +38,5 @@ if spec_path:
 
 with open(summary_path, "w") as f:
     json.dump(summary, f, indent=2)
+
+log(f"stamped completed_at for skill={skill}" + (f" spec={spec_path}" if spec_path else ""))

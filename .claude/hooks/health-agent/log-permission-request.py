@@ -18,6 +18,7 @@ else:
 
 hooks_dir = os.path.dirname(os.path.abspath(__file__))
 events_path = os.path.join(hooks_dir, "permission-events.jsonl")
+log_path = os.path.join(hooks_dir, "hooks.log")
 
 with open(events_path, "a") as f:
     f.write(json.dumps({
@@ -26,3 +27,6 @@ with open(events_path, "a") as f:
         "detail": detail,
         "transcript_path": transcript_path,
     }) + "\n")
+
+with open(log_path, "a") as f:
+    f.write(f"{datetime.now().isoformat()}\t[log-permission-request]\ttool={tool_name} detail={detail[:120]!r}\n")
