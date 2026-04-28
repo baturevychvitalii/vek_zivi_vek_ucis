@@ -96,9 +96,10 @@ When entering architect mode in a fresh worktree or session, read:
 - `.claude/meta/state/active-context.md` — current focus and open threads on this branch
   (gitignored; may not exist on a clean checkout).
 
-Before finishing the session, update `active-context.md` to reflect what was changed,
-what is still open, and where to resume. This file is a scratchpad — overwrite freely.
-Decisions worth keeping permanently graduate to `why/` before the branch closes.
+Updates to `active-context.md` are automatic: a SessionEnd hook
+(`.claude/hooks/mem-bank/append-session-summary.py`) appends one summary per session
+when keywords match. Decisions worth keeping permanently graduate to `why/` before the
+branch closes.
 
 ---
 

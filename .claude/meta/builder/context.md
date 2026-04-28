@@ -34,6 +34,6 @@ When entering builder mode in a fresh worktree or session, read:
 - `.claude/meta/state/active-context.md` — current focus and open threads on this branch
   (gitignored; may not exist on a clean checkout).
 
-Before finishing the session, update `active-context.md` to reflect what was changed,
-what is still open, and where to resume. Builder pauses mid-build belong here; finalized
-structural decisions belong in `meta/architect/why/`.
+Updates to `active-context.md` are automatic: a SessionEnd hook
+(`.claude/hooks/mem-bank/append-session-summary.py`) appends one summary per session
+when keywords match. Finalized structural decisions belong in `meta/architect/why/`.

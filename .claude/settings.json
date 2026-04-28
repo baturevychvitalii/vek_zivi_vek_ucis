@@ -28,7 +28,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/turn-tracker.py"
+            "command": "python3 .claude/hooks/debug/turn-tracker.py"
           }
         ]
       }
@@ -38,7 +38,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/log-instructions-loaded.py"
+            "command": "python3 .claude/hooks/debug/log-instructions-loaded.py"
           }
         ]
       }
@@ -48,7 +48,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/log-permission-request.py"
+            "command": "python3 .claude/hooks/debug/log-permission-request.py"
           }
         ]
       }
@@ -59,11 +59,25 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/notify-meta-read.py"
+            "command": "python3 .claude/hooks/debug/notify-meta-read.py"
           },
           {
             "type": "command",
-            "command": "python3 .claude/hooks/notify-context-read.py"
+            "command": "python3 .claude/hooks/debug/notify-context-read.py"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/debug/log-session-end.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/mem-bank/append-session-summary.py --keywords 'meta/.*/context\\.md' --target .claude/meta/state/active-context.md"
           }
         ]
       }

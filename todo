@@ -1,4 +1,5 @@
+shall active session have any predefined context? Probably not - solve one level higher
 
- - No SessionStart hook auto-read — violates "navigation, not injection" (architect/context.md:70-73). The pointers in
- architect/context.md and builder/context.md are the navigation; the agent reads them when entering those modes (already an observable
- handoff).
+a merge into master -> population of why. Mechanics on not losing stuff at abrupt session stop
+
+consider how much cheaper --bear will be

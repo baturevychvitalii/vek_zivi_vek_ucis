@@ -27,9 +27,10 @@ different writers. They do not share files; neither inherits from the other.
 **Read** — navigation-based, not hook-injected. The pointers in `architect/context.md`
 and `builder/context.md` direct the agent here when entering those modes.
 
-**Update** — agent-driven by convention. Both mode `context.md` files instruct the agent
-to update `active-context.md` before finishing a session. No automation; if the session
-ends abruptly the update is missed — acceptable trade-off for v1.
+**Update** — automatic via SessionEnd hook. `.claude/hooks/mem-bank/append-session-summary.py`
+appends one prose summary per session when the session transcript matches the configured
+regex keywords (registered in `.claude/settings.json`). Append-only; never rewrites prior
+content. Hard kills may skip the hook — acceptable trade-off.
 
 ## What Belongs Here vs. Elsewhere
 
