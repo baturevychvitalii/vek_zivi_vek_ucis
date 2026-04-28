@@ -111,8 +111,40 @@ def git_status(cwd):
         return f"(git status failed: {e})"
 
 
+RESPONSE_CAP = 3000
+
+SYSTEM_REMINDER_RE = re.compile(
+    r"<system-reminder\b[^>]*>.*?</system-reminder>",
+    re.DOTALL | re.IGNORECASE,
+)
+COMMAND_NAME_RE = re.compile(
+    r"<command-name>([^<]+)</command-name>",
+    re.IGNORECASE,
+)
+
+
+def clean_user_prompt(text):
+    m = COMMAND_NAME_RE.search(text)
+    if m:
+        return f"[invoked /{m.group(1).strip()}]"
+    return SYSTEM_REMINDER_RE.sub("", text).strip()
+
+
+def slim_assistant(text):
+    text = SYSTEM_REMINDER_RE.sub("", text).strip()
+    if len(text) > RESPONSE_CAP:
+        head = text[:1000]
+        tail = text[-300:]
+        elided = len(text) - len(head) - len(tail)
+        text = f"{head}\n…[elided {elided} chars]…\n{tail}"
+    return text
+
+
 def build_prompt(prompts, last_asst, gstatus):
-    numbered = "\n".join(f"{i+1}. {p}" for i, p in enumerate(prompts))
+    cleaned_prompts = [clean_user_prompt(p) for p in prompts]
+    cleaned_prompts = [p for p in cleaned_prompts if p]
+    slim_last = slim_assistant(last_asst)
+    numbered = "\n".join(f"{i+1}. {p}" for i, p in enumerate(cleaned_prompts))
     return (
         "You are summarizing a coding session for an append-only project memory file.\n\n"
         "STRICT RULES:\n"
@@ -122,7 +154,7 @@ def build_prompt(prompts, last_asst, gstatus):
         "- Output 2-4 plain prose sentences. No headings, no lists, no code fences.\n"
         "- Focus on what changed, what is still open, and where to resume.\n\n"
         f"--- USER PROMPTS ---\n{numbered}\n\n"
-        f"--- LAST ASSISTANT RESPONSE ---\n{last_asst}\n\n"
+        f"--- LAST ASSISTANT RESPONSE ---\n{slim_last}\n\n"
         f"--- GIT STATUS ---\n{gstatus}\n"
     )
 
@@ -247,9 +279,10 @@ def run_hook(args):
         prompts = collect_user_prompts(events)
         last_asst = last_assistant_response(events)
         gstatus = git_status(cwd)
+        pre_slim_chars = sum(len(p) for p in prompts) + len(last_asst)
         full_prompt = build_prompt(prompts, last_asst, gstatus)
         PROMPT_DUMP_PATH.write_text(full_prompt)
-        log(f"claude input written to {PROMPT_DUMP_PATH} ({len(full_prompt)} chars)")
+        log(f"claude input written to {PROMPT_DUMP_PATH} ({len(full_prompt)} chars; pre-slim user+asst {pre_slim_chars})")
         spawn_worker(target, session_id)
     except Exception as e:
         log(f"hook failed before spawn: {e}")
