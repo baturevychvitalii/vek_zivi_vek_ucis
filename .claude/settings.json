@@ -10,6 +10,8 @@
       "Bash(date *)",
       "Bash(git log *)",
       "Bash(git diff *)",
+      "Bash(git add *)",
+      "Bash(git check-ignore *)",
       "Write(decks/**/compiled.md)",
       "Write(decks/**/depolymorphized.md)",
       "Read(decks/**/compiled.md)",
