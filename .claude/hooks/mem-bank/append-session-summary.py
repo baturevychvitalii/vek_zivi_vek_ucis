@@ -90,14 +90,17 @@ def collect_user_prompts(events):
     return prompts
 
 
-def last_assistant_response(events):
+def last_n_assistant_responses(events, n=3):
+    out = []
     for ev in reversed(events):
         if ev.get("type") != "assistant":
             continue
         text = extract_text(ev.get("message", {}).get("content", "")).strip()
         if text:
-            return text
-    return ""
+            out.append(text)
+            if len(out) >= n:
+                break
+    return list(reversed(out))
 
 
 def git_status(cwd):
@@ -121,12 +124,28 @@ COMMAND_NAME_RE = re.compile(
     r"<command-name>([^<]+)</command-name>",
     re.IGNORECASE,
 )
+TASK_NOTIFICATION_RE = re.compile(
+    r"<task-notification\b[^>]*>.*?</task-notification>",
+    re.DOTALL | re.IGNORECASE,
+)
+TASK_SUMMARY_RE = re.compile(
+    r"<summary>([^<]+)</summary>",
+    re.IGNORECASE,
+)
+
+
+def _format_task_notification(block):
+    m = TASK_SUMMARY_RE.search(block)
+    if m:
+        return f"[task-notification: {m.group(1).strip()}]"
+    return "[task-notification]"
 
 
 def clean_user_prompt(text):
     m = COMMAND_NAME_RE.search(text)
     if m:
         return f"[invoked /{m.group(1).strip()}]"
+    text = TASK_NOTIFICATION_RE.sub(lambda mm: _format_task_notification(mm.group(0)), text)
     return SYSTEM_REMINDER_RE.sub("", text).strip()
 
 
@@ -140,11 +159,15 @@ def slim_assistant(text):
     return text
 
 
-def build_prompt(prompts, last_asst, gstatus):
+def build_prompt(prompts, last_responses, gstatus):
     cleaned_prompts = [clean_user_prompt(p) for p in prompts]
     cleaned_prompts = [p for p in cleaned_prompts if p]
-    slim_last = slim_assistant(last_asst)
+    slim_responses = [slim_assistant(r) for r in last_responses]
     numbered = "\n".join(f"{i+1}. {p}" for i, p in enumerate(cleaned_prompts))
+    total = len(slim_responses)
+    rendered_responses = "\n\n".join(
+        f"[{i+1}/{total}] {r}" for i, r in enumerate(slim_responses)
+    )
     return (
         "You are summarizing a coding session for an append-only project memory file.\n\n"
         "STRICT RULES:\n"
@@ -154,18 +177,18 @@ def build_prompt(prompts, last_asst, gstatus):
         "- Output 2-4 plain prose sentences. No headings, no lists, no code fences.\n"
         "- Focus on what changed, what is still open, and where to resume.\n\n"
         f"--- USER PROMPTS ---\n{numbered}\n\n"
-        f"--- LAST ASSISTANT RESPONSE ---\n{slim_last}\n\n"
+        f"--- LAST ASSISTANT RESPONSES (chronological, oldest first) ---\n{rendered_responses}\n\n"
         f"--- GIT STATUS ---\n{gstatus}\n"
     )
 
 
 def call_claude(prompt):
     result = subprocess.run(
-        ["claude", "-p", prompt],
+        ["claude", "-p", "--model", "haiku", prompt],
         capture_output=True, text=True, timeout=300,
     )
     if result.returncode != 0:
-        raise RuntimeError(f"claude -p exited {result.returncode}: {result.stderr.strip()}")
+        raise RuntimeError(f"claude exited {result.returncode}: {result.stderr.strip()}")
     return result.stdout.strip()
 
 
@@ -277,10 +300,10 @@ def run_hook(args):
 
     try:
         prompts = collect_user_prompts(events)
-        last_asst = last_assistant_response(events)
+        last_responses = last_n_assistant_responses(events, n=3)
         gstatus = git_status(cwd)
-        pre_slim_chars = sum(len(p) for p in prompts) + len(last_asst)
-        full_prompt = build_prompt(prompts, last_asst, gstatus)
+        pre_slim_chars = sum(len(p) for p in prompts) + sum(len(r) for r in last_responses)
+        full_prompt = build_prompt(prompts, last_responses, gstatus)
         PROMPT_DUMP_PATH.write_text(full_prompt)
         log(f"claude input written to {PROMPT_DUMP_PATH} ({len(full_prompt)} chars; pre-slim user+asst {pre_slim_chars})")
         spawn_worker(target, session_id)

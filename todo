@@ -6,3 +6,8 @@ consider how much cheaper --bear will be
 
 
 builder -> mode_agnostic.md or on architecture layer
+
+look at last prompt.txt -> it takes only last response from ai.
+
+
+when merging active-context -> remove noise see "session f86aef"
