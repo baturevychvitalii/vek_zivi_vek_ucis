@@ -8,17 +8,16 @@ anything that shapes how the system grows. Not for everyday card operations.*
 ## The Skill Being Practiced Here
 
 This project is a sandbox for **context engineering** — the discipline of shaping what
-Claude knows, when it knows it, and how reliably it acts on that knowledge.
+AI knows, when it knows it, and how reliably it acts on that knowledge.
 
-The flashcard use case is real, but it is also the petri dish. The goal is to develop
-fluency in:
+The goal is to develop fluency in:
 
 - Designing context packages that load exactly when needed, not more
 - Building governance that enforces itself (hooks > manual review)
-- Making Claude's behavior observable and verifiable, not just assumed
+- Making AI's behavior observable and verifiable, not just assumed
 - Understanding where mechanical enforcement is necessary vs. where navigation suffices
 
-Each architectural decision is also a hypothesis about how Claude behaves. Treat gaps
+Each architectural decision is also a hypothesis about how AI behaves. Treat gaps
 and failures as data, not just bugs.
 
 ---
@@ -30,7 +29,7 @@ never repeated.**
 
 This applies at every level:
 - Skills are generic so a new domain needs only a context file, not a new skill
-- If a rule is in its canonical location, it is not also here or in CLAUDE.md
+- If a rule is in its canonical location, it is not also here or in AI.md
 
 Duplication is a signal that something hasn't found its canonical home yet.
 When you notice it, consolidate — don't patch both copies.
@@ -90,16 +89,7 @@ new primitives, new governance patterns, reconsidering structure.
 
 ## Project State
 
-When entering architect mode in a fresh worktree or session, read:
-
-- `.claude/meta/state/product-vision.md` — the project's forward-looking direction.
-- `.claude/meta/state/active-context.md` — current focus and open threads on this branch
-  (gitignored; may not exist on a clean checkout).
-
-Updates to `active-context.md` are automatic: a SessionEnd hook
-(`.claude/hooks/mem-bank/append-session-summary.py`) appends one summary per session
-when keywords match. Decisions worth keeping permanently graduate to `why/` before the
-branch closes.
+Read `.claude/meta/state/context.md` on entry.
 
 ---
 

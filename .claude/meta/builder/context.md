@@ -28,12 +28,4 @@ read `hooks.md` (in this directory) first.
 
 ## Project State
 
-When entering builder mode in a fresh worktree or session, read:
-
-- `.claude/meta/state/product-vision.md` — the project's forward-looking direction.
-- `.claude/meta/state/active-context.md` — current focus and open threads on this branch
-  (gitignored; may not exist on a clean checkout).
-
-Updates to `active-context.md` are automatic: a SessionEnd hook
-(`.claude/hooks/mem-bank/append-session-summary.py`) appends one summary per session
-when keywords match. Finalized structural decisions belong in `meta/architect/why/`.
+Read `.claude/meta/state/context.md` on entry.

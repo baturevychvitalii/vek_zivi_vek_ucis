@@ -1,13 +1,8 @@
-shall active session have any predefined context? Probably not - solve one level higher
-
 a merge into master -> population of why. Mechanics on not losing stuff at abrupt session stop
 
-consider how much cheaper --bear will be
 
+move membank skcripts from hooks. a hook shall be just an entry.
 
 builder -> mode_agnostic.md or on architecture layer
 
-look at last prompt.txt -> it takes only last response from ai.
 
-
-when merging active-context -> remove noise see "session f86aef"

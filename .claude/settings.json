@@ -5,6 +5,7 @@
       "Bash(python3 .claude/scripts/compiled-is-fresh.py:*)",
       "Bash(python3 .claude/scripts/depolymorphize.py:*)",
       "Bash(python3 .claude/scripts/find-inheritables.py:*)",
+      "Bash(python3 .claude/scripts/mem-bank-graduate.py:*)",
       "Bash(pwd)",
       "Bash(ls *)",
       "Bash(date *)",

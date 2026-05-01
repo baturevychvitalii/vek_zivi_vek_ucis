@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# Auto-graduate active-context.md to .claude/meta/architect/why/ when a feature
+# branch is merged into the project's main branch. Fires only when HEAD after
+# the merge is master/main; merges in the other direction (e.g. master into a
+# feature branch) are ignored.
+
+set -e
+
+current=$(git branch --show-current)
+case "$current" in
+    master|main) ;;
+    *) exit 0 ;;
+esac
+
+subject=$(git log -1 --pretty=%s)
+branch=$(printf '%s\n' "$subject" | sed -n "s/^Merge branch '\([^']*\)'.*/\1/p")
+[ -z "$branch" ] && branch="unknown"
+
+repo_root=$(git rev-parse --show-toplevel)
+cd "$repo_root"
+
+python3 .claude/scripts/mem-bank-graduate.py \
+    --source .claude/meta/state/active-context.md \
+    --archive-dir .claude/meta/architect/why \
+    --backup-dir .claude/meta/state/.archived \
+    --branch "$branch"
