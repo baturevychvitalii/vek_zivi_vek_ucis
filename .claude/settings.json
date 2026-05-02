@@ -80,7 +80,7 @@
           },
           {
             "type": "command",
-            "command": "python3 .claude/mem-bank/append-session-summary.py --keywords 'meta/.*/context\\.md' --target .claude/meta/state/active-context.md"
+            "command": "python3 .claude/mem-bank/append-session-summary.py --keywords 'meta/.*/context\\.md' --target .claude/meta/memory/small-bank.md"
           }
         ]
       }
