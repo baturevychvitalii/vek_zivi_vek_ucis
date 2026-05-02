@@ -14,7 +14,7 @@ The wider question was: what *are* rules good for, and where do hooks beat them?
 
 ## Decision
 
-A generic Python script — `.claude/hooks/mem-bank/append-session-summary.py` —
+A generic Python script — `.claude/mem-bank/append-session-summary.py` —
 registered as a `SessionEnd` hook. It takes `--keywords` (comma-separated regex
 patterns) and `--target` (project-relative path). When the session transcript matches
 any pattern, the script pre-processes content in Python (all user prompts + last

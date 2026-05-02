@@ -8,7 +8,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-LOG_PATH = Path(".claude/hooks/mem-bank/mem-bank.log")
+LOG_PATH = Path(__file__).resolve().parent / "mem-bank.log"
 SCRIPT_TAG = "[mem-bank-graduate]"
 
 FILENAME_RE = re.compile(r"^[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.md$")

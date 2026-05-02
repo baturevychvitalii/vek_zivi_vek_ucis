@@ -12,8 +12,8 @@ __pycache__/
 .DS_Store
 
 .claude/hooks/debug/hooks.log
-.claude/hooks/mem-bank/mem-bank.log
-.claude/hooks/mem-bank/last-prompt.txt
+.claude/mem-bank/mem-bank.log
+.claude/mem-bank/last-prompt.txt
 
 # Depolymorphized context snapshots (generated, not source)
 depolymorphized.md
