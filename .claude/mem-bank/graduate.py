@@ -61,7 +61,7 @@ def build_prompt(source_text, branch, existing_filenames):
     listed = "\n".join(f"- {n}" for n in sorted(existing_filenames)) or "(none)"
     return (
         "You are summarizing a branch's project-development log into a durable archive entry.\n\n"
-        "INPUT — active-context.md from the branch:\n"
+        "INPUT — small-bank.md from the branch:\n"
         "```\n"
         f"{source_text}\n"
         "```\n\n"
@@ -142,7 +142,7 @@ def write_archive(target, title, branch, sessions, summary, source_text):
         f"# {title}\n\n"
         f"<{today} — branch {branch} — sessions {sessions_str}>\n\n"
         f"## Summary\n{summary}\n\n"
-        f"## Active context contents\n{source_text}"
+        f"## Small bank contents\n{source_text}"
     )
     if not body.endswith("\n"):
         body += "\n"
@@ -153,7 +153,7 @@ def write_archive(target, title, branch, sessions, summary, source_text):
 def backup_source(source, backup_dir):
     backup_dir.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now().strftime("%Y%m%dT%H%M%S")
-    dest = backup_dir / f"{stamp}-active-context.md"
+    dest = backup_dir / f"{stamp}-small-bank.md"
     shutil.copy2(source, dest)
     return dest
 

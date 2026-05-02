@@ -1,7 +1,7 @@
 # Product Vision
 
 *Forward-looking north star. Architect-owned. Updated when direction shifts, not on every
-session. For the frozen point-in-time retrospective, see `why/trajectory-snapshot.md`.*
+session. For the frozen point-in-time retrospective, consult `.claude/meta/memory/context.md`
 
 ---
 

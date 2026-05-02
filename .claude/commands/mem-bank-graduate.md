@@ -1,9 +1,12 @@
-Graduate the current branch's `active-context.md` into a durable entry under `.claude/meta/architect/why/`.
+Graduate the current branch's `small-bank.md` into a durable entry in it's corresponding `./big-bank/`
+
+Variables we will need: 
+<small-bank>: actively loaded small-bank.md (report error if none is loaded in any context now user must first start interacting with the part of the project which uses mem-bank subsystem)
+
+<big-bank>: directory located besides <small-bank>
 
 Run the script:
 
 ```bash
-python3 .claude/mem-bank/graduate.py --source .claude/meta/state/active-context.md --archive-dir .claude/meta/architect/why --backup-dir .claude/meta/state/.archived
+python3 .claude/mem-bank/graduate.py --source <small-bank> --archive-dir <big-bank> --backup-dir <big-bank>
 ```
-
-The script reads `active-context.md`, asks Claude (Sonnet) for a topical kebab-case filename and a 4–8-sentence summary, writes a new file under `why/` containing the summary plus the verbatim active-context, copies the original to the backup directory, and deletes the source. On a clean no-op (missing or empty source) it exits 0 without writing anything.

@@ -89,7 +89,8 @@ new primitives, new governance patterns, reconsidering structure.
 
 ## Project State
 
-Read `.claude/meta/state/context.md` on entry.
+Read `./product-vision.md` on entry.
+Read `../momory/context.md` on entry. 
 
 ---
 

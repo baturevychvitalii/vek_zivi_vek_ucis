@@ -20,7 +20,4 @@ depolymorphized.md
 compiled.md
 
 # Meta state — branch-local development scratchpad
-.claude/meta/state/active-context.md
-
-# Pre-graduation backups of active-context (local-only insurance)
-.claude/meta/state/.archived/
+.claude/meta/memory/small-bank.md
