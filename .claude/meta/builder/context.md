@@ -25,3 +25,7 @@ read `hooks.md` (in this directory) first.
 
 - Adding cards, running pipelines, or other operational tasks (user mode)
 - Changing how the system grows, adding new layers or primitives (out of scope for builder)
+
+## Project State
+
+Read `../memory/context.md` on entry. 
