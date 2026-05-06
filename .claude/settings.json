@@ -5,11 +5,14 @@
       "Bash(python3 .claude/scripts/compiled-is-fresh.py:*)",
       "Bash(python3 .claude/scripts/depolymorphize.py:*)",
       "Bash(python3 .claude/scripts/find-inheritables.py:*)",
+      "Bash(python3 .claude/mem-bank/big-bank.py:*)",
       "Bash(pwd)",
       "Bash(ls *)",
       "Bash(date *)",
       "Bash(git log *)",
       "Bash(git diff *)",
+      "Bash(git add *)",
+      "Bash(git check-ignore *)",
       "Write(decks/**/compiled.md)",
       "Write(decks/**/depolymorphized.md)",
       "Read(decks/**/compiled.md)",
@@ -28,7 +31,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/turn-tracker.py"
+            "command": "python3 .claude/hooks/debug/turn-tracker.py"
           }
         ]
       }
@@ -38,7 +41,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/log-instructions-loaded.py"
+            "command": "python3 .claude/hooks/debug/log-instructions-loaded.py"
           }
         ]
       }
@@ -48,7 +51,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/log-permission-request.py"
+            "command": "python3 .claude/hooks/debug/log-permission-request.py"
           }
         ]
       }
@@ -59,11 +62,25 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/notify-meta-read.py"
+            "command": "python3 .claude/hooks/debug/notify-meta-read.py"
           },
           {
             "type": "command",
-            "command": "python3 .claude/hooks/notify-context-read.py"
+            "command": "python3 .claude/hooks/debug/notify-context-read.py"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/debug/log-session-end.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 .claude/mem-bank/small-bank.py --subscriptions .claude/mem-bank/subscriptions.json"
           }
         ]
       }
