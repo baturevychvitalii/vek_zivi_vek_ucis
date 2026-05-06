@@ -142,24 +142,23 @@ def topic_title_from_filename(filename):
     return " ".join(part.capitalize() for part in stem.split("-"))
 
 
-def write_archive(target, title, branch, sessions, summary, source_text):
+def write_archive(target, title, branch, sessions, summary, archive_link):
     sessions_str = ", ".join(sessions) if sessions else "n/a"
     today = datetime.now().strftime("%Y-%m-%d")
     body = (
         f"# {title}\n\n"
         f"<{today} — branch {branch} — sessions {sessions_str}>\n\n"
         f"## Summary\n{summary}\n\n"
-        f"## Small bank contents\n{source_text}"
+        f"## Archive\n[Small bank sessions]({archive_link})\n"
     )
-    if not body.endswith("\n"):
-        body += "\n"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(body)
 
 
-def backup_source(source, backup_dir):
+def backup_source(source, backup_dir, stamp=None):
     backup_dir.mkdir(parents=True, exist_ok=True)
-    stamp = datetime.now().strftime("%Y%m%dT%H%M%S")
+    if stamp is None:
+        stamp = datetime.now().strftime("%Y%m%dT%H%M%S")
     dest = backup_dir / f"{stamp}-small-bank.md"
     shutil.copy2(source, dest)
     return dest
@@ -213,9 +212,12 @@ def graduate_one(source, archive_dir, backup_dir, branch, name=""):
         log(f"{label}collision resolved: {filename} -> {target.name}")
 
     title = topic_title_from_filename(target.name)
+    stamp = datetime.now().strftime("%Y%m%dT%H%M%S")
+    backup_dest = backup_dir / f"{stamp}-small-bank.md"
+    archive_link = os.path.relpath(backup_dest, target.parent)
 
     try:
-        write_archive(target, title, branch, sessions, summary, source_text)
+        write_archive(target, title, branch, sessions, summary, archive_link)
         log(f"{label}wrote {target}")
     except Exception as e:
         log(f"{label}archive write failed: {e}")
@@ -223,7 +225,7 @@ def graduate_one(source, archive_dir, backup_dir, branch, name=""):
         return 1
 
     try:
-        backup = backup_source(source, backup_dir)
+        backup = backup_source(source, backup_dir, stamp)
         log(f"{label}backed up source -> {backup}")
     except Exception as e:
         log(f"{label}backup failed (preserving source): {e}")
@@ -266,7 +268,8 @@ def main(argv):
             bank_path = Path(bank["bank"])
             source = bank_path / "small-bank.md"
             archive_dir = bank_path / "big-bank"
-            ret = graduate_one(source, archive_dir, archive_dir, branch, bank.get("name", ""))
+            backup_dir = archive_dir / "small-bank-archive"
+            ret = graduate_one(source, archive_dir, backup_dir, branch, bank.get("name", ""))
             if ret != 0:
                 overall = ret
         return overall
