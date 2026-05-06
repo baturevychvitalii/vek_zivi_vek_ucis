@@ -29,11 +29,18 @@ def log(detail):
 
 def parse_args(argv):
     p = argparse.ArgumentParser()
-    p.add_argument("--source", required=True)
-    p.add_argument("--archive-dir", required=True)
-    p.add_argument("--backup-dir", required=True)
+    p.add_argument("--subscriptions")
+    p.add_argument("--source")
+    p.add_argument("--archive-dir")
+    p.add_argument("--backup-dir")
     p.add_argument("--branch", default="")
     return p.parse_args(argv)
+
+
+def load_subscriptions(subs_path):
+    with open(subs_path) as f:
+        data = json.load(f)
+    return data.get("banks", [])
 
 
 def detect_branch(explicit):
@@ -158,36 +165,27 @@ def backup_source(source, backup_dir):
     return dest
 
 
-def main(argv):
-    try:
-        args = parse_args(argv)
-    except SystemExit as e:
-        return int(e.code) if isinstance(e.code, int) else 2
-
-    source = Path(args.source)
-    archive_dir = Path(args.archive_dir)
-    backup_dir = Path(args.backup_dir)
-
-    log(f"called: source={source} archive_dir={archive_dir} backup_dir={backup_dir} branch={args.branch!r}")
+def graduate_one(source, archive_dir, backup_dir, branch, name=""):
+    label = f"[{name}] " if name else ""
+    log(f"{label}called: source={source} archive_dir={archive_dir} backup_dir={backup_dir} branch={branch!r}")
 
     if not source.exists():
-        log("source missing — clean no-op")
-        print(f"{source}: not found, nothing to graduate")
+        log(f"{label}source missing — clean no-op")
+        print(f"{label}{source}: not found, nothing to graduate")
         return 0
 
     try:
         source_text = source.read_text()
     except Exception as e:
-        log(f"failed to read source: {e}")
+        log(f"{label}failed to read source: {e}")
         print(f"error: failed to read {source}: {e}", file=sys.stderr)
         return 1
 
     if not source_text.strip():
-        log("source empty — clean no-op")
-        print(f"{source}: empty, nothing to graduate")
+        log(f"{label}source empty — clean no-op")
+        print(f"{label}{source}: empty, nothing to graduate")
         return 0
 
-    branch = detect_branch(args.branch)
     sessions = extract_sessions(source_text)
 
     archive_dir.mkdir(parents=True, exist_ok=True)
@@ -198,55 +196,91 @@ def main(argv):
     try:
         raw = call_claude(prompt)
     except Exception as e:
-        log(f"claude call failed: {e}")
+        log(f"{label}claude call failed: {e}")
         print(f"error: claude call failed: {e}", file=sys.stderr)
         return 1
-    log(f"claude response ({len(raw)} chars)")
+    log(f"{label}claude response ({len(raw)} chars)")
 
     try:
         filename, summary = parse_response(raw)
     except ValueError as e:
-        log(f"response validation failed: {e}")
+        log(f"{label}response validation failed: {e}")
         print(f"error: {e}", file=sys.stderr)
         return 1
 
     target = resolve_collision(archive_dir, filename)
     if target.name != filename:
-        log(f"collision resolved: {filename} -> {target.name}")
+        log(f"{label}collision resolved: {filename} -> {target.name}")
 
     title = topic_title_from_filename(target.name)
 
     try:
         write_archive(target, title, branch, sessions, summary, source_text)
-        log(f"wrote {target}")
+        log(f"{label}wrote {target}")
     except Exception as e:
-        log(f"archive write failed: {e}")
+        log(f"{label}archive write failed: {e}")
         print(f"error: archive write failed: {e}", file=sys.stderr)
         return 1
 
     try:
         backup = backup_source(source, backup_dir)
-        log(f"backed up source -> {backup}")
+        log(f"{label}backed up source -> {backup}")
     except Exception as e:
-        log(f"backup failed (preserving source): {e}")
+        log(f"{label}backup failed (preserving source): {e}")
         print(f"error: backup failed, source preserved: {e}", file=sys.stderr)
         try:
             target.unlink()
-            log(f"rolled back archive write: {target}")
+            log(f"{label}rolled back archive write: {target}")
         except Exception:
             pass
         return 1
 
     try:
         source.unlink()
-        log(f"deleted source {source}")
+        log(f"{label}deleted source {source}")
     except Exception as e:
-        log(f"source delete failed: {e}")
+        log(f"{label}source delete failed: {e}")
         print(f"warning: source delete failed: {e}", file=sys.stderr)
         return 1
 
-    print(f"graduated -> {target}")
+    print(f"{label}graduated -> {target}")
     return 0
+
+
+def main(argv):
+    try:
+        args = parse_args(argv)
+    except SystemExit as e:
+        return int(e.code) if isinstance(e.code, int) else 2
+
+    branch = detect_branch(args.branch)
+
+    if args.subscriptions:
+        try:
+            banks = load_subscriptions(args.subscriptions)
+        except Exception as e:
+            print(f"error: failed to load subscriptions: {e}", file=sys.stderr)
+            return 1
+        overall = 0
+        for bank in banks:
+            bank_path = Path(bank["bank"])
+            source = bank_path / "small-bank.md"
+            archive_dir = bank_path / "big-bank"
+            ret = graduate_one(source, archive_dir, archive_dir, branch, bank.get("name", ""))
+            if ret != 0:
+                overall = ret
+        return overall
+
+    if not args.source or not args.archive_dir or not args.backup_dir:
+        print("error: provide --subscriptions or all of --source/--archive-dir/--backup-dir", file=sys.stderr)
+        return 2
+
+    return graduate_one(
+        Path(args.source),
+        Path(args.archive_dir),
+        Path(args.backup_dir),
+        branch,
+    )
 
 
 if __name__ == "__main__":

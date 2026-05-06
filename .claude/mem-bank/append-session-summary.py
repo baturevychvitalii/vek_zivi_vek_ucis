@@ -10,6 +10,7 @@ from pathlib import Path
 HOOK_DIR = Path(__file__).resolve().parent
 LOG_PATH = HOOK_DIR / "mem-bank.log"
 PROMPT_DUMP_PATH = HOOK_DIR / "last-prompt.txt"
+TARGETS_DUMP_PATH = HOOK_DIR / "last-targets.txt"
 
 sys.path.insert(0, str(HOOK_DIR))
 from listener import read_transcript, extract_text, matched_any  # noqa: E402
@@ -26,12 +27,33 @@ def log(detail):
 
 def parse_args(argv):
     p = argparse.ArgumentParser()
-    p.add_argument("--keywords")
-    p.add_argument("--target")
+    p.add_argument("--subscriptions")
     p.add_argument("--worker", action="store_true",
-                   help="internal: run as detached worker (reads prompt from disk)")
+                   help="internal: run as detached worker (reads prompt and targets from disk)")
     p.add_argument("--session-id", default="")
     return p.parse_args(argv)
+
+
+def load_subscriptions(subs_path, cwd):
+    path = Path(subs_path)
+    if not path.is_absolute():
+        path = Path(cwd) / path
+    with open(path) as f:
+        data = json.load(f)
+    return data.get("banks", [])
+
+
+def bank_effective_pattern(bank_cfg):
+    if "pattern" in bank_cfg:
+        return bank_cfg["pattern"]
+    return re.escape(bank_cfg["bank"]) + r"/context\.md"
+
+
+def bank_small_bank_path(bank_cfg, cwd):
+    p = Path(bank_cfg["bank"]) / "small-bank.md"
+    if not p.is_absolute():
+        p = Path(cwd) / p
+    return p
 
 
 def collect_user_prompts(events):
@@ -156,13 +178,22 @@ def append_to_target(target, summary, session_id):
         f.write(block)
 
 
-def run_worker(target, session_id):
-    log(f"worker started: pid={os.getpid()} target={target} session={session_id or 'unknown'}")
+def run_worker(session_id):
+    log(f"worker started: pid={os.getpid()} session={session_id or 'unknown'}")
     try:
         prompt = PROMPT_DUMP_PATH.read_text()
     except Exception as e:
         log(f"worker failed to read prompt dump: {e}")
         return 1
+    try:
+        targets_text = TARGETS_DUMP_PATH.read_text()
+        targets = [Path(t.strip()) for t in targets_text.splitlines() if t.strip()]
+    except Exception as e:
+        log(f"worker failed to read targets dump: {e}")
+        return 1
+    if not targets:
+        log("worker: no targets in targets dump")
+        return 0
     try:
         summary = call_claude(prompt)
     except Exception as e:
@@ -172,20 +203,19 @@ def run_worker(target, session_id):
         log("worker: claude -p returned empty output")
         return 0
     log(f"worker claude response ({len(summary)} chars): {summary!r}")
-    try:
-        append_to_target(target, summary, session_id)
-        log(f"worker appended summary to {target}")
-    except Exception as e:
-        log(f"worker append failed: {e}")
-        return 1
+    for target in targets:
+        try:
+            append_to_target(target, summary, session_id)
+            log(f"worker appended summary to {target}")
+        except Exception as e:
+            log(f"worker append failed for {target}: {e}")
     return 0
 
 
-def spawn_worker(target, session_id):
+def spawn_worker(session_id):
     cmd = [
         sys.executable, str(Path(__file__).resolve()),
         "--worker",
-        "--target", str(target),
         "--session-id", session_id,
     ]
     devnull_r = open(os.devnull, "rb")
@@ -224,24 +254,20 @@ def run_hook(args):
         log(f"missing transcript_path: {transcript_path}")
         return 0
 
-    if not args.keywords or not args.target:
-        log("hook mode requires --keywords and --target")
+    if not args.subscriptions:
+        log("hook mode requires --subscriptions")
         return 0
-
-    try:
-        patterns = [re.compile(p.strip()) for p in args.keywords.split(",") if p.strip()]
-    except re.error as e:
-        log(f"bad regex in --keywords: {e}")
-        return 0
-
-    target = Path(args.target)
-    if not target.is_absolute():
-        target = Path(cwd) / target
 
     log(
-        f"called: keywords={args.keywords!r} target={target} "
+        f"called: subscriptions={args.subscriptions!r} "
         f"transcript={transcript_path} session={session_id} cwd={cwd}"
     )
+
+    try:
+        banks = load_subscriptions(args.subscriptions, cwd)
+    except Exception as e:
+        log(f"failed to load subscriptions: {e}")
+        return 0
 
     try:
         events = read_transcript(transcript_path)
@@ -249,8 +275,22 @@ def run_hook(args):
         log(f"failed to read transcript: {e}")
         return 0
 
-    if not matched_any(events, patterns):
-        log("no keyword match in transcript — skipping")
+    matched_targets = []
+    for bank in banks:
+        name = bank.get("name", "?")
+        pattern_str = bank_effective_pattern(bank)
+        try:
+            patterns = [re.compile(pattern_str)]
+        except re.error as e:
+            log(f"bad pattern for bank {name!r}: {e}")
+            continue
+        if matched_any(events, patterns):
+            target = bank_small_bank_path(bank, cwd)
+            matched_targets.append(str(target))
+            log(f"bank matched: {name!r} -> {target}")
+
+    if not matched_targets:
+        log("no bank matched in transcript — skipping")
         return 0
 
     try:
@@ -260,8 +300,12 @@ def run_hook(args):
         pre_slim_chars = sum(len(p) for p in prompts) + sum(len(r) for r in last_responses)
         full_prompt = build_prompt(prompts, last_responses, gstatus)
         PROMPT_DUMP_PATH.write_text(full_prompt)
-        log(f"claude input written to {PROMPT_DUMP_PATH} ({len(full_prompt)} chars; pre-slim user+asst {pre_slim_chars})")
-        spawn_worker(target, session_id)
+        TARGETS_DUMP_PATH.write_text("\n".join(matched_targets))
+        log(
+            f"prompt written ({len(full_prompt)} chars; pre-slim {pre_slim_chars}); "
+            f"targets: {matched_targets}"
+        )
+        spawn_worker(session_id)
     except Exception as e:
         log(f"hook failed before spawn: {e}")
         return 0
@@ -277,10 +321,7 @@ def main(argv):
         return 0
 
     if args.worker:
-        if not args.target:
-            log("worker mode requires --target")
-            return 1
-        return run_worker(Path(args.target), args.session_id)
+        return run_worker(args.session_id)
 
     return run_hook(args)
 

@@ -1,0 +1,9 @@
+{
+  "banks": [
+    {
+      "name": "memory",
+      "bank": ".claude/meta/memory",
+      "pattern": "meta/.*/context\\.md"
+    }
+  ]
+}
