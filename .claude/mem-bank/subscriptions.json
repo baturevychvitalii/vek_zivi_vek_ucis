@@ -1,0 +1,12 @@
+{
+  "banks": [
+    {
+      "name": "meta",
+      "bank": ".claude/meta/memory",
+      "patterns": [
+        "meta/.*/context\\.md",
+        "mem-bank/README\\.md"
+      ]
+    }
+  ]
+}

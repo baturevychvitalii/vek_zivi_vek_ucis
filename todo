@@ -1,6 +1,8 @@
-no specification of output.
-what to do with cloze?
+minimalistic git hook pre merge - notify if ungraduated small banks. Simply stops the merge untill all is clean.
 
+graduate - if multiple small-banks were populated - ask which ones to graduate.
+(there might be situations when another system was touched by mistake, and I wouldn't want to graduate it)
+How does graduate work? in a loop per subscription?
 
 Delete cards (same identification as for editing)
 
@@ -12,48 +14,8 @@ Delete cards (same identification as for editing)
 /tasks
 /terminal-setup
 
-tmp files are already present and it doesn't want to overwrite
-● Write(/tmp/anki_payload.json)
-  ⎿  Error writing file
-
-
-● Skill(generate-cards)                                                                                                                 
-  ⎿  Initializing…                                                                                                                      
-  ⎿  Error: Skill generate-cards cannot be used with Skill tool due to disable-model-invocation                                         
-
-
 Maybe make some watcher process that is investigating each run on whether there was
 a hiccup during execution and auto apply edits
 
-Let's brainstorm a bit. I don't like the agent being triggered while I'm in a user mode. I would rather it be dormant on the         
-  background and get to the surface only when it finds something or can offer a suggestion.
-
-
-● Agent "Background: compile Spanish deck context" completed                                                                            
-                                                            
-● Compiled context is ready. Now running step 5: anki-add-cards.                                                                        
-                                                                    
-  Read 1 file (ctrl+o to expand)                                                                                                        
-                                                  
-● Reading compiled.md and the temp file to satisfy the write constraint.                                                                
-                                                                                                                                        
-● Reading 2 files… (ctrl+o to expand)                                                                                                   
-  ⎿  /tmp/card-generation-context.md                                                                                                    
-                                                                                                                                        
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
- Read file                                                                                                                              
-                                                                                                                                        
-  Read(/tmp/card-generation-context.md)                                                                                                 
-                                                                                                                                        
- Do you want to proceed?                                                                                                                
- ❯ 1. Yes
-
-● Write(/tmp/card-generation-context.md)
-
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-● Overwrite file
- ../../../../../tmp/card-generation-context.md
-╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
-╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
- Do you want to overwrite card-generation-context.md?
- ❯ 1. Yes
+Let's brainstorm a bit. I don't like the agent being triggered while I'm in a user mode. I would rather it be dormant on the
+background and get to the surface only when it finds something or can offer a suggestion.
