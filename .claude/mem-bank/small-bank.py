@@ -8,21 +8,15 @@ from datetime import datetime
 from pathlib import Path
 
 HOOK_DIR = Path(__file__).resolve().parent
-LOG_PATH = HOOK_DIR / "mem-bank.log"
 PROMPT_DUMP_PATH = HOOK_DIR / "last-prompt.txt"
 TARGETS_DUMP_PATH = HOOK_DIR / "last-targets.txt"
 
 sys.path.insert(0, str(HOOK_DIR))
 from listener import read_transcript, extract_text, matched_any  # noqa: E402
+from registry import load_banks, bank_effective_patterns, bank_small_bank_path  # noqa: E402
+from utils import make_logger, call_claude as _call_claude  # noqa: E402
 
-
-def log(detail):
-    try:
-        LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
-        with open(LOG_PATH, "a") as f:
-            f.write(f"{datetime.now().isoformat()}\t[append-session-summary]\t{detail}\n")
-    except Exception:
-        pass
+log = make_logger("small-bank")
 
 
 def parse_args(argv):
@@ -32,30 +26,6 @@ def parse_args(argv):
                    help="internal: run as detached worker (reads prompt and targets from disk)")
     p.add_argument("--session-id", default="")
     return p.parse_args(argv)
-
-
-def load_subscriptions(subs_path, cwd):
-    path = Path(subs_path)
-    if not path.is_absolute():
-        path = Path(cwd) / path
-    with open(path) as f:
-        data = json.load(f)
-    return data.get("banks", [])
-
-
-def bank_effective_patterns(bank_cfg):
-    if "patterns" in bank_cfg:
-        return list(bank_cfg["patterns"])
-    if "pattern" in bank_cfg:
-        return [bank_cfg["pattern"]]
-    return [re.escape(bank_cfg["bank"]) + r"/context\.md"]
-
-
-def bank_small_bank_path(bank_cfg, cwd):
-    p = Path(bank_cfg["bank"]) / "small-bank.md"
-    if not p.is_absolute():
-        p = Path(cwd) / p
-    return p
 
 
 def collect_user_prompts(events):
@@ -162,13 +132,7 @@ def build_prompt(prompts, last_responses, gstatus):
 
 
 def call_claude(prompt):
-    result = subprocess.run(
-        ["claude", "-p", "--model", "haiku", prompt],
-        capture_output=True, text=True, timeout=300,
-    )
-    if result.returncode != 0:
-        raise RuntimeError(f"claude exited {result.returncode}: {result.stderr.strip()}")
-    return result.stdout.strip()
+    return _call_claude(prompt, "haiku")
 
 
 def append_to_target(target, summary, session_id):
@@ -266,7 +230,7 @@ def run_hook(args):
     )
 
     try:
-        banks = load_subscriptions(args.subscriptions, cwd)
+        banks = load_banks(args.subscriptions, cwd)
     except Exception as e:
         log(f"failed to load subscriptions: {e}")
         return 0

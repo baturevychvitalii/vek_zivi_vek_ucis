@@ -1,0 +1,2 @@
+#!/bin/sh
+python3 .claude/mem-bank/pre-merge-commit.py

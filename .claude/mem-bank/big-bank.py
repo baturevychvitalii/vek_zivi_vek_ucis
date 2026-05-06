@@ -8,23 +8,17 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-LOG_PATH = Path(__file__).resolve().parent / "mem-bank.log"
-SCRIPT_TAG = "[mem-bank-graduate]"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from registry import load_banks, bank_archive_dir, populated_banks  # noqa: E402
+from utils import make_logger, call_claude as _call_claude  # noqa: E402
+
+log = make_logger("big-bank")
 
 FILENAME_RE = re.compile(r"^[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.md$")
 SESSION_HEADER_RE = re.compile(
     r"^## \d{4}-\d{2}-\d{2} \d{2}:\d{2} \(session ([a-zA-Z0-9]+)\)",
     re.MULTILINE,
 )
-
-
-def log(detail):
-    try:
-        LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
-        with open(LOG_PATH, "a") as f:
-            f.write(f"{datetime.now().isoformat()}\t{SCRIPT_TAG}\t{detail}\n")
-    except Exception:
-        pass
 
 
 def parse_args(argv):
@@ -35,12 +29,6 @@ def parse_args(argv):
     p.add_argument("--backup-dir")
     p.add_argument("--branch", default="")
     return p.parse_args(argv)
-
-
-def load_subscriptions(subs_path):
-    with open(subs_path) as f:
-        data = json.load(f)
-    return data.get("banks", [])
 
 
 def detect_branch(explicit):
@@ -87,15 +75,7 @@ def build_prompt(source_text, branch, existing_filenames):
 
 
 def call_claude(prompt):
-    env = os.environ.copy()
-    env["MEM_BANK_HOOK_RECURSION_GUARD"] = "1"
-    result = subprocess.run(
-        ["claude", "-p", "--model", "sonnet", prompt],
-        capture_output=True, text=True, timeout=300, env=env,
-    )
-    if result.returncode != 0:
-        raise RuntimeError(f"claude exited {result.returncode}: {result.stderr.strip()}")
-    return result.stdout.strip()
+    return _call_claude(prompt, "sonnet", recursion_guard=True)
 
 
 def parse_response(raw):
@@ -259,15 +239,14 @@ def main(argv):
 
     if args.subscriptions:
         try:
-            banks = load_subscriptions(args.subscriptions)
+            banks = load_banks(args.subscriptions)
         except Exception as e:
             print(f"error: failed to load subscriptions: {e}", file=sys.stderr)
             return 1
         overall = 0
         for bank in banks:
-            bank_path = Path(bank["bank"])
-            source = bank_path / "small-bank.md"
-            archive_dir = bank_path / "big-bank"
+            archive_dir = bank_archive_dir(bank)
+            source = Path(bank["bank"]) / "small-bank.md"
             backup_dir = archive_dir / "small-bank-archive"
             ret = graduate_one(source, archive_dir, backup_dir, branch, bank.get("name", ""))
             if ret != 0:

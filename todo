@@ -1,8 +1,6 @@
-a merge into master -> population of why. Mechanics on not losing stuff at abrupt session stop
+minimalistic git hook pre merge - notify if ungraduated small banks. Simply stops the merge untill all is clean.
 
+graduate - if multiple small-banks were populated - ask which ones to graduate.
+(there might be situations when another system was touched by mistake, and I wouldn't want to graduate it)
+How does graduate work? in a loop per subscription?
 
-builder -> mode_agnostic.md or on architecture layer
-
-
-reuse trigger of small-bank collection to check whether any memory context was loaded for
-graduate skill. I think it doesn't need llm to decide

@@ -1,7 +1,7 @@
 {
   "banks": [
     {
-      "name": "memory",
+      "name": "meta",
       "bank": ".claude/meta/memory",
       "patterns": [
         "meta/.*/context\\.md",
