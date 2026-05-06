@@ -11,6 +11,7 @@ Graduation is user-triggered (run `/mem-bank-graduate` while on the feature bran
 | Path | What |
 |---|---|
 | `./append-session-summary.py` | SessionEnd hook. Detects relevant sessions, slims transcript, spawns a detached `claude -p` worker that appends a 2–4-sentence summary to the target file. |
+| `./listener.py` | Transcript-scanning primitive. `read_transcript`, `extract_text`, `matches(events, patterns) -> set[str]`, `matched_any(events, patterns) -> bool`. Imported by the hook; future consumer of the multi-instance dispatcher and graduate routing. |
 | `./graduate.py` | Graduation script. Reads source, calls Sonnet for `{filename, summary}`, writes archive entry, backs up source, deletes source. |
 | `./mem-bank.log` | Runtime log for capture and graduation. Tab-delimited. Gitignored. |
 | `./last-prompt.txt` | Disk-dumped prompt the detached worker reads on spawn. Gitignored, overwritten each fire. |

@@ -6,3 +6,7 @@ move membank skcripts from hooks. a hook shall be just an entry.
 builder -> mode_agnostic.md or on architecture layer
 
 
+reuse trigger of small-bank collection to check whether any memory context was loaded for
+graduate skill. I think it doesn't need llm to decide
+
+abstract out context load testing. We can thus reliably query in which mode we are via regex.

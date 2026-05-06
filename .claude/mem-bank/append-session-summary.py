@@ -11,6 +11,9 @@ HOOK_DIR = Path(__file__).resolve().parent
 LOG_PATH = HOOK_DIR / "mem-bank.log"
 PROMPT_DUMP_PATH = HOOK_DIR / "last-prompt.txt"
 
+sys.path.insert(0, str(HOOK_DIR))
+from listener import read_transcript, extract_text, matched_any  # noqa: E402
+
 
 def log(detail):
     try:
@@ -29,54 +32,6 @@ def parse_args(argv):
                    help="internal: run as detached worker (reads prompt from disk)")
     p.add_argument("--session-id", default="")
     return p.parse_args(argv)
-
-
-def read_transcript(path):
-    events = []
-    with open(path) as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                events.append(json.loads(line))
-            except json.JSONDecodeError:
-                continue
-    return events
-
-
-def extract_text(content):
-    if isinstance(content, str):
-        return content
-    if isinstance(content, list):
-        parts = []
-        for block in content:
-            if isinstance(block, dict) and block.get("type") == "text":
-                parts.append(block.get("text", ""))
-        return "\n".join(parts)
-    return ""
-
-
-def detect(events, patterns):
-    for ev in events:
-        if ev.get("type") == "user":
-            text = extract_text(ev.get("message", {}).get("content", ""))
-            for pat in patterns:
-                if pat.search(text):
-                    return True
-        if ev.get("type") == "assistant":
-            content = ev.get("message", {}).get("content", [])
-            if isinstance(content, list):
-                for block in content:
-                    if isinstance(block, dict) and block.get("type") == "tool_use":
-                        tool_input = block.get("input", {}) or {}
-                        for key in ("file_path", "path", "pattern"):
-                            val = tool_input.get(key, "")
-                            if isinstance(val, str):
-                                for pat in patterns:
-                                    if pat.search(val):
-                                        return True
-    return False
 
 
 def collect_user_prompts(events):
@@ -294,7 +249,7 @@ def run_hook(args):
         log(f"failed to read transcript: {e}")
         return 0
 
-    if not detect(events, patterns):
+    if not matched_any(events, patterns):
         log("no keyword match in transcript — skipping")
         return 0
 
