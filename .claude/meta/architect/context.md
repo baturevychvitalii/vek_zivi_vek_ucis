@@ -90,7 +90,7 @@ new primitives, new governance patterns, reconsidering structure.
 ## Project State
 
 Read `./product-vision.md` on entry.
-Read `../momory/context.md` on entry. 
+Read `../memory/context.md` on entry. 
 
 ---
 
