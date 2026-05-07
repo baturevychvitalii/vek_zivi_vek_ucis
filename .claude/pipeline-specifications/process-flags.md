@@ -2,7 +2,7 @@
 
 ## Steps
 
-1. /anki-sync [mandatory]
+1. mcp__anki__sync [mandatory]
    Why: ensure local Anki state is current before reading or modifying any cards
    On failure: stop — do not proceed with stale local state
 
@@ -22,7 +22,7 @@
    Why: cleanup unneeded cards
    On failure: stop and report
 
-6. /anki-sync [mandatory]
+6. mcp__anki__sync [mandatory]
    Why: push changes to anki
    On failure: stop and report
 

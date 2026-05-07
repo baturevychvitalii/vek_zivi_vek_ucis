@@ -53,33 +53,24 @@ If the user says no or wants to skip individual cards, respect that.
 
 After the user confirms the cards look good, strip display line numbers and use the parsed cards (col1, col2, col3 split on ` | `).
 
-Build the AnkiConnect payload using values from Deck Config:
+Build the notes list using values from Deck Config:
 - Cloze cards → `modelName: <clozeModel>`, fields: `{"Text": col1, "Back Extra": col2}`, `deckName: <deckName>`
 - Basic cards → `modelName: <basicModel>`, fields: `{"Front": col1, "Back": col2}`, `deckName: <deckName>`
 
+Call the MCP tool `mcp__anki__add_notes` with the notes list:
+
 ```json
-{
-  "action": "addNotes",
-  "params": {
-    "notes": [
-      {
-        "deckName": "<deckName>",
-        "modelName": "<clozeModel or basicModel>",
-        "fields": {"Text": "<col1>", "Back Extra": "<col2>"},
-        "tags": ["<tag1>", "<tag2>"]
-      }
-    ]
+[
+  {
+    "deckName": "<deckName>",
+    "modelName": "<clozeModel or basicModel>",
+    "fields": {"Text": "<col1>", "Back Extra": "<col2>"},
+    "tags": ["<tag1>", "<tag2>"]
   }
-}
+]
 ```
 
-Pass the JSON payload as a single-quoted string argument directly:
+The tool returns a list of note IDs — non-null = added, null = duplicate/skipped.
 
-```bash
-python3 .claude/scripts/anki.py '<json payload>'
-```
-
-Parse the output: `result["result"]` is a list — non-null = added, null = duplicate/skipped.
-
-If connection fails: warn the user — cards were not added to Anki.
+If the tool raises an error: warn the user — cards were not added to Anki.
 Final confirm: "Added X cloze card(s) and Y basic card(s) — pushed to Anki."

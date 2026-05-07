@@ -7,7 +7,7 @@
    overlaps with the I/O-bound steps below
    On failure: stop — cannot generate without compiled context
 
-2. anki-sync [mandatory]
+2. mcp__anki__sync [mandatory]
    Why: ensure local Anki state is current before modifying it
    On failure: stop — do not proceed with stale local state
 
@@ -23,7 +23,7 @@
    Why: the actual card generation (isolated subprocess) and injection
    On failure: stop and report
 
-6. anki-sync [mandatory]
+6. mcp__anki__sync [mandatory]
    Why: push changes to anki
    On failure: stop and report
 
