@@ -12,12 +12,32 @@ The subsystem is consolidated under `.claude/anki-mcp/`. Outside that folder, tw
 
 ## Tools
 
+### Query
+
 | Tool | What |
 |---|---|
-| `add_notes(notes)` | Add a list of notes to Anki. Each note: `{deckName, modelName, fields, tags}`. Returns list of note IDs; null at a position = duplicate skipped. |
+| `find_cards(query)` | Search cards by raw Anki query string (e.g. `"deck:Español tag:food"`). Returns list of card IDs. |
+| `find_flagged_cards(flag, deck?)` | Find cards by flag name (`red`, `green`, `purple`, …), optionally scoped to a deck. |
+| `cards_info(card_ids)` | Fetch full metadata for a list of card IDs — fields, tags, flags, scheduling data. |
+| `notes_info(note_ids)` | Fetch full metadata for a list of note IDs — fields, tags, associated card IDs. |
+
+### Write
+
+| Tool | What |
+|---|---|
+| `add_notes(notes)` | Add notes to Anki. Each note: `{deckName, modelName, fields, tags}`. Returns list of note IDs; null = duplicate skipped. |
+| `update_note_fields(note_id, fields)` | Update specific fields on an existing note in-place. Omitted fields are untouched. |
+| `set_card_flag(card_id, flag)` | Set a card's flag by name: `none`, `red`, `orange`, `green`, `blue`, `pink`, `turquoise`, `purple`. |
+| `delete_notes(note_ids)` | Permanently delete notes and all their associated cards. Irreversible. |
+
+### Collection
+
+| Tool | What |
+|---|---|
+| `export_deck(deck, path, include_sched)` | Export a deck to an `.apkg` file at the given absolute path. `include_sched=true` preserves review history. |
 | `sync()` | Trigger AnkiWeb sync. Fires and returns immediately. |
 
-When invoked by Claude, tools are namespaced as `mcp__anki__add_notes` and `mcp__anki__sync`.
+When invoked by Claude, tools are namespaced as `mcp__anki__<tool_name>`.
 
 ## Host-fixed handles (point into the subsystem)
 

@@ -19,31 +19,17 @@ The rest of the file contains deck-specific editing guidelines — keep them in 
 
 ## Step 1 — Find Flagged Cards
 
-Run each command and parse the JSON output printed to stdout.
-
-Find RED-flagged cards (flag:1):
-```bash
-python3 .claude/scripts/anki.py '{"action": "findCards", "params": {"query": "flag:1"}}'
-```
-→ `result["result"]` is `card_ids` (list of integers).
+Call `mcp__anki__find_flagged_cards` with `flag="red"` → `card_ids`.
 
 If no card IDs: report "No RED-flagged cards found." and stop.
 
-Fetch card details (substitute actual IDs):
-```bash
-python3 .claude/scripts/anki.py '{"action": "cardsInfo", "params": {"cards": [<card_ids>]}}'
-```
-→ `result["result"]` is the list of card objects.
+Call `mcp__anki__cards_info` with `card_ids` → list of card objects.
 
 Filter to only cards where `card["deckName"] == deckName` (from Step 0). If none remain after filtering: report "No RED-flagged cards found in <deck>." and stop.
 
 Extract `note_ids` as the deduplicated list of `card["note"]` values.
 
-Fetch note details:
-```bash
-python3 .claude/scripts/anki.py '{"action": "notesInfo", "params": {"notes": [<note_ids>]}}'
-```
-→ `result["result"]` is the list of note objects. Build a `notes` dict keyed by `noteId`.
+Call `mcp__anki__notes_info` with `note_ids` → list of note objects. Build a `notes` dict keyed by `noteId`.
 
 ## Step 2 — Extract Instructions
 
@@ -89,27 +75,13 @@ If the user says no or wants to skip individual cards, respect that.
 
 ## Step 5 — Apply Changes
 
-Build a single `multi` payload containing all confirmed changes — field updates and flag flips together — then pass it as an inline JSON string argument:
+For each confirmed card, in order:
 
-```bash
-python3 .claude/scripts/anki.py '<json payload>'
-```
+1. Call `mcp__anki__update_note_fields` with the note's `note_id` and updated fields:
+   - Basic card: `{"Front": "<new_front>", "Back": "<new_back>"}`
+   - Cloze card: `{"Text": "<new_text>", "Back Extra": "<new_back_extra>"}`
 
-Payload structure:
-```json
-{
-  "action": "multi",
-  "params": {
-    "actions": [
-      {"action": "updateNoteFields", "params": {"note": {"id": <note_id>, "fields": {"Front": "<new_front>", "Back": "<new_back>"}}}},
-      {"action": "updateNoteFields", "params": {"note": {"id": <note_id>, "fields": {"Text": "<new_text>", "Back Extra": "<new_back_extra>"}}}},
-      {"action": "setSpecificValueOfCard", "params": {"card": <card_id>, "keys": ["flags"], "newValues": [3]}}
-    ]
-  }
-}
-```
-
-Include one `updateNoteFields` per confirmed card (Basic or Cloze shape as appropriate) followed by one `setSpecificValueOfCard` per confirmed card.
+2. Call `mcp__anki__set_card_flag` with the card's `card_id` and `flag="green"`.
 
 ## Step 5 — Report
 

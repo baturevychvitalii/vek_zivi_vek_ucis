@@ -1,7 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python3 .claude/scripts/anki.py:*)",
+      "mcp__anki__*",
       "Bash(python3 .claude/scripts/compiled-is-fresh.py:*)",
       "Bash(python3 .claude/scripts/depolymorphize.py:*)",
       "Bash(python3 .claude/scripts/find-inheritables.py:*)",

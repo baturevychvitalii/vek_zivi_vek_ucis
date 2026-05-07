@@ -16,29 +16,15 @@ Build a lookup table of known `deckName` values. This is used for display and to
 
 ## Step 1 — Find PURPLE-flagged Cards
 
-Run each command and parse the JSON output printed to stdout.
-
-Find PURPLE-flagged cards (flag:7):
-```bash
-python3 .claude/scripts/anki.py '{"action": "findCards", "params": {"query": "flag:7"}}'
-```
-→ `result["result"]` is `card_ids` (list of integers).
+Call `mcp__anki__find_flagged_cards` with `flag="purple"` → `card_ids`.
 
 If no card IDs: report "No PURPLE-flagged cards found." and stop.
 
-Fetch card details (substitute actual IDs):
-```bash
-python3 .claude/scripts/anki.py '{"action": "cardsInfo", "params": {"cards": [<card_ids>]}}'
-```
-→ `result["result"]` is the list of card objects.
+Call `mcp__anki__cards_info` with `card_ids` → list of card objects.
 
 Extract `note_ids` as the deduplicated list of `card["note"]` values.
 
-Fetch note details:
-```bash
-python3 .claude/scripts/anki.py '{"action": "notesInfo", "params": {"notes": [<note_ids>]}}'
-```
-→ `result["result"]` is the list of note objects. Build a `notes` dict keyed by `noteId`.
+Call `mcp__anki__notes_info` with `note_ids` → list of note objects. Build a `notes` dict keyed by `noteId`.
 
 ## Step 2 — Show Deletion List
 - Display output according to deck's `context.md`.
@@ -50,12 +36,7 @@ This cannot be undone. Confirm? [yes / no]
 
 ## Step 3 — Delete
 
-On confirmation:
-
-**Delete from Anki** (removes notes and all associated cards, substitute actual IDs):
-```bash
-python3 .claude/scripts/anki.py '{"action": "deleteNotes", "params": {"notes": [<note_ids>]}}'
-```
+On confirmation, call `mcp__anki__delete_notes` with `note_ids`.
 
 ## Step 4 — Report
 

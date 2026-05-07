@@ -40,13 +40,12 @@ ls <BACKUP_DIR>/<TODAY>.apkg 2>/dev/null
 
 ## Step 2 — Export
 
-```bash
-python3 .claude/scripts/anki.py '{"action": "exportPackage", "params": {"deck": "<deckName>", "path": "<PROJECT_ROOT>/<BACKUP_DIR>/<FILENAME>", "includeSched": true}}'
-```
+Call `mcp__anki__export_deck` with:
+- `deck`: `<deckName>`
+- `path`: `<PROJECT_ROOT>/<BACKUP_DIR>/<FILENAME>` (absolute path)
+- `include_sched`: `true`
 
-Parse the result:
-- `result["result"] == true` → success
-- `result["result"] == false` or error present → report the error and stop
+On error: report the error and stop.
 
 ## Step 3 — Report
 
