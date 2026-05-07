@@ -1,5 +1,6 @@
 import json, os, sys, glob
 from datetime import datetime
+from pathlib import Path
 
 sys.stdin.read()  # consume stdin (Stop hook provides it; fields not documented)
 
@@ -10,10 +11,10 @@ project_root = os.path.dirname(claude_dir)
 log_path = os.path.join(subsystem_dir, "hooks.log")
 summary_path = os.path.join(subsystem_dir, "run-summary.json")
 
+sys.path.insert(0, claude_dir)
+from utils.log import make_logger  # noqa: E402
 
-def log(msg):
-    with open(log_path, "a") as f:
-        f.write(f"{datetime.now().isoformat()}\t[observe-session-health]\t{msg}\n")
+log = make_logger("observe-session-health", Path(subsystem_dir) / "hooks.log")
 
 if not os.path.exists(summary_path):
     log("skip: no run-summary.json found")

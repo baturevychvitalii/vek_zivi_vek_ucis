@@ -1,16 +1,17 @@
 import json, os, sys
 from datetime import datetime
+from pathlib import Path
 
 IGNORED_SKILLS = []
 
 hooks_dir = os.path.dirname(os.path.abspath(__file__))
 subsystem_dir = os.path.dirname(hooks_dir)
-log_path = os.path.join(subsystem_dir, "hooks.log")
+claude_dir = os.path.dirname(subsystem_dir)
 
+sys.path.insert(0, claude_dir)
+from utils.log import make_logger  # noqa: E402
 
-def log(msg):
-    with open(log_path, "a") as f:
-        f.write(f"{datetime.now().isoformat()}\t[observe-skill-start-natural]\t{msg}\n")
+log = make_logger("observe-skill-start-natural", Path(subsystem_dir) / "hooks.log")
 
 
 inp = json.loads(sys.stdin.read())

@@ -1,18 +1,18 @@
 import json, os, sys
-from datetime import datetime
+from pathlib import Path
 
 sys.stdin.read()
 
 hooks_dir = os.path.dirname(os.path.abspath(__file__))
 subsystem_dir = os.path.dirname(hooks_dir)
+claude_dir = os.path.dirname(subsystem_dir)
 findings_path = os.path.join(subsystem_dir, "health-findings.jsonl")
 flag_path = os.path.join(subsystem_dir, "pending-ai-review.flag")
-log_path = os.path.join(subsystem_dir, "hooks.log")
 
+sys.path.insert(0, claude_dir)
+from utils.log import make_logger  # noqa: E402
 
-def log(msg):
-    with open(log_path, "a") as f:
-        f.write(f"{datetime.now().isoformat()}\t[surface-session-health]\t{msg}\n")
+log = make_logger("surface-session-health", Path(subsystem_dir) / "hooks.log")
 
 
 def load_findings():

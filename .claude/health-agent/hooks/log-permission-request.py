@@ -1,5 +1,6 @@
 import json, os, sys
 from datetime import datetime
+from pathlib import Path
 
 inp = json.loads(sys.stdin.read())
 tool_name = inp.get("tool_name", "")
@@ -18,8 +19,13 @@ else:
 
 hooks_dir = os.path.dirname(os.path.abspath(__file__))
 subsystem_dir = os.path.dirname(hooks_dir)
+claude_dir = os.path.dirname(subsystem_dir)
 events_path = os.path.join(subsystem_dir, "permission-events.jsonl")
-log_path = os.path.join(subsystem_dir, "hooks.log")
+
+sys.path.insert(0, claude_dir)
+from utils.log import make_logger  # noqa: E402
+
+log = make_logger("log-permission-request", Path(subsystem_dir) / "hooks.log")
 
 with open(events_path, "a") as f:
     f.write(json.dumps({
@@ -29,5 +35,4 @@ with open(events_path, "a") as f:
         "transcript_path": transcript_path,
     }) + "\n")
 
-with open(log_path, "a") as f:
-    f.write(f"{datetime.now().isoformat()}\t[log-permission-request]\ttool={tool_name} detail={detail[:120]!r}\n")
+log(f"tool={tool_name} detail={detail[:120]!r}")

@@ -10,14 +10,14 @@ findings_path = os.path.join(subsystem_dir, "health-findings.jsonl")
 flag_path = os.path.join(subsystem_dir, "pending-ai-review.flag")
 log_path = os.path.join(subsystem_dir, "hooks.log")
 
-
-def log(msg):
-    with open(log_path, "a") as f:
-        f.write(f"{datetime.now().isoformat()}\t[detect-health-issues]\t{msg}\n")
-
 sys.path.insert(0, subsystem_dir)
+sys.path.insert(0, claude_dir)
 from detectors import bash_chaining, git_policy, destructive_ops
 from detectors import whitelist_gap, skill_circumvention, refactoring_rot
+from utils.log import make_logger  # noqa: E402
+from utils.session_crawler import read_transcript, detect_mode  # noqa: E402
+
+log = make_logger("detect-health-issues", log_path)
 
 ALL_DETECTORS = [
     bash_chaining,
@@ -210,6 +210,17 @@ if __name__ == "__main__":
     if not summary.get("started_at"):
         log("skip: run-summary has no started_at")
         sys.exit(0)
+
+    transcript_path = summary.get("transcript_path", "")
+    if transcript_path and os.path.exists(transcript_path):
+        try:
+            mode = detect_mode(read_transcript(transcript_path))
+        except Exception:
+            mode = "user"
+        if mode != "user":
+            log(f"mode={mode!r} — skipping detection")
+            mark_analyzed(summary)
+            sys.exit(0)
 
     log(f"triggered for skill={summary.get('skill')} started_at={summary.get('started_at')}")
     analyze(summary)

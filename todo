@@ -19,3 +19,5 @@ a hiccup during execution and auto apply edits
 Let's brainstorm a bit. I don't like the agent being triggered while I'm in a user mode. I would rather it be dormant on the
 background and get to the surface only when it finds something or can offer a suggestion.
 
+  New behavior: detect-health-issues.py reads the full session transcript at startup and skips detection if meta/architect/context.md or
+   meta/builder/context.md was read — so health findings are suppressed in architect and builder sessions.  
