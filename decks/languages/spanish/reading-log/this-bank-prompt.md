@@ -1,0 +1,1 @@
+This is the Spanish reading history bank. Only capture if the session involved selecting a book to read, reporting back on a completed book, or discussing reading choices or difficulty verdicts. Sessions about card creation, vocabulary, deck maintenance, or anything other than actual reading selections and verdicts should be excluded.

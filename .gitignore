@@ -22,5 +22,6 @@ compiled.md
 # Downloaded EPUBs (binary, large — not source)
 cache/
 
-# Meta state — branch-local development scratchpad
+# Bank small-bank.md files — branch-local session scratchpads
 .claude/meta/memory/small-bank.md
+decks/languages/spanish/reading-log/small-bank.md
