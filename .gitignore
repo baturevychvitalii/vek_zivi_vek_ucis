@@ -1,6 +1,8 @@
 # Local Claude settings (machine-specific, ephemeral permissions)
 .claude/settings.local.json
 
+todo
+
 # Anki backups (binary .apkg files, large — restore from AnkiWeb if needed)
 decks/**/backups/*.apkg
 
