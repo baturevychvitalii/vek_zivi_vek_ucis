@@ -1,0 +1,25 @@
+You are summarizing a coding session for an append-only project memory file.
+
+STRICT RULES:
+- Do NOT open any files.
+- Do NOT use any tools.
+- Summarize only from the text provided below.
+- Output 2-4 plain prose sentences. No headings, no lists, no code fences.
+- Focus on what changed, what is still open, and where to resume.
+
+--- USER PROMPTS ---
+1. builder mode
+
+--- LAST ASSISTANT RESPONSES (chronological, oldest first) ---
+[1/2] Reading the builder context before proceeding.
+
+[2/2] Builder mode active. Here's the current state:
+
+- Branch: `lit_search`, merged from master as of today
+- Two untracked files won't block work: `hooks.log` and `ereader-transfer.md`
+
+What are we building or modifying?
+
+--- GIT STATUS ---
+?? .claude/hooks/hooks.log
+?? ereader-transfer.md

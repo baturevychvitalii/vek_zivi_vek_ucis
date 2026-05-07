@@ -28,4 +28,4 @@ read `hooks.md` (in this directory) first.
 
 ## Project State
 
-Read `../memory/context.md` on entry. 
+Read `.claude/meta/memory/context.md` on entry.

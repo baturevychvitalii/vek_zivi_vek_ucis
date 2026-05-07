@@ -31,6 +31,15 @@ def bank_archive_dir(bank_cfg):
     return Path(bank_cfg["bank"]) / "big-bank"
 
 
+def bank_capture_prompt(bank_cfg, cwd=None):
+    p = Path(bank_cfg["bank"]) / "this-bank-prompt.md"
+    if cwd and not p.is_absolute():
+        p = Path(cwd) / p
+    if p.exists():
+        return p.read_text().strip()
+    return None
+
+
 def populated_banks(banks, cwd=None):
     result = []
     for bank in banks:

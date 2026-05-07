@@ -13,8 +13,7 @@ __pycache__/
 
 .claude/hooks/debug/hooks.log
 .claude/mem-bank/mem-bank.log
-.claude/mem-bank/last-prompt.txt
-.claude/mem-bank/last-targets.txt
+.claude/mem-bank/last-jobs.json
 
 # Depolymorphized context snapshots (generated, not source)
 depolymorphized.md
