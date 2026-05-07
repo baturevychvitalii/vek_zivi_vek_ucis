@@ -11,10 +11,8 @@ Graduation is user-triggered (run `/mem-bank-big-bank` while on the feature bran
 | Path | What |
 |---|---|
 | `./subscriptions.json` | Bank registry. One entry per memory bank: `name`, `bank` (directory), optional `pattern` override. Graduation script reads this. |
-| `./utils.py` | Shared utilities. `LOG_PATH`, `make_logger(tag)` → returns a `log(detail)` fn, `call_claude(prompt, model, recursion_guard=False)`. Imported by all three scripts. |
 | `./registry.py` | Bank registry primitive. `load_banks`, `bank_effective_patterns`, `bank_small_bank_path`, `bank_archive_dir`, `populated_banks`. Imported by `small-bank.py` and `big-bank.py`. |
 | `./small-bank.py` | SessionEnd hook. Reads subscriptions, matches each bank's pattern against the transcript, spawns a single detached `claude -p` worker that appends a 2–4-sentence summary to all matched banks. |
-| `./listener.py` | Transcript-scanning primitive. `read_transcript`, `extract_text`, `matches(events, patterns) -> set[str]`, `matched_any(events, patterns) -> bool`. Imported by `small-bank.py`. |
 | `./big-bank.py` | Graduation script. In `--subscriptions` mode, iterates all banks, graduates each non-empty `small-bank.md` into `big-bank/` via Sonnet. Explicit `--source/--archive-dir/--backup-dir` mode retained for one-off use. |
 | `./mem-bank.log` | Runtime log for capture and graduation. Tab-delimited. Gitignored. |
 | `./last-jobs.json` | JSON array of `{"target", "prompt"}` jobs written by hook, read by worker. One entry per matched bank. Gitignored, overwritten each fire. |
