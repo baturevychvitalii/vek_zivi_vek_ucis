@@ -16,3 +16,6 @@ Started architect mode brainstorm on integrating MCP (Model Context Protocol) as
 ## 2026-05-07 10:49 (session 0d4ca7)
 Built a minimal MCP server at `.claude/anki-mcp/` with `add_notes` and `sync` tools, registered in `.mcp.json`, replacing the previous skill-based approach. This new subsystem is organized as a separate directory with its own venv, README, and server.py implementation. Three migration steps remain: updating `anki-add-cards` to call the MCP tool instead of constructing JSON and calling `anki.py`, deleting the old `anki-sync` skill, and deciding whether to retire `anki.py`. The user is restarting Claude Code to load the MCP server and will verify it appears in the tools list before continuing with the migration work.
 
+## 2026-05-07 10:56 (session 3f6fdf)
+Migrated Anki tooling from custom bash/anki.py indirection to direct MCP tool calls. Both pipeline specs (`add-cards` and `process-flags`) now call `mcp__anki__sync` directly instead of via the `anki-sync` skill, which was deleted. The `anki-add-cards` skill step 6 now invokes `mcp__anki__add_notes` directly rather than bash+anki.py, simplifying the architecture. The `anki.py` whitelist entry was retained for use by backup, red-edit, and purple-delete flows.
+
