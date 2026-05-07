@@ -8,12 +8,11 @@ from datetime import datetime
 from pathlib import Path
 
 HOOK_DIR = Path(__file__).resolve().parent
-PROMPT_DUMP_PATH = HOOK_DIR / "last-prompt.txt"
-TARGETS_DUMP_PATH = HOOK_DIR / "last-targets.txt"
+JOBS_DUMP_PATH = HOOK_DIR / "last-jobs.json"
 
 sys.path.insert(0, str(HOOK_DIR))
 from listener import read_transcript, extract_text, matched_any  # noqa: E402
-from registry import load_banks, bank_effective_patterns, bank_small_bank_path  # noqa: E402
+from registry import load_banks, bank_effective_patterns, bank_small_bank_path, bank_capture_prompt  # noqa: E402
 from utils import make_logger, call_claude as _call_claude  # noqa: E402
 
 log = make_logger("small-bank")
@@ -108,7 +107,7 @@ def slim_assistant(text):
     return text
 
 
-def build_prompt(prompts, last_responses, gstatus):
+def build_prompt(prompts, last_responses, gstatus, bank_prompt=None):
     cleaned_prompts = [clean_user_prompt(p) for p in prompts]
     cleaned_prompts = [p for p in cleaned_prompts if p]
     slim_responses = [slim_assistant(r) for r in last_responses]
@@ -117,9 +116,17 @@ def build_prompt(prompts, last_responses, gstatus):
     rendered_responses = "\n\n".join(
         f"[{i+1}/{total}] {r}" for i, r in enumerate(slim_responses)
     )
+    filter_rule = ""
+    if bank_prompt:
+        filter_rule = (
+            f"- BANK FILTER: {bank_prompt}"
+            " If this filter excludes the session, respond with exactly SKIP"
+            " — one word, no punctuation, no explanation.\n"
+        )
     return (
         "You are summarizing a coding session for an append-only project memory file.\n\n"
         "STRICT RULES:\n"
+        f"{filter_rule}"
         "- Do NOT open any files.\n"
         "- Do NOT use any tools.\n"
         "- Summarize only from the text provided below.\n"
@@ -147,29 +154,28 @@ def append_to_target(target, summary, session_id):
 def run_worker(session_id):
     log(f"worker started: pid={os.getpid()} session={session_id or 'unknown'}")
     try:
-        prompt = PROMPT_DUMP_PATH.read_text()
+        jobs = json.loads(JOBS_DUMP_PATH.read_text())
     except Exception as e:
-        log(f"worker failed to read prompt dump: {e}")
+        log(f"worker failed to read jobs dump: {e}")
         return 1
-    try:
-        targets_text = TARGETS_DUMP_PATH.read_text()
-        targets = [Path(t.strip()) for t in targets_text.splitlines() if t.strip()]
-    except Exception as e:
-        log(f"worker failed to read targets dump: {e}")
-        return 1
-    if not targets:
-        log("worker: no targets in targets dump")
+    if not jobs:
+        log("worker: no jobs in dump")
         return 0
-    try:
-        summary = call_claude(prompt)
-    except Exception as e:
-        log(f"worker claude call failed: {e}")
-        return 1
-    if not summary:
-        log("worker: claude -p returned empty output")
-        return 0
-    log(f"worker claude response ({len(summary)} chars): {summary!r}")
-    for target in targets:
+    for job in jobs:
+        target = Path(job["target"])
+        prompt = job["prompt"]
+        try:
+            summary = call_claude(prompt)
+        except Exception as e:
+            log(f"worker claude call failed for {target}: {e}")
+            continue
+        if not summary:
+            log(f"worker: claude returned empty for {target}")
+            continue
+        if summary.strip() == "SKIP":
+            log(f"worker: bank filter excluded {target} — skipping")
+            continue
+        log(f"worker claude response ({len(summary)} chars): {summary!r}")
         try:
             append_to_target(target, summary, session_id)
             log(f"worker appended summary to {target}")
@@ -241,7 +247,15 @@ def run_hook(args):
         log(f"failed to read transcript: {e}")
         return 0
 
-    matched_targets = []
+    try:
+        prompts = collect_user_prompts(events)
+        last_responses = last_n_assistant_responses(events, n=3)
+        gstatus = git_status(cwd)
+    except Exception as e:
+        log(f"hook failed building transcript data: {e}")
+        return 0
+
+    jobs = []
     for bank in banks:
         name = bank.get("name", "?")
         pattern_strs = bank_effective_patterns(bank)
@@ -252,25 +266,18 @@ def run_hook(args):
             continue
         if matched_any(events, patterns):
             target = bank_small_bank_path(bank, cwd)
-            matched_targets.append(str(target))
-            log(f"bank matched: {name!r} -> {target}")
+            bp = bank_capture_prompt(bank, cwd)
+            prompt = build_prompt(prompts, last_responses, gstatus, bp)
+            jobs.append({"target": str(target), "prompt": prompt})
+            log(f"bank matched: {name!r} -> {target} (bank-prompt: {'yes' if bp else 'no'})")
 
-    if not matched_targets:
+    if not jobs:
         log("no bank matched in transcript — skipping")
         return 0
 
     try:
-        prompts = collect_user_prompts(events)
-        last_responses = last_n_assistant_responses(events, n=3)
-        gstatus = git_status(cwd)
-        pre_slim_chars = sum(len(p) for p in prompts) + sum(len(r) for r in last_responses)
-        full_prompt = build_prompt(prompts, last_responses, gstatus)
-        PROMPT_DUMP_PATH.write_text(full_prompt)
-        TARGETS_DUMP_PATH.write_text("\n".join(matched_targets))
-        log(
-            f"prompt written ({len(full_prompt)} chars; pre-slim {pre_slim_chars}); "
-            f"targets: {matched_targets}"
-        )
+        JOBS_DUMP_PATH.write_text(json.dumps(jobs))
+        log(f"jobs written: {len(jobs)} bank(s)")
         spawn_worker(session_id)
     except Exception as e:
         log(f"hook failed before spawn: {e}")

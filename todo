@@ -1,4 +1,3 @@
-minimalistic git hook pre merge - notify if ungraduated small banks. Simply stops the merge untill all is clean.
 
 graduate - if multiple small-banks were populated - ask which ones to graduate.
 (there might be situations when another system was touched by mistake, and I wouldn't want to graduate it)
@@ -19,3 +18,4 @@ a hiccup during execution and auto apply edits
 
 Let's brainstorm a bit. I don't like the agent being triggered while I'm in a user mode. I would rather it be dormant on the
 background and get to the surface only when it finds something or can offer a suggestion.
+

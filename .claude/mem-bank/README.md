@@ -17,8 +17,7 @@ Graduation is user-triggered (run `/mem-bank-big-bank` while on the feature bran
 | `./listener.py` | Transcript-scanning primitive. `read_transcript`, `extract_text`, `matches(events, patterns) -> set[str]`, `matched_any(events, patterns) -> bool`. Imported by `small-bank.py`. |
 | `./big-bank.py` | Graduation script. In `--subscriptions` mode, iterates all banks, graduates each non-empty `small-bank.md` into `big-bank/` via Sonnet. Explicit `--source/--archive-dir/--backup-dir` mode retained for one-off use. |
 | `./mem-bank.log` | Runtime log for capture and graduation. Tab-delimited. Gitignored. |
-| `./last-prompt.txt` | Disk-dumped prompt the detached worker reads on spawn. Gitignored, overwritten each fire. |
-| `./last-targets.txt` | Newline-delimited list of matched bank target paths written by hook, read by worker. Gitignored, overwritten each fire. |
+| `./last-jobs.json` | JSON array of `{"target", "prompt"}` jobs written by hook, read by worker. One entry per matched bank. Gitignored, overwritten each fire. |
 
 ## Bank directory convention
 
@@ -26,9 +25,10 @@ Each bank lives at a fixed path and follows this layout:
 
 ```
 <bank>/
-├── context.md       # entry point; reading it is the default trigger pattern
-├── small-bank.md    # append-only session log (gitignored)
-└── big-bank/        # graduation archive and backups
+├── context.md           # entry point; reading it is the default trigger pattern
+├── this-bank-prompt.md  # optional: per-bank capture filter (see below)
+├── small-bank.md        # append-only session log (gitignored)
+└── big-bank/            # graduation archive and backups
     └── <topic>.md
 ```
 
@@ -36,7 +36,20 @@ To register a new bank add one entry to `subscriptions.json`:
 ```json
 { "name": "spanish", "bank": "decks/languages/spanish" }
 ```
-The default trigger pattern is `<bank>/context\.md`. Override with `"pattern"` for broader matching.
+The default trigger pattern is `<bank>/context\.md`. Override with `"patterns"` for broader matching.
+
+### Per-bank capture filter (`this-bank-prompt.md`)
+
+If `this-bank-prompt.md` is present in the bank directory, its contents are injected into the summarization prompt as a `BANK FILTER` rule — evaluated before the session data. Use it to exclude irrelevant sessions from a bank.
+
+The filter instruction should describe what qualifies for capture. The script automatically appends: *"If this filter excludes the session, respond with exactly SKIP."* Workers that receive `SKIP` log the exclusion and skip appending.
+
+Example (`decks/languages/spanish/reading-log/this-bank-prompt.md`):
+```
+This is the Spanish reading history bank. Only capture if the session involved
+selecting a book to read or reporting back on a completed book. Sessions about
+card creation or vocabulary should be excluded.
+```
 
 ## Host-fixed handles (point into the subsystem)
 
