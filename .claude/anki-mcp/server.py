@@ -5,16 +5,21 @@ Anki MCP server — thin MCP wrapper over AnkiConnect.
 Exposes Anki operations as MCP tools so Claude can call them natively
 without bash invocations or JSON string construction.
 
-All logging goes to stderr (never stdout — stdout is the stdio transport).
+All logging goes to the project file logger (never stdout — stdout is the stdio transport).
 """
 import json
+import pathlib
 import sys
 import urllib.request
+
+sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
+from utils.log import make_logger
 from mcp.server.fastmcp import FastMCP
 from launcher import ensure_anki_running
 
 ANKI_CONNECT_URL = "http://localhost:8765"
 
+_log = make_logger("server", pathlib.Path(__file__).resolve().parent / "anki-mcp.log")
 mcp = FastMCP("anki")
 
 
@@ -46,6 +51,7 @@ def add_notes(notes: list[dict]) -> list:
     Null at a position means the note was a duplicate and was skipped.
     """
     ensure_anki_running()
+    _log(f"add_notes: {len(notes)} notes")
     return _call("addNotes", notes=notes)
 
 
@@ -58,10 +64,11 @@ def sync() -> str:
     Returns a confirmation string; does not wait for sync completion.
     """
     ensure_anki_running()
+    _log("sync triggered")
     _call("sync")
     return "sync triggered"
 
 
 if __name__ == "__main__":
-    print("anki-mcp server starting", file=sys.stderr)
+    _log("server starting")
     mcp.run()

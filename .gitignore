@@ -13,8 +13,10 @@ __pycache__/
 # OS
 .DS_Store
 
-.claude/hooks/debug/hooks.log
-.claude/mem-bank/mem-bank.log
+# all logs
+*.log
+
+## Mem bank
 .claude/mem-bank/last-jobs.json
 **/small-bank.md
 

@@ -7,26 +7,19 @@ Safe to call from multiple MCP server instances: Anki's own single-instance
 guard prevents duplicate processes, and the health-check is idempotent.
 """
 import json
+import pathlib
 import subprocess
 import sys
 import time
 import urllib.request
-from datetime import datetime
-from pathlib import Path
+
+sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
+from utils.log import make_logger
 
 ANKI_CONNECT_URL = "http://localhost:8765"
 _STARTUP_TIMEOUT_S = 30
-_LOG_PATH = Path(__file__).resolve().parent / "anki-mcp.log"
 
-
-def _log(detail: str) -> None:
-    line = f"{datetime.now().isoformat()}\t[launcher]\t{detail}"
-    print(line, file=sys.stderr)
-    try:
-        with open(_LOG_PATH, "a") as f:
-            f.write(line + "\n")
-    except Exception:
-        pass
+_log = make_logger("launcher", pathlib.Path(__file__).resolve().parent / "anki-mcp.log")
 
 
 def _is_anki_up() -> bool:
