@@ -23,7 +23,7 @@
       "Write(/tmp/card-generation-context.md)",
       "Read(/tmp/card-generation-context.md)",
       "Bash(claude -p --bare *)",
-      "Write(.claude/agents/health-agent/health-findings.jsonl)"
+      "Write(.claude/health-agent/health-findings.jsonl)"
     ]
   },
   "hooks": {
@@ -32,11 +32,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/health-agent/observe-session-health.py"
+            "command": "python3 .claude/health-agent/hooks/observe-session-health.py"
           },
           {
             "type": "command",
-            "command": "python3 .claude/hooks/health-agent/detect-health-issues.py"
+            "command": "python3 .claude/health-agent/hooks/detect-health-issues.py"
           }
         ]
       }
@@ -50,7 +50,7 @@
           },
           {
             "type": "command",
-            "command": "python3 .claude/hooks/health-agent/surface-session-health.py"
+            "command": "python3 .claude/health-agent/hooks/surface-session-health.py"
           }
         ]
       }
@@ -74,7 +74,7 @@
           },
           {
             "type": "command",
-            "command": "python3 .claude/hooks/health-agent/log-permission-request.py"
+            "command": "python3 .claude/health-agent/hooks/log-permission-request.py"
           }
         ]
       }
@@ -112,7 +112,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/health-agent/observe-skill-start-natural.py"
+            "command": "python3 .claude/health-agent/hooks/observe-skill-start-natural.py"
           }
         ]
       }

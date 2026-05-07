@@ -20,8 +20,8 @@ and say nothing — proceed with the user's actual request.
 
 ## Task
 
-1. Read `.claude/agents/health-agent/health-findings.jsonl`. Collect `status == "unreviewed"` entries.
-   If none: remove the pending flag at `.claude/hooks/health-agent/pending-ai-review.flag` if it
+1. Read `.claude/health-agent/health-findings.jsonl`. Collect `status == "unreviewed"` entries.
+   If none: remove the pending flag at `.claude/health-agent/pending-ai-review.flag` if it
    exists, then stop.
 
 2. For each finding, load **only the law sections relevant to that finding's `rule`**:
@@ -51,12 +51,12 @@ and say nothing — proceed with the user's actual request.
    - Issue is in a skill, pipeline, or settings file (broken refs, missing whitelist, refactoring rot) → `propose_diff`
    - Behavioral anomaly (skill_circumvention) → `describe_only` + note the skill needs debugging
 
-4. Rewrite `.claude/agents/health-agent/health-findings.jsonl` updating each processed entry:
+4. Rewrite `.claude/health-agent/health-findings.jsonl` updating each processed entry:
    - `status`: `"ai_processed"`
    - add fields: `verdict`, `rule_reference`, `fix_type`, `proposed_fix`
    - preserve all other entries and fields
 
-5. Remove `.claude/hooks/health-agent/pending-ai-review.flag` if it exists.
+5. Remove `.claude/health-agent/pending-ai-review.flag` if it exists.
 
 6. **If at least one verdict is `confirmed_violation` or `behavioral_anomaly`**: surface a nudge
    to the user in this format (concise, not alarming):

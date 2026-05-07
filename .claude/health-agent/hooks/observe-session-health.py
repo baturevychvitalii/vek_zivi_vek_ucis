@@ -4,8 +4,11 @@ from datetime import datetime
 sys.stdin.read()  # consume stdin (Stop hook provides it; fields not documented)
 
 hooks_dir = os.path.dirname(os.path.abspath(__file__))
-log_path = os.path.join(hooks_dir, "hooks.log")
-summary_path = os.path.join(hooks_dir, "run-summary.json")
+subsystem_dir = os.path.dirname(hooks_dir)
+claude_dir = os.path.dirname(subsystem_dir)
+project_root = os.path.dirname(claude_dir)
+log_path = os.path.join(subsystem_dir, "hooks.log")
+summary_path = os.path.join(subsystem_dir, "run-summary.json")
 
 
 def log(msg):
@@ -23,8 +26,7 @@ skill = summary.get("skill", "")
 
 # Fuzzy-match skill name against pipeline spec filenames.
 # "anki-add-cards" → looks for a spec whose stem is a suffix of the skill name.
-project_root = os.path.dirname(hooks_dir)
-specs = glob.glob(os.path.join(project_root, ".claude", "pipeline-specifications", "*.md"))
+specs = glob.glob(os.path.join(claude_dir, "pipeline-specifications", "*.md"))
 spec_path = ""
 for spec in specs:
     stem = os.path.splitext(os.path.basename(spec))[0]

@@ -2,20 +2,20 @@ import json, os, sys
 from datetime import datetime, timezone
 
 hooks_dir = os.path.dirname(os.path.abspath(__file__))
-claude_dir = os.path.dirname(os.path.dirname(hooks_dir))
-agent_dir = os.path.join(claude_dir, "agents", "health-agent")
-summary_path = os.path.join(hooks_dir, "run-summary.json")
-events_path = os.path.join(hooks_dir, "permission-events.jsonl")
-findings_path = os.path.join(agent_dir, "health-findings.jsonl")
-flag_path = os.path.join(hooks_dir, "pending-ai-review.flag")
-log_path = os.path.join(hooks_dir, "hooks.log")
+subsystem_dir = os.path.dirname(hooks_dir)
+claude_dir = os.path.dirname(subsystem_dir)
+summary_path = os.path.join(subsystem_dir, "run-summary.json")
+events_path = os.path.join(subsystem_dir, "permission-events.jsonl")
+findings_path = os.path.join(subsystem_dir, "health-findings.jsonl")
+flag_path = os.path.join(subsystem_dir, "pending-ai-review.flag")
+log_path = os.path.join(subsystem_dir, "hooks.log")
 
 
 def log(msg):
     with open(log_path, "a") as f:
         f.write(f"{datetime.now().isoformat()}\t[detect-health-issues]\t{msg}\n")
 
-sys.path.insert(0, hooks_dir)
+sys.path.insert(0, subsystem_dir)
 from detectors import bash_chaining, git_policy, destructive_ops
 from detectors import whitelist_gap, skill_circumvention, refactoring_rot
 
@@ -172,7 +172,6 @@ def analyze(summary):
 
     log(f"analyzed skill={skill}: {len(findings)} finding(s) → {[f['rule'] for f in findings]}")
 
-    os.makedirs(agent_dir, exist_ok=True)
     with open(findings_path, "a") as f:
         for finding in findings:
             f.write(json.dumps(finding) + "\n")
@@ -198,19 +197,20 @@ def mark_analyzed(summary):
         json.dump(summary, f, indent=2)
 
 
-sys.stdin.read()  # consume stdin (hook event data; not needed for detection)
+if __name__ == "__main__":
+    sys.stdin.read()  # consume stdin (hook event data; not needed for detection)
 
-summary = load_summary()
-if not summary:
-    log("skip: no run-summary.json")
-    sys.exit(0)
-if summary.get("analyzed_at"):
-    log(f"skip: skill={summary.get('skill')} already analyzed at {summary['analyzed_at']}")
-    sys.exit(0)
-if not summary.get("started_at"):
-    log("skip: run-summary has no started_at")
-    sys.exit(0)
+    summary = load_summary()
+    if not summary:
+        log("skip: no run-summary.json")
+        sys.exit(0)
+    if summary.get("analyzed_at"):
+        log(f"skip: skill={summary.get('skill')} already analyzed at {summary['analyzed_at']}")
+        sys.exit(0)
+    if not summary.get("started_at"):
+        log("skip: run-summary has no started_at")
+        sys.exit(0)
 
-log(f"triggered for skill={summary.get('skill')} started_at={summary.get('started_at')}")
-analyze(summary)
-mark_analyzed(summary)
+    log(f"triggered for skill={summary.get('skill')} started_at={summary.get('started_at')}")
+    analyze(summary)
+    mark_analyzed(summary)

@@ -12,7 +12,7 @@ read these:
     - `./claude/meta/builder/security.md` 
     - `./claude/meta/builder/user_experience.md`
 
-Before creating or modifying any hook in `.claude/hooks/`,
+Before creating or modifying any hook,
 read:
     - `./claude/meta/builder/hooks.md` 
 

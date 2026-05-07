@@ -3,13 +3,13 @@
 Every builder principle must have a complementing detector.
 
 The health-agent is the enforcement arm of the builder law. A rule that exists only in
-`meta/builder/` but has no corresponding detector in `.claude/hooks/health-agent/detectors/`
+`meta/builder/` but has no corresponding detector in `.claude/health-agent/detectors/`
 is unenforceable — it will never be automatically caught.
 
 ## When adding a new builder rule
 
 1. Write the rule in its canonical location (`security.md`, `user_experience.md`, etc.)
-2. Create a detector in `.claude/hooks/health-agent/detectors/<rule_name>.py`
+2. Create a detector in `.claude/health-agent/detectors/<rule_name>.py`
    - Export a single `detect(ctx) -> list[dict]` function
    - Return findings with `{rule, severity, evidence, suggested_fix}`
    - `severity` is one of: `violation`, `warning`, `anomaly`

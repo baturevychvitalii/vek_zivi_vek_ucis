@@ -11,9 +11,10 @@ __pycache__/
 # OS
 .DS_Store
 
-.claude/hooks/health-agent/hooks.log
-.claude/hooks/health-agent/run-summary.json
-.claude/hooks/health-agent/permission-events.jsonl
+.claude/health-agent/hooks.log
+.claude/health-agent/run-summary.json
+.claude/health-agent/permission-events.jsonl
+.claude/health-agent/pending-ai-review.flag
 .claude/hooks/debug/hooks.log
 .claude/mem-bank/mem-bank.log
 .claude/mem-bank/last-prompt.txt

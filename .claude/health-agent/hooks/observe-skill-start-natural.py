@@ -4,7 +4,8 @@ from datetime import datetime
 IGNORED_SKILLS = []
 
 hooks_dir = os.path.dirname(os.path.abspath(__file__))
-log_path = os.path.join(hooks_dir, "hooks.log")
+subsystem_dir = os.path.dirname(hooks_dir)
+log_path = os.path.join(subsystem_dir, "hooks.log")
 
 
 def log(msg):
@@ -28,7 +29,7 @@ if skill in IGNORED_SKILLS:
     sys.exit(0)
 
 transcript_path = inp.get("transcript_path", "")
-summary_path = os.path.join(hooks_dir, "run-summary.json")
+summary_path = os.path.join(subsystem_dir, "run-summary.json")
 
 log(f"recorded skill={skill} transcript={transcript_path or 'none'}")
 

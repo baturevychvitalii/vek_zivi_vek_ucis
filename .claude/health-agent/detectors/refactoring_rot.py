@@ -31,7 +31,7 @@ def _extract_skill_names(content):
 
 def _resolve(ref, claude_dir):
     project_root = os.path.dirname(claude_dir)
-    return os.path.join(project_root, ref.lstrip("./"))
+    return os.path.normpath(os.path.join(project_root, ref))
 
 
 def _skill_exists(name, claude_dir):
@@ -44,7 +44,7 @@ def _skill_exists(name, claude_dir):
     return any(os.path.exists(c) for c in candidates)
 
 
-_EDIT_TARGETS = (".claude/commands/", ".claude/pipeline-specifications/", ".claude/agents/")
+_EDIT_TARGETS = (".claude/commands/", ".claude/pipeline-specifications/", ".claude/agents/", ".claude/health-agent/")
 
 
 def detect(ctx):

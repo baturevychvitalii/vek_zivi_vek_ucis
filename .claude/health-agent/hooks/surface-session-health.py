@@ -4,11 +4,10 @@ from datetime import datetime
 sys.stdin.read()
 
 hooks_dir = os.path.dirname(os.path.abspath(__file__))
-claude_dir = os.path.dirname(os.path.dirname(hooks_dir))
-agent_dir = os.path.join(claude_dir, "agents", "health-agent")
-findings_path = os.path.join(agent_dir, "health-findings.jsonl")
-flag_path = os.path.join(hooks_dir, "pending-ai-review.flag")
-log_path = os.path.join(hooks_dir, "hooks.log")
+subsystem_dir = os.path.dirname(hooks_dir)
+findings_path = os.path.join(subsystem_dir, "health-findings.jsonl")
+flag_path = os.path.join(subsystem_dir, "pending-ai-review.flag")
+log_path = os.path.join(subsystem_dir, "hooks.log")
 
 
 def log(msg):
@@ -75,5 +74,5 @@ log(f"no flag but {n} ai_processed finding(s) pending user review: emitting remi
 emit(
     f"Reminder: the health agent has {n} analyzed finding(s) from recent skill runs "
     f"({skills_str}) that haven't been reviewed yet. "
-    "Mention this briefly — one sentence. The user can run /health whenever they want."
+    "Mention this briefly — one sentence. The user can run /health-agent whenever they want."
 )

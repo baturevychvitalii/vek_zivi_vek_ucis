@@ -17,8 +17,9 @@ else:
     detail = ""
 
 hooks_dir = os.path.dirname(os.path.abspath(__file__))
-events_path = os.path.join(hooks_dir, "permission-events.jsonl")
-log_path = os.path.join(hooks_dir, "hooks.log")
+subsystem_dir = os.path.dirname(hooks_dir)
+events_path = os.path.join(subsystem_dir, "permission-events.jsonl")
+log_path = os.path.join(subsystem_dir, "hooks.log")
 
 with open(events_path, "a") as f:
     f.write(json.dumps({
