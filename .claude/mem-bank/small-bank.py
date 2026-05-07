@@ -8,14 +8,18 @@ from datetime import datetime
 from pathlib import Path
 
 HOOK_DIR = Path(__file__).resolve().parent
+CLAUDE_DIR = HOOK_DIR.parent
 JOBS_DUMP_PATH = HOOK_DIR / "last-jobs.json"
+LOG_PATH = HOOK_DIR / "mem-bank.log"
 
 sys.path.insert(0, str(HOOK_DIR))
-from listener import read_transcript, extract_text, matched_any  # noqa: E402
+sys.path.insert(0, str(CLAUDE_DIR))
+from utils.session_crawler import read_transcript, extract_text, matched_any  # noqa: E402
 from registry import load_banks, bank_effective_patterns, bank_small_bank_path, bank_capture_prompt  # noqa: E402
-from utils import make_logger, call_claude as _call_claude  # noqa: E402
+from utils.log import make_logger  # noqa: E402
+from utils.llm_triggers import call_isolated as _call_claude  # noqa: E402
 
-log = make_logger("small-bank")
+log = make_logger("small-bank", LOG_PATH)
 
 
 def parse_args(argv):
@@ -193,7 +197,7 @@ def spawn_worker(session_id):
     devnull_r = open(os.devnull, "rb")
     devnull_w = open(os.devnull, "ab")
     env = os.environ.copy()
-    env["MEM_BANK_HOOK_RECURSION_GUARD"] = "1"
+    env["HOOK_RECURSION_GUARD"] = "1"
     proc = subprocess.Popen(
         cmd,
         stdin=devnull_r,
@@ -214,7 +218,7 @@ def run_hook(args):
         log(f"failed to parse stdin: {e}")
         return 0
 
-    if os.environ.get("MEM_BANK_HOOK_RECURSION_GUARD") == "1":
+    if os.environ.get("HOOK_RECURSION_GUARD") == "1":
         log("recursion guard tripped (called from child claude -p) — skipping")
         return 0
 

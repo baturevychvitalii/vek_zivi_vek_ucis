@@ -1,6 +1,8 @@
 # Local Claude settings (machine-specific, ephemeral permissions)
 .claude/settings.local.json
 
+todo
+
 # Anki backups (binary .apkg files, large — restore from AnkiWeb if needed)
 decks/**/backups/*.apkg
 
@@ -14,6 +16,7 @@ __pycache__/
 .claude/hooks/debug/hooks.log
 .claude/mem-bank/mem-bank.log
 .claude/mem-bank/last-jobs.json
+**/small-bank.md
 
 # Anki MCP subsystem — venv (reproducible via README setup step)
 .claude/anki-mcp/.venv/

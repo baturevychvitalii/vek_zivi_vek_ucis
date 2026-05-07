@@ -105,6 +105,36 @@ of dependency — upper layers know about lower layers, never the reverse.
 - **Enforcement layer (hooks)** — enforce contracts at write time; independent of content
 - **Constitution (meta/)** — design record and governance; referenced, never modified lightly
 
+Two structures sit alongside the stack rather than inside it:
+- **Shared primitives (`.claude/utils/`)** — consumed across hooks, scripts, and pipelines; no directional dependency
+- **Integration boundary (`.claude/anki-mcp/`)** — exposes external systems as native tools; referenced by pipelines, maintained as a subsystem
+
 Collapsing layers for convenience is always a short-term gain and a long-term cost.
+
+---
+
+## Structural Lessons
+
+Meta-patterns distilled from building the systems in this project. Read these when
+designing something new — they describe the shape every subsystem here has converged on.
+
+**AI-powered subsystems follow a consistent primitive: orchestrator + isolated worker + artifact.**
+The orchestrator (Python) handles deterministic mechanics: file I/O, process management,
+state. The AI worker (`claude -p --bare`) handles judgment: summarization, generation,
+analysis. The artifact carries output and serves as the interface between components.
+This shape — and the decoupling it enforces — appears in mem-bank, health-agent, and
+compiled-context generation. New AI-powered subsystems should fit it.
+
+**Behavior is data, not code.**
+AI behavior is parameterized via context files, not skill implementations. New domain =
+new context file; no skill changes. This invariant has held since Phase 2. When a new
+capability can't be added with only a context file, that's a signal the skill isn't
+generic enough — fix the skill, don't embed the logic.
+
+**Structural isolation is stronger than behavioral rules.**
+Rules can be accidentally skipped; process boundaries cannot. When isolation matters,
+use a subprocess boundary with explicit context passing — not a navigation instruction.
+The compiled-context pattern is the reference: context is flattened to a single `/tmp/`
+file and passed to a bare subprocess with no access to CLAUDE.md, memory, or hooks.
 
 ---

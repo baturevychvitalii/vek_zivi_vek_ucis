@@ -8,11 +8,16 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from registry import load_banks, bank_archive_dir, populated_banks  # noqa: E402
-from utils import make_logger, call_claude as _call_claude  # noqa: E402
+_SCRIPT_DIR = Path(__file__).resolve().parent
+_CLAUDE_DIR = _SCRIPT_DIR.parent
 
-log = make_logger("big-bank")
+sys.path.insert(0, str(_SCRIPT_DIR))
+sys.path.insert(0, str(_CLAUDE_DIR))
+from registry import load_banks, bank_archive_dir, populated_banks  # noqa: E402
+from utils.log import make_logger  # noqa: E402
+from utils.llm_triggers import call_isolated as _call_claude  # noqa: E402
+
+log = make_logger("big-bank", _SCRIPT_DIR / "mem-bank.log")
 
 FILENAME_RE = re.compile(r"^[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.md$")
 SESSION_HEADER_RE = re.compile(
