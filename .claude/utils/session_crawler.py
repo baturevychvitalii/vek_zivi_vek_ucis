@@ -1,4 +1,5 @@
 import json
+import re
 
 
 def read_transcript(path):
@@ -60,3 +61,18 @@ def matches(events, patterns):
 
 def matched_any(events, patterns):
     return bool(matches(events, patterns))
+
+
+_ARCHITECT_RE = re.compile(r"meta/architect/context\.md")
+_BUILDER_RE = re.compile(r"meta/builder/context\.md")
+
+
+def detect_mode(events):
+    """Infer session mode from context files read: 'architect' | 'builder' | 'user'."""
+    for ev in events:
+        for s in _candidate_strings(ev):
+            if _ARCHITECT_RE.search(s):
+                return "architect"
+            if _BUILDER_RE.search(s):
+                return "builder"
+    return "user"
