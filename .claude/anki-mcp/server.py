@@ -11,6 +11,7 @@ import json
 import sys
 import urllib.request
 from mcp.server.fastmcp import FastMCP
+from launcher import ensure_anki_running
 
 ANKI_CONNECT_URL = "http://localhost:8765"
 
@@ -44,6 +45,7 @@ def add_notes(notes: list[dict]) -> list:
     Returns a list of note IDs in the same order as input.
     Null at a position means the note was a duplicate and was skipped.
     """
+    ensure_anki_running()
     return _call("addNotes", notes=notes)
 
 
@@ -55,6 +57,7 @@ def sync() -> str:
     Fires and returns immediately — the sync runs in the background inside Anki.
     Returns a confirmation string; does not wait for sync completion.
     """
+    ensure_anki_running()
     _call("sync")
     return "sync triggered"
 

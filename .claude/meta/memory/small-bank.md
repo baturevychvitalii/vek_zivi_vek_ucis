@@ -19,3 +19,6 @@ Built a minimal MCP server at `.claude/anki-mcp/` with `add_notes` and `sync` to
 ## 2026-05-07 10:56 (session 3f6fdf)
 Migrated Anki tooling from custom bash/anki.py indirection to direct MCP tool calls. Both pipeline specs (`add-cards` and `process-flags`) now call `mcp__anki__sync` directly instead of via the `anki-sync` skill, which was deleted. The `anki-add-cards` skill step 6 now invokes `mcp__anki__add_notes` directly rather than bash+anki.py, simplifying the architecture. The `anki.py` whitelist entry was retained for use by backup, red-edit, and purple-delete flows.
 
+## 2026-05-07 11:09 (session b76e5e)
+Implemented lazy-startup for the Anki daemon when the MCP server is in use — created `launcher.py` with `ensure_anki_running()` to auto-launch Anki on the first tool call if it's not already running, then wired it into `server.py` as a handler entrypoint. The implementation logs to stderr and `anki-mcp.log`, waits up to 30s for AnkiConnect to respond, and keeps lifecycle logic separate from the server interface. Both files are ready; the MCP server needs a restart to pick up the new launcher module.
+
