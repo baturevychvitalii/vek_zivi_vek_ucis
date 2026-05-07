@@ -10,3 +10,6 @@ Fixed the pre-merge-commit hook to correctly validate branch maturity by checkin
 ## 2026-05-07 10:07 (session a3ec05)
 Removed the merge hook infrastructure from mem-bank subsystem — deleted `.githooks/pre-merge-commit` and `.claude/mem-bank/pre-merge-commit.py` since small-bank versioning made the hook unnecessary. Updated both `.claude/mem-bank/README.md` and `.githooks/README.md` to remove references to the deleted hook layer. Note: `merge.ff false` remains in git config from the original hook setup and can be unset with `git config --unset merge.ff` if fast-forward merges are desired.
 
+## 2026-05-07 10:21 (session 1412bd)
+Started architect mode brainstorm on integrating MCP (Model Context Protocol) as an alternative to the current bash-anki.py-HTTP-AnkiConnect chain, which today is a pure transport shim. Identified the core tradeoff: MCP would let Claude call Anki tools natively without JSON string construction or permission friction, but requires maintaining a separate server process; the current approach is simple and decoupled. Created a new worktree and branch (`anki_mcp`) from master to experimentally evaluate whether MCP would simplify skill implementations or unlock new capabilities — treating it as an exploration before committing to a direction.
+
