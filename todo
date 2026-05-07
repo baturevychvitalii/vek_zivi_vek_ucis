@@ -4,3 +4,15 @@ graduate - if multiple small-banks were populated - ask which ones to graduate.
 (there might be situations when another system was touched by mistake, and I wouldn't want to graduate it)
 How does graduate work? in a loop per subscription?
 
+logger subsystem that grants a logger to other subsystems.
+
+check big bank merge hook
+
+
+Architect mode.                                                                                                                     
+  let's Brainstorm the opportunity to to have the MCP server to interact with the Anki. After brainstorming and considering             
+  everything, we will not develop here, but most probably we will create a new work and a branch, and we will work with it there. The   
+  branch will be from master. But this is later. For now, what I have to tell you is that I'm not really familiar with how MCPs work.   
+  It just I heard some things and it seems like potential thing to investigate. So currently, we interact with Anki via the Anki py     
+  script. You can see it being called from AnkiSync, you you you will find it. I I don't doubt that. So basically we need to            
+  brainstorm whether that is necessary and theoretically move to another branch if and implement.
