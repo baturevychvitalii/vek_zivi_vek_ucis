@@ -7,3 +7,6 @@ The user explored their branch structure and learned that infrastructure work (m
 ## 2026-05-07 09:37 (session c246a1)
 Fixed the pre-merge-commit hook to correctly validate branch maturity by checking the commit being merged (via `git show MERGE_HEAD`) rather than the working tree state. The solution involved tracking `small-bank.md` in git instead of gitignore, setting `merge.ff false` to ensure the hook always runs, and making the hook executable. One remaining task: after running `/mem-bank-big-bank` graduation, the deleted `small-bank.md` will need to be staged with `git rm` before committing, since it's now a tracked file rather than an ignored artifact.
 
+## 2026-05-07 10:07 (session a3ec05)
+Removed the merge hook infrastructure from mem-bank subsystem — deleted `.githooks/pre-merge-commit` and `.claude/mem-bank/pre-merge-commit.py` since small-bank versioning made the hook unnecessary. Updated both `.claude/mem-bank/README.md` and `.githooks/README.md` to remove references to the deleted hook layer. Note: `merge.ff false` remains in git config from the original hook setup and can be unset with `git config --unset merge.ff` if fast-forward merges are desired.
+
