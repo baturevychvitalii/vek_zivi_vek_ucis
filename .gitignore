@@ -14,6 +14,7 @@ __pycache__/
 .claude/hooks/debug/hooks.log
 .claude/mem-bank/mem-bank.log
 .claude/mem-bank/last-jobs.json
+**/small-bank.md
 
 # Depolymorphized context snapshots (generated, not source)
 depolymorphized.md
