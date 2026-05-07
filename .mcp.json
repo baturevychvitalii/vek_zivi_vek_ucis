@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "anki": {
+      "type": "stdio",
+      "command": ".claude/anki-mcp/.venv/bin/python3",
+      "args": [".claude/anki-mcp/server.py"]
+    }
+  }
+}

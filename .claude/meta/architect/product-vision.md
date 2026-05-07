@@ -27,7 +27,7 @@ system is growing into:
 |---|---|---|
 | **Intake** | `lit_search` | Discover and ingest upstream material (reading lists, EPUBs, sources) |
 | **Memory** | `mem_bank` (this branch) | Persist project-development state across sessions and worktrees |
-| **Execution** | existing pipelines (`anki-add-cards`, `anki-process-flags`) | Encode and act on material |
+| **Execution** | execution pipelines + MCP integration layer | Encode and act on material; MCP exposes external tools natively |
 | **Observability** | `health_agent` | Detect operational friction, accumulate findings |
 
 The four pillars are not a finished list; they are the visible shape of the system
