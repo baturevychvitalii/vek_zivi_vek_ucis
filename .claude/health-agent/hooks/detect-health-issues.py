@@ -15,7 +15,7 @@ sys.path.insert(0, claude_dir)
 from detectors import bash_chaining, git_policy, destructive_ops
 from detectors import whitelist_gap, skill_circumvention, refactoring_rot
 from utils.log import make_logger  # noqa: E402
-from utils.session_crawler import read_transcript, detect_mode  # noqa: E402
+from session_crawler import SessionTranscript  # noqa: E402
 
 log = make_logger("detect-health-issues", log_path)
 
@@ -214,7 +214,7 @@ if __name__ == "__main__":
     transcript_path = summary.get("transcript_path", "")
     if transcript_path and os.path.exists(transcript_path):
         try:
-            mode = detect_mode(read_transcript(transcript_path))
+            mode = SessionTranscript(transcript_path).mode()
         except Exception:
             mode = "user"
         if mode != "user":

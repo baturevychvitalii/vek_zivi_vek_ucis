@@ -14,7 +14,7 @@ LOG_PATH = HOOK_DIR / "mem-bank.log"
 
 sys.path.insert(0, str(HOOK_DIR))
 sys.path.insert(0, str(CLAUDE_DIR))
-from utils.session_crawler import read_transcript, extract_text, matched_any  # noqa: E402
+from session_crawler import SessionTranscript, extract_text  # noqa: E402
 from registry import load_banks, bank_effective_patterns, bank_small_bank_path, bank_capture_prompt  # noqa: E402
 from utils.log import make_logger  # noqa: E402
 from utils.llm_triggers import call_isolated as _call_claude  # noqa: E402
@@ -245,13 +245,10 @@ def run_hook(args):
         log(f"failed to load subscriptions: {e}")
         return 0
 
-    try:
-        events = read_transcript(transcript_path)
-    except Exception as e:
-        log(f"failed to read transcript: {e}")
-        return 0
+    transcript = SessionTranscript(transcript_path)
 
     try:
+        events = transcript.events
         prompts = collect_user_prompts(events)
         last_responses = last_n_assistant_responses(events, n=3)
         gstatus = git_status(cwd)
@@ -268,7 +265,7 @@ def run_hook(args):
         except re.error as e:
             log(f"bad pattern for bank {name!r}: {e}")
             continue
-        if matched_any(events, patterns):
+        if transcript.matched_any(patterns):
             target = bank_small_bank_path(bank, cwd)
             bp = bank_capture_prompt(bank, cwd)
             prompt = build_prompt(prompts, last_responses, gstatus, bp)
