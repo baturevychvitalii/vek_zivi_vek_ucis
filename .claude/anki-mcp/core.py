@@ -4,6 +4,7 @@ Shared state for the Anki MCP server.
 Provides: mcp instance, _call() (with Anki startup folded in), FLAGS, _log.
 Imported by every tools/* module — nothing here may import from tools/.
 """
+import functools
 import json
 import pathlib
 import urllib.request
@@ -19,8 +20,25 @@ FLAGS = {
     "blue": 4, "pink": 5, "turquoise": 6, "purple": 7,
 }
 
-_log = make_logger("server", pathlib.Path(__file__).resolve().parent / "anki-mcp.log")
+_log_path = pathlib.Path(__file__).resolve().parent / "anki-mcp.log"
+_log = make_logger("server", _log_path)
+_call_log = make_logger("call", _log_path)
+
 mcp = FastMCP("anki")
+
+_original_tool = mcp.tool
+
+def _logging_tool(*args, **kwargs):
+    register = _original_tool(*args, **kwargs)
+    def decorator(fn):
+        @functools.wraps(fn)
+        def wrapper(*a, **kw):
+            _call_log(fn.__name__)
+            return fn(*a, **kw)
+        return register(wrapper)
+    return decorator
+
+mcp.tool = _logging_tool
 
 
 def _call(action: str, **params) -> object:
