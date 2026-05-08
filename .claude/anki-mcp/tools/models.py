@@ -24,3 +24,31 @@ def model_templates(model_name: str) -> dict:
 def model_styling(model_name: str) -> dict:
     """Return CSS styling for a note type."""
     return _call("modelStyling", modelName=model_name)
+
+
+@mcp.tool()
+def rename_model_field(model_name: str, old_field_name: str, new_field_name: str) -> None:
+    """Rename a field in an existing note type."""
+    return _call("modelFieldRename", modelName=model_name, oldFieldName=old_field_name, newFieldName=new_field_name)
+
+
+@mcp.tool()
+def create_model(model_name: str, fields: list[str], is_cloze: bool = False) -> dict:
+    """Create a new note type. is_cloze=True sets cloze template and isCloze flag correctly."""
+    if is_cloze:
+        front_html = "{{cloze:" + fields[0] + "}}"
+        back_parts = ["{{cloze:" + fields[0] + "}}"] + ["{{" + f + "}}" for f in fields[1:]]
+        back_html = "<br>".join(back_parts)
+    else:
+        front_html = "{{" + fields[0] + "}}"
+        back_parts = ["{{" + f + "}}" for f in fields[1:]]
+        back_html = "{{FrontSide}}<hr id=answer>" + "<br>".join(back_parts)
+    css = ".card { font-family: arial; font-size: 20px; text-align: center; color: black; background-color: white; }"
+    return _call(
+        "createModel",
+        modelName=model_name,
+        inOrderFields=fields,
+        isCloze=is_cloze,
+        cardTemplates=[{"Name": "Card 1", "Front": front_html, "Back": back_html}],
+        css=css,
+    )

@@ -4,7 +4,7 @@ description: Find RED-flagged cards and apply edit instructions
 disable-model-invocation: true
 ---
 
-Find all RED-flagged cards in a deck, apply the `[instruction]` written in any field, then flip the flag to GREEN.
+Find all RED-flagged cards in a deck, apply the `[instruction]` written in any field to that very field, then flip the flag to GREEN.
 
 **Usage:** `/anki-process-red-edit <deck>` — e.g. `/anki-process-red-edit spanish`
 

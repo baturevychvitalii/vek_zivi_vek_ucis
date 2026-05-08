@@ -117,6 +117,7 @@ Import `mcp` and `_call` from `core`. Restart Claude Code after any server chang
 | `model_field_names(model_name)` | Field names in definition order. |
 | `model_templates(model_name)` | Card template HTML. |
 | `model_styling(model_name)` | Note type CSS. |
+| `create_model(model_name, fields, is_cloze?)` | Create a new note type with default templates. `is_cloze=True` sets cloze template and flag. |
 
 ### Media
 
