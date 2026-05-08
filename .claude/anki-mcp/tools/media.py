@@ -3,7 +3,7 @@ from core import mcp, _call, _log
 
 
 @mcp.tool()
-def store_media_file(filename: str, data: str = None, path: str = None) -> str:
+def store_media_file(filename: str, data: str = None, path: str = None, url: str = None) -> str:
     """
     Store a file in Anki's media collection.
 
@@ -11,14 +11,17 @@ def store_media_file(filename: str, data: str = None, path: str = None) -> str:
       filename: Target filename (e.g. "my-image.jpg").
       data:     Base64-encoded file content.
       path:     Absolute path to the source file on disk.
-    Exactly one of data or path must be provided. Returns the stored filename.
+      url:      Public URL — AnkiConnect downloads and stores the file.
+    Exactly one of data, path, or url must be provided. Returns the stored filename.
     """
     _log(f"store_media_file: {filename!r}")
     if data is not None:
         return _call("storeMediaFile", filename=filename, data=data)
     if path is not None:
         return _call("storeMediaFile", filename=filename, path=path)
-    raise ValueError("Either data or path must be provided")
+    if url is not None:
+        return _call("storeMediaFile", filename=filename, url=url)
+    raise ValueError("Exactly one of data, path, or url must be provided")
 
 
 @mcp.tool()

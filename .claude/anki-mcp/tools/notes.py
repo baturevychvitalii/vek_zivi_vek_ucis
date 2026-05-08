@@ -7,6 +7,8 @@ def add_notes(notes: list[dict]) -> list:
     """
     Add notes to Anki via AnkiConnect.
 
+    Before calling, read resource anki://add-notes via ReadMcpResourceTool.
+
     Each note must be a dict with:
       - deckName (str): target deck, e.g. "Spanish"
       - modelName (str): note type, e.g. "Cloze" or "Basic"

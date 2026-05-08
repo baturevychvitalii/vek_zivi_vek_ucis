@@ -109,6 +109,14 @@ Import `mcp` and `_call` from `core`. Restart Claude Code after any server chang
 | `relearn_cards(card_ids)` | Move to learning queue. |
 | `answer_cards(answers)` | Simulate review answers `[{cardId, ease}]`. |
 
+### Resources
+
+Read-only data served alongside tools. Access via `ListMcpResourcesTool` (catalog) and `ReadMcpResourceTool` (content).
+
+| URI | What |
+|---|---|
+| `anki://template-reference` | Anki card template syntax and CSS conventions — read before calling `update_model_templates` or `update_model_styling`. |
+
 ### Models
 
 | Tool | What |
@@ -117,13 +125,15 @@ Import `mcp` and `_call` from `core`. Restart Claude Code after any server chang
 | `model_field_names(model_name)` | Field names in definition order. |
 | `model_templates(model_name)` | Card template HTML. |
 | `model_styling(model_name)` | Note type CSS. |
+| `update_model_templates(model_name, templates)` | Update card template HTML for an existing note type. `templates` format: `{"Card 1": {"Front": "...", "Back": "..."}}`. |
+| `update_model_styling(model_name, css)` | Replace the CSS stylesheet for an existing note type. |
 | `create_model(model_name, fields, is_cloze?)` | Create a new note type with default templates. `is_cloze=True` sets cloze template and flag. |
 
 ### Media
 
 | Tool | What |
 |---|---|
-| `store_media_file(filename, data?, path?)` | Store a file in Anki's media dir. |
+| `store_media_file(filename, data?, path?, url?)` | Store a file in Anki's media dir. `url` lets AnkiConnect download directly from a public URL. |
 | `retrieve_media_file(filename)` | Retrieve a file as base64. |
 | `get_media_files_names(pattern?)` | List media files by glob. |
 | `get_media_dir_path()` | Absolute path to media directory. |
