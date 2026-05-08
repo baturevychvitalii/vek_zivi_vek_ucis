@@ -1,49 +1,161 @@
 # Anki MCP Subsystem
 
-Self-contained MCP server that exposes Anki operations as native Claude tools. Claude calls tools directly instead of constructing JSON strings and invoking bash.
+Self-contained MCP server that exposes Anki operations as native Claude tools.
+Claude calls tools directly instead of constructing JSON strings and invoking bash.
 
-The subsystem is consolidated under `.claude/anki-mcp/`. Outside that folder, two host-fixed locations carry thin handles that point in: `.mcp.json` (server registration) and `.gitignore` (runtime artifacts if any are added later).
+The subsystem lives under `.claude/anki-mcp/`. Two host-fixed locations point into it:
+`.mcp.json` (server registration) and `.gitignore` (runtime artifacts).
 
-## Subsystem files (this folder)
+---
 
-| Path | What |
-|---|---|
-| `./server.py` | The MCP server. Exposes `add_notes` and `sync` as tools. All Anki calls route through AnkiConnect at `localhost:8765`. |
+## Package layout
+
+```
+.claude/anki-mcp/
+├── server.py       Entry point — sets sys.path, imports core + tools, runs mcp
+├── launcher.py     Anki process lifecycle (ensure_anki_running)
+├── core.py         Shared state: mcp instance, _call(), FLAGS, _log
+└── tools/
+    ├── __init__.py     Imports all submodules → triggers @mcp.tool() registration
+    ├── cards.py        Card search, metadata, flag ops
+    ├── notes.py        Note create/update/delete
+    ├── tags.py         Tag operations (note-level)
+    ├── decks.py        Deck management + sync
+    ├── scheduling.py   Suspend, forget, relearn, answer, intervals
+    ├── models.py       Note type introspection
+    ├── media.py        Media store/retrieve/delete
+    ├── stats.py        Review history and collection stats
+    ├── aggregate.py    Higher-level aggregation (get_all_notes, get_flagged_notes)
+    └── analytics.py    Computed metrics (vocabulary_snapshot, learning_velocity)
+```
+
+**Adding a tool:** add a `@mcp.tool()` function to the appropriate `tools/*.py` file.
+Import `mcp` and `_call` from `core`. Restart Claude Code after any server change.
+
+---
 
 ## Tools
 
-### Query
+### Search
 
 | Tool | What |
 |---|---|
-| `find_cards(query)` | Search cards by raw Anki query string (e.g. `"deck:Español tag:food"`). Returns list of card IDs. |
-| `find_flagged_cards(flag, deck?)` | Find cards by flag name (`red`, `green`, `purple`, …), optionally scoped to a deck. |
-| `cards_info(card_ids)` | Fetch full metadata for a list of card IDs — fields, tags, flags, scheduling data. |
-| `notes_info(note_ids)` | Fetch full metadata for a list of note IDs — fields, tags, associated card IDs. |
+| `find_cards(query)` | Search cards by raw Anki query. Returns card IDs. |
+| `find_flagged_cards(flag, deck?)` | Find cards by flag name, optionally scoped to a deck. |
+| `find_notes(query)` | Search notes by raw Anki query. Returns note IDs. |
 
-### Write
-
-| Tool | What |
-|---|---|
-| `add_notes(notes)` | Add notes to Anki. Each note: `{deckName, modelName, fields, tags}`. Returns list of note IDs; null = duplicate skipped. |
-| `update_note_fields(note_id, fields)` | Update specific fields on an existing note in-place. Omitted fields are untouched. |
-| `set_card_flag(card_id, flag)` | Set a card's flag by name: `none`, `red`, `orange`, `green`, `blue`, `pink`, `turquoise`, `purple`. |
-| `delete_notes(note_ids)` | Permanently delete notes and all their associated cards. Irreversible. |
-
-### Collection
+### Card & note metadata
 
 | Tool | What |
 |---|---|
-| `export_deck(deck, path, include_sched)` | Export a deck to an `.apkg` file at the given absolute path. `include_sched=true` preserves review history. |
-| `sync()` | Trigger AnkiWeb sync. Fires and returns immediately. |
+| `cards_info(card_ids)` | Full metadata per card — fields, tags, flags, scheduling. |
+| `notes_info(note_ids)` | Full metadata per note — fields, tags, card IDs. |
+| `cards_to_notes(card_ids)` | Convert card IDs → note IDs. |
 
-When invoked by Claude, tools are namespaced as `mcp__anki__<tool_name>`.
+### Note mutations
 
-## Host-fixed handles (point into the subsystem)
-
-| Path | What it does |
+| Tool | What |
 |---|---|
-| `.mcp.json` | Registers the server with Claude Code as a project-scoped stdio MCP server. |
+| `add_notes(notes)` | Add notes. Each: `{deckName, modelName, fields, tags}`. |
+| `can_add_notes(notes)` | Duplicate check before adding. |
+| `update_note_fields(note_id, fields)` | Update specific fields in-place. |
+| `update_note(note_id, fields?, tags?)` | Atomically update fields and/or tags. |
+| `delete_notes(note_ids)` | Permanently delete notes and all their cards. |
+| `remove_empty_notes()` | Remove notes with no cards. |
+
+### Tags
+
+| Tool | What |
+|---|---|
+| `get_tags()` | All tags in the collection. |
+| `add_tags(note_ids, tags)` | Add space-separated tags (preserves existing). |
+| `remove_tags(note_ids, tags)` | Remove space-separated tags. |
+| `update_note_tags(note_id, tags)` | Replace all tags on a note. |
+| `clear_unused_tags()` | Remove tags unused by any note. |
+| `replace_tags_in_all_notes(old, new)` | Rename a tag collection-wide. |
+
+### Flags
+
+| Tool | What |
+|---|---|
+| `set_card_flag(card_id, flag)` | Set flag by name: none/red/orange/green/blue/pink/turquoise/purple. |
+
+### Decks
+
+| Tool | What |
+|---|---|
+| `deck_names()` | All deck names. |
+| `deck_stats(decks)` | New/learn/review/total counts per deck. |
+| `get_decks(card_ids)` | Map deck name → card IDs for given cards. |
+| `create_deck(deck)` | Create a deck. Returns deck ID. |
+| `get_deck_config(deck)` | Deck configuration object. |
+| `save_deck_config(config)` | Save a configuration object. |
+| `change_deck(card_ids, deck)` | Move cards to another deck. |
+| `delete_decks(decks, cards_too?)` | Delete decks (optionally with cards). |
+| `export_deck(deck, path, include_sched?)` | Export to .apkg. |
+| `import_package(path)` | Import an .apkg file. |
+| `sync()` | Trigger AnkiWeb sync (background). |
+
+### Scheduling
+
+| Tool | What |
+|---|---|
+| `are_suspended(card_ids)` | Suspension state per card. |
+| `are_due(card_ids)` | Due state per card. |
+| `get_intervals(card_ids, complete?)` | Current intervals (days). |
+| `suspend_cards(card_ids)` | Exclude cards from review. |
+| `unsuspend_cards(card_ids)` | Restore to review queue. |
+| `forget_cards(card_ids)` | Reset to new. |
+| `relearn_cards(card_ids)` | Move to learning queue. |
+| `answer_cards(answers)` | Simulate review answers `[{cardId, ease}]`. |
+
+### Models
+
+| Tool | What |
+|---|---|
+| `model_names()` | All note type names. |
+| `model_field_names(model_name)` | Field names in definition order. |
+| `model_templates(model_name)` | Card template HTML. |
+| `model_styling(model_name)` | Note type CSS. |
+
+### Media
+
+| Tool | What |
+|---|---|
+| `store_media_file(filename, data?, path?)` | Store a file in Anki's media dir. |
+| `retrieve_media_file(filename)` | Retrieve a file as base64. |
+| `get_media_files_names(pattern?)` | List media files by glob. |
+| `get_media_dir_path()` | Absolute path to media directory. |
+| `delete_media_file(filename)` | Delete a media file. |
+
+### Statistics
+
+| Tool | What |
+|---|---|
+| `get_collection_stats()` | Collection-wide stats as HTML. |
+| `card_reviews(deck, start_id?)` | Raw review log entries. |
+| `get_reviews_of_cards(card_ids)` | Full review history per card. |
+| `get_latest_review_id(deck)` | ID of most recent review (for incremental fetches). |
+
+### Aggregation
+
+Higher-level tools that collapse multi-step roundtrips and return clean, merged objects.
+
+| Tool | What |
+|---|---|
+| `get_all_notes(deck, include_scheduling?)` | All notes in a deck, fields flattened. Foundation for bulk AI operations. |
+| `get_flagged_notes(deck, flag)` | Flagged notes merged and ready for editing — card_id + flattened fields in one call. |
+
+### Analytics
+
+Computed metrics derived from raw AnkiConnect data.
+
+| Tool | What |
+|---|---|
+| `vocabulary_snapshot(deck)` | Maturity breakdown + weighted vocabulary estimate + sample words. |
+| `learning_velocity(deck, days?)` | Learning rate + 30-day and 365-day projections. |
+
+---
 
 ## Setup
 
@@ -53,20 +165,20 @@ python3 -m venv .claude/anki-mcp/.venv
 .claude/anki-mcp/.venv/bin/pip install mcp
 ```
 
-The venv is gitignored — run these commands after cloning or on a fresh machine.
+The venv is gitignored — run after cloning or on a fresh machine.
 
-**Register with Claude Code (already done via `.mcp.json` — no action needed).**
+**Restart Claude Code** after any changes to `.mcp.json` or the server — it is spawned at startup.
 
-**Restart Claude Code** after any changes to `.mcp.json` or `server.py` — the server is spawned at startup, not on demand.
+---
 
 ## Stdio discipline
 
-This server uses stdio transport. Stdout is the protocol channel — anything written to stdout that isn't routed through the MCP SDK corrupts the JSON-RPC stream silently. Rules:
-- Never `print()` outside the SDK
-- All debug/log output goes to `stderr`
+Stdout is the JSON-RPC protocol channel.
+- Never `print()` outside the SDK — it corrupts the stream silently
+- All debug/log output goes to `anki-mcp.log` via `core._log`
 
-## Growing the server
+---
 
-Add a new tool by decorating a function with `@mcp.tool()` in `server.py`. The docstring becomes the tool description Claude reads — write it as a precise, self-contained spec. Restart Claude Code after adding tools.
+## AnkiConnect reference
 
-AnkiConnect action reference: https://foosoft.net/projects/anki-connect/
+https://foosoft.net/projects/anki-connect/
