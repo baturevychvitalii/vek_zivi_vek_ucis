@@ -17,7 +17,7 @@ __pycache__/
 *.log
 
 ## Mem bank
-.claude/mem-bank/last-jobs.json
+.claude/mem-bank/small-jobs.json
 **/small-bank.md
 
 # Anki MCP subsystem — venv (reproducible via README setup step)

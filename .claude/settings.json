@@ -43,6 +43,7 @@
       "Bash(python3 .claude/scripts/depolymorphize.py:*)",
       "Bash(python3 .claude/scripts/find-inheritables.py:*)",
       "Bash(python3 .claude/mem-bank/big-bank.py:*)",
+      "Bash(python3 .claude/mem-bank/small-job-worker.py*)",
       "Bash(pwd)",
       "Bash(ls *)",
       "Bash(date *)",
