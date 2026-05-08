@@ -111,7 +111,7 @@ def slim_assistant(text):
     return text
 
 
-def build_prompt(prompts, last_responses, gstatus, bank_prompt=None):
+def build_prompt(prompts, last_responses, gstatus, bank_prompt=""):
     cleaned_prompts = [clean_user_prompt(p) for p in prompts]
     cleaned_prompts = [p for p in cleaned_prompts if p]
     slim_responses = [slim_assistant(r) for r in last_responses]
@@ -120,25 +120,19 @@ def build_prompt(prompts, last_responses, gstatus, bank_prompt=None):
     rendered_responses = "\n\n".join(
         f"[{i+1}/{total}] {r}" for i, r in enumerate(slim_responses)
     )
-    filter_rule = ""
-    if bank_prompt:
-        filter_rule = (
-            f"- BANK FILTER: {bank_prompt}"
-            " If this filter excludes the session, respond with exactly SKIP"
-            " — one word, no punctuation, no explanation.\n"
-        )
+
     return (
-        "You are summarizing a coding session for an append-only project memory file.\n\n"
+        "You are summarizing a session for an append-only project memory file.\n\n"
         "STRICT RULES:\n"
-        f"{filter_rule}"
         "- Do NOT open any files.\n"
         "- Do NOT use any tools.\n"
         "- Summarize only from the text provided below.\n"
         "- Output 2-4 plain prose sentences. No headings, no lists, no code fences.\n"
-        "- Focus on what changed, what is still open, and where to resume.\n\n"
+        "- Focus on what changed, what is still open, and where to resume.\n"
+        f"- {bank_prompt}\n\n"
         f"--- USER PROMPTS ---\n{numbered}\n\n"
         f"--- LAST ASSISTANT RESPONSES (chronological, oldest first) ---\n{rendered_responses}\n\n"
-        f"--- GIT STATUS ---\n{gstatus}\n"
+        #f"--- GIT STATUS ---\n{gstatus}\n"
     )
 
 
@@ -175,9 +169,6 @@ def run_worker(session_id):
             continue
         if not summary:
             log(f"worker: claude returned empty for {target}")
-            continue
-        if summary.strip() == "SKIP":
-            log(f"worker: bank filter excluded {target} — skipping")
             continue
         log(f"worker claude response ({len(summary)} chars): {summary!r}")
         try:

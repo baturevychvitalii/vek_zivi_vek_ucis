@@ -1,1 +1,1 @@
-This is the architect/builder mode development history bank. Only capture if meaningful development work was done — new features, design decisions, architectural changes, or significant debugging. Exclude sessions that ended without real work: just a git commit, a trivial question, or builder/architect mode triggered but immediately abandoned.
+ignore things not related to project/tools infrastructure development or brainstorming.
