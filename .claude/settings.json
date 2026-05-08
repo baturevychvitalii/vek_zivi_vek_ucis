@@ -7,6 +7,8 @@
       "mcp__anki__cards_info",
       "mcp__anki__notes_info",
       "mcp__anki__cards_to_notes",
+      "mcp__anki__get_flagged_notes",
+      "mcp__anki__get_all_notes",
       "mcp__anki__add_notes",
       "mcp__anki__can_add_notes",
       "mcp__anki__update_note_fields",
