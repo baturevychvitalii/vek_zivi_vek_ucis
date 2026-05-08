@@ -13,9 +13,11 @@ __pycache__/
 # OS
 .DS_Store
 
-.claude/hooks/debug/hooks.log
-.claude/mem-bank/mem-bank.log
-.claude/mem-bank/last-jobs.json
+# all logs
+*.log
+
+## Mem bank
+.claude/mem-bank/small-jobs.json
 **/small-bank.md
 
 # Anki MCP subsystem — venv (reproducible via README setup step)

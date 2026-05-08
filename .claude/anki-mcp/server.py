@@ -1,67 +1,23 @@
 #!/usr/bin/env python3
 """
-Anki MCP server — thin MCP wrapper over AnkiConnect.
+Anki MCP server — entry point.
 
-Exposes Anki operations as MCP tools so Claude can call them natively
-without bash invocations or JSON string construction.
+Sets up the import path, imports core (mcp instance + _call),
+then imports the tools package which triggers @mcp.tool() registration
+across all submodules.
 
-All logging goes to stderr (never stdout — stdout is the stdio transport).
+All logging goes to the project file logger (never stdout — stdout is the stdio transport).
 """
-import json
+import pathlib
 import sys
-import urllib.request
-from mcp.server.fastmcp import FastMCP
-from launcher import ensure_anki_running
 
-ANKI_CONNECT_URL = "http://localhost:8765"
+_here = pathlib.Path(__file__).resolve().parent
+sys.path.insert(0, str(_here))           # anki-mcp/ → core, launcher, tools
+sys.path.insert(0, str(_here.parent))    # .claude/   → utils
 
-mcp = FastMCP("anki")
-
-
-def _call(action: str, **params) -> object:
-    payload = {"action": action, "version": 6, "params": params}
-    data = json.dumps(payload).encode()
-    req = urllib.request.Request(
-        ANKI_CONNECT_URL, data=data,
-        headers={"Content-Type": "application/json"},
-    )
-    response = json.loads(urllib.request.urlopen(req, timeout=30).read())
-    if response.get("error"):
-        raise RuntimeError(response["error"])
-    return response["result"]
-
-
-@mcp.tool()
-def add_notes(notes: list[dict]) -> list:
-    """
-    Add notes to Anki via AnkiConnect.
-
-    Each note must be a dict with:
-      - deckName (str): target deck, e.g. "Spanish"
-      - modelName (str): note type, e.g. "Cloze" or "Basic"
-      - fields (dict): field-name → value mapping
-      - tags (list[str]): tag list, may be empty
-
-    Returns a list of note IDs in the same order as input.
-    Null at a position means the note was a duplicate and was skipped.
-    """
-    ensure_anki_running()
-    return _call("addNotes", notes=notes)
-
-
-@mcp.tool()
-def sync() -> str:
-    """
-    Trigger an AnkiWeb sync via AnkiConnect.
-
-    Fires and returns immediately — the sync runs in the background inside Anki.
-    Returns a confirmation string; does not wait for sync completion.
-    """
-    ensure_anki_running()
-    _call("sync")
-    return "sync triggered"
-
+from core import mcp, _log
+import tools  # noqa: F401 — import triggers @mcp.tool() registration in all submodules
 
 if __name__ == "__main__":
-    print("anki-mcp server starting", file=sys.stderr)
+    _log("server starting")
     mcp.run()

@@ -1,7 +1,7 @@
 ## Deck Config
 
 ```
-basicModel: "Basic"
+(deck-specific config only — no model defaults)
 ```
 
 ### Input Rules
@@ -27,15 +27,16 @@ cardtype::<type>     (mandatory — types defined per deck)
 
 ### Output Format
 
-- `<br>` for line breaks within a cell
-- If binary file on the front - just give a brief description
+- `<br>` for line breaks within a field value
+- If binary file on the front — just give a brief description
+- Choose the note type that best fits the card. Use an existing type from the Available Note Types list when one fits. If none fits well, propose a new name and field list.
 
 ```
-Front: 
-Back:
-<tag1 tag2 tag3>
+[model: <ModelName>] card
+<FieldName>: <value>
+<FieldName>: <value>
+Tags: <tag1> <tag2> <tag3>
 ```
-
 
 **For display only**
 Cards are previewed before conversion to AnkiConnect payloads and getting user confirmation.

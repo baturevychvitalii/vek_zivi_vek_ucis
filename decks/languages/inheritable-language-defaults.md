@@ -1,7 +1,7 @@
 ## Deck Config
 
 ```
-clozeModel: "Cloze"
+(language-level config only — no model defaults)
 ```
 
 ### User Input Syntax
