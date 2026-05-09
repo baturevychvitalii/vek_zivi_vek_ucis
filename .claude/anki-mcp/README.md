@@ -3,8 +3,6 @@
 Self-contained MCP server that exposes Anki operations as native Claude tools.
 Claude calls tools directly instead of constructing JSON strings and invoking bash.
 
-The subsystem lives under `.claude/anki-mcp/`. Two host-fixed locations point into it:
-`.mcp.json` (server registration) and `.gitignore` (runtime artifacts).
 
 ---
 
@@ -192,4 +190,4 @@ Stdout is the JSON-RPC protocol channel.
 
 ## AnkiConnect reference
 
-https://foosoft.net/projects/anki-connect/
+https://git.sr.ht/~foosoft/anki-connect

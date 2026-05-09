@@ -22,7 +22,7 @@ Single type: **visual identification**.
 When adding an instrument card:
 
 1. **Find a clean image** — Wikipedia Commons is the preferred source (freely licensed, high quality). Pick a photo on white/neutral background where possible.
-2. **Store the image in Anki media** via AnkiConnect `storeMediaFile`:
+2. **Store the image in Anki media** via anki MCP:
    ```json
    {"action": "storeMediaFile", "params": {"filename": "<instrument>.jpg", "url": "<image_url>"}}
    ```

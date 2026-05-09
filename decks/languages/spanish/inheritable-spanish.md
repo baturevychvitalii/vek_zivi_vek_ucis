@@ -48,18 +48,9 @@ Do NOT generate recognition cards (ES → EN).
 cardtype::production / pattern / cloze
 
 grammar::tense::present / preterite / imperfect / future / conditional / subjunctive
-grammar::structure::ser_estar / hay_que / gustar / ir_a / al_plus_infinitive / por_para / question_form / negation / comparatives / voseo
-grammar::pronouns::direct / indirect / reflexive
-grammar::modal_verbs::poder / deber / querer
+grammar::structure::gustar / ir_a / al_plus_infinitive / por_para / question_form / negation / comparatives / voseo
 
-vocab::verb::<verb>
-vocab::noun::<noun>
-vocab::adjective::<adjective>
 vocab::connector::<connector>
-vocab::expression::<expression>
-vocab::idiom::<idiom>
-
-freq::top500 / top1000 / top2000 / less_common
 ```
 
 Use `grammar` OR `vocab`, not both, unless clearly justified.

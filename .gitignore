@@ -17,11 +17,11 @@ __pycache__/
 *.log
 
 ## Mem bank
-.claude/mem-bank/small-jobs.json
+mem-bank/small-jobs.json
 **/small-bank.md
 
 # Anki MCP subsystem — venv (reproducible via README setup step)
-.claude/anki-mcp/.venv/
+.venv/
 
 # Depolymorphized context snapshots (generated, not source)
 depolymorphized.md

@@ -1,10 +1,10 @@
 ---
 name: anki-add-cards
-description: Generate Anki cards for a deck and push to AnkiConnect
+description: Generate Anki cards for a deck and push to Anki
 disable-model-invocation: true
 ---
 
-Generate Anki cards for any deck and push them to AnkiConnect.
+Generate Anki cards for any deck and push them to Anki.
 
 Card generation runs in an isolated subprocess with only compiled context — no CLAUDE.md, no memory, no rules.
 
@@ -65,7 +65,7 @@ Ask the user: **"Apply these N change(s)? [yes / no]"**
 
 If the user says no or wants to skip individual cards, respect that.
 
-## Step 7 — Push to AnkiConnect
+## Step 7 — Push to Anki
 
 Parse each card block from the generator output. Each block has this format:
 
@@ -85,24 +85,7 @@ For each unique model name referenced:
   - On yes: call `mcp__anki__create_model` with the model name, fields, and `is_cloze`.
   - On no: skip all cards using that model, report them as skipped.
 
-Build the notes list:
-
-```json
-[
-  {
-    "deckName": "<deckName>",
-    "modelName": "<ModelName>",
-    "fields": {"<FieldName>": "<value>", ...},
-    "tags": ["<tag1>", "<tag2>"]
-  }
-]
-```
-
 Call `mcp__anki__add_notes` with the notes list.
-
-The tool returns a list of note IDs — non-null = added, null = duplicate/skipped.
-
-If the tool raises an error: warn the user — cards were not added to Anki.
 
 ## Step 8 — Report
 
