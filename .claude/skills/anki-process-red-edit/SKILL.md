@@ -10,11 +10,11 @@ Find all RED-flagged cards in a deck, apply the `[instruction]` written in any f
 
 ## Step 0 — Load Deck Context
 
-Read `decks/<deck>/compiled.md`. Extract `deckName` and keep the deck-specific editing guidelines in context.
+Read `decks/<deck>/compiled.md`. Keep the deck-specific editing guidelines in context.
 
 ## Step 1 — Find Flagged Cards
 
-Call `mcp__anki__get_flagged_notes` with `deck=deckName` and `flag="red"`.
+Call `mcp__anki__get_flagged_notes` with `deck=<deck>` and `flag="red"`.
 
 If empty: report "No RED-flagged cards found in <deck>." and stop.
 

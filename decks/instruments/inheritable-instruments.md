@@ -1,11 +1,3 @@
-# Instruments Deck
-
-## Deck Config
-
-```
-deckName: "Instruments"
-```
-
 ## Card Type
 
 Single type: **visual identification**.

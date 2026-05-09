@@ -170,8 +170,8 @@ Computed metrics derived from raw AnkiConnect data.
 
 **Create the venv and install the MCP SDK (one-time):**
 ```
-python3 -m venv .claude/anki-mcp/.venv
-.claude/anki-mcp/.venv/bin/pip install mcp
+python3 -m venv <this anki-mcp directory>/.venv
+<this anki-mcp directory>/.venv/bin/pip install mcp
 ```
 
 The venv is gitignored — run after cloning or on a fresh machine.

@@ -1,10 +1,10 @@
 # CLAUDE.md
 
 AI context garden and suite of tools to aid learning for humans
-    - working with human memory (spaced repetition - Anki - high level MCP integration)
-    - finding learning materials suitable to current domain skill level
-    - reuse and scalability of built infrastructure to evolve with demand
-    - potentially adaptibility to motivation curves and plateus
+- working with human memory (spaced repetition - Anki - high level MCP integration)
+- finding learning materials suitable to current domain skill level
+- reuse and scalability of built infrastructure to evolve with demand
+- potentially adaptibility to motivation curves and plateus
 
 The longer-term direction is a generalized **learning conductor** — an interface for learning skills seamlessly, where each area carries its own intake, encoding, execution, and observability.
 

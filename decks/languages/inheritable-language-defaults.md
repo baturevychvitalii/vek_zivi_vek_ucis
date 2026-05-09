@@ -20,9 +20,10 @@ vocab::idiom::<idiom>
 ### Output Format
 
 - Cloze deletion **always** belongs to the front of the card
-    + Single cloze: `{{c1::word}}`
-    + Multiple: `{{c1::word1}} {{c2::word2}}`
-    + With cue: `{{c1::word::cue}}`
+    + Single cloze: `{{c1::hidden expression}}`
+    + With cue: `{{c1::hidden expression::cue}}`
+    + Multiple: `{{c1::word1}} a b c {{c2::word2}}`
+    + Single card, multiple clozes: `{{c1::word1}} a b c {{c1::word2}}`
 
 
 ### Quality Check 

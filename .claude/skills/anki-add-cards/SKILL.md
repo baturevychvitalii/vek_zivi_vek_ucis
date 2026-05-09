@@ -12,11 +12,8 @@ Card generation runs in an isolated subprocess with only compiled context — no
 
 Parse `$ARGUMENTS`: the first word is the deck name, everything after is the card input.
 
-If no deck name given: list subdirectories of `decks/` and ask the user which deck to use.
+If the directory `decks/<deck>/` does not exist or no deck name given: report "Deck '<deck>' not found. Available decks: [list]" and stop.
 
-Read `decks/<deck>/compiled.md`. Extract from the **Deck Config** block: `deckName`.
-
-If the directory `decks/<deck>/` does not exist: report "Deck '<deck>' not found. Available decks: [list]" and stop.
 
 ## Step 2 — Get Input
 
@@ -90,7 +87,7 @@ Call `mcp__anki__add_notes` with the notes list.
 ## Step 8 — Report
 
 ```
-Added X card(s) to <deckName>.
+Added X card(s) to <deck>.
   ✓ [first-field snippet]
   ⚠ [first-field snippet] — skipped (duplicate / user skipped / model creation declined)
 ```
