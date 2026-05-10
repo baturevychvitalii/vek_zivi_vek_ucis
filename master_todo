@@ -1,6 +1,22 @@
+# Subsystems
+Move to folders outside of claude; considure when graduate into plugin
+
+Inheritance manually listing files to inherit -> enables multi inheritance and maybe more structural ease.
+
+consider crawler MCP - might be a powerful tool for meta interaction with claude. Brainstorm of reliable ways to have modes and whether this is a good idea at the end of the day.
+
+
+# Boox
+Brainstorm boox selecting ereader text to anki
+
+Selecting text in Boox -> auto promote into cards
+
+
+# User integration
+Card models that enable richer integration (maybe field with some history, maybe with initial string to get generated)
+
 Brainstorm cloze before the big one.
 
-Brainstorm boox selecting ereader text to anki
 When dealing with red flags - unsuspend & unburry
 
 One field with original sentence - custom note. Can be used later to improve generation.

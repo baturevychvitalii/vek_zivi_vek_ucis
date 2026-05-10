@@ -1,1 +1,4 @@
-When the user's intent is ambiguous — unclear whether to invoke an atomic skill or a pipeline — default to the pipeline. Pipelines are the safer path.
+Priority of executing users requests:
+- Pipeline
+- Skill
+- other ways like coming up with mcp calls
