@@ -25,7 +25,6 @@ python3 .claude/health-agent/tests/test_health_agent.py
 | `run-summary.json` | Current skill observation window — gitignored |
 | `permission-events.jsonl` | Raw permission events for the current session — gitignored |
 | `health-findings.jsonl` | Accumulated findings across sessions |
-| `health-state.json` | Reminder throttle state |
 | `pending-ai-review.flag` | Written by detect hook; triggers the agent on next session start — gitignored |
 
 ## Host-fixed handles (point into the subsystem)
@@ -71,6 +70,9 @@ UserPromptSubmit (next session)
 /health-agent (on demand)
   → health-agent                      surfaces ai_processed findings, asks to apply fixes
                                        sets status → user_reviewed
+
+Note: surfacing (Priority 2 reminder) only fires in builder-mode sessions. User and
+architect sessions are always silent.
 ```
 
 ## Finding lifecycle
@@ -87,7 +89,7 @@ unreviewed → (agent processes) → ai_processed → (user reviews) → user_re
 
 **Nudge threshold** — `health-agent.md` only nudges for `confirmed_violation` and `behavioral_anomaly`. Adjust the verdict condition to change sensitivity.
 
-**Reminder cadence** — `hooks/surface-session-health.py` uses `timedelta(days=7)` for the periodic reminder. Adjust to taste.
+**Reminder mode** — `hooks/surface-session-health.py` only surfaces findings in builder-mode sessions. Change the `mode != "builder"` guard to adjust.
 
 ## Logging
 

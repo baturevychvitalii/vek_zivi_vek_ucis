@@ -1,8 +1,6 @@
 import json, os, sys
 from pathlib import Path
 
-sys.stdin.read()
-
 hooks_dir = os.path.dirname(os.path.abspath(__file__))
 subsystem_dir = os.path.dirname(hooks_dir)
 claude_dir = os.path.dirname(subsystem_dir)
@@ -11,8 +9,18 @@ flag_path = os.path.join(subsystem_dir, "pending-ai-review.flag")
 
 sys.path.insert(0, claude_dir)
 from utils.log import make_logger  # noqa: E402
+from session_crawler import SessionTranscript  # noqa: E402
 
 log = make_logger("surface-session-health", Path(subsystem_dir) / "hooks.log")
+
+inp_raw = sys.stdin.read()
+inp = json.loads(inp_raw) if inp_raw.strip() else {}
+t = SessionTranscript.from_hook_stdin(inp)
+mode = t.mode() if t else "user"
+
+if mode != "builder":
+    log(f"mode={mode!r} — not builder, skipping surfacing")
+    sys.exit(0)
 
 
 def load_findings():
