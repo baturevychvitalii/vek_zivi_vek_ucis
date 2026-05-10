@@ -166,6 +166,17 @@ Computed metrics derived from raw AnkiConnect data.
 
 ---
 
+## Prompts
+
+Prompts are user-triggered templates that load live Anki data into the conversation as context.
+Invoke them via the slash menu in Claude Code as `/mcp__anki__<name>`.
+
+| Prompt | Args | What |
+|---|---|---|
+| `deck_briefing` | `deck` | Vocabulary breakdown, learning velocity, and all pending flags for a deck. |
+
+---
+
 ## Setup
 
 **Create the venv and install the MCP SDK (one-time):**

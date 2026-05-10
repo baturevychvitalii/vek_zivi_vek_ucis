@@ -16,7 +16,8 @@ sys.path.insert(0, str(_here))           # anki-mcp/ → core, launcher, tools
 sys.path.insert(0, str(_here.parent))    # .claude/   → utils
 
 from core import mcp, _log
-import tools  # noqa: F401 — import triggers @mcp.tool() registration in all submodules
+import tools    # noqa: F401 — import triggers @mcp.tool() registration in all submodules
+import prompts  # noqa: F401 — import triggers @mcp.prompt() registration
 
 if __name__ == "__main__":
     _log("server starting")
