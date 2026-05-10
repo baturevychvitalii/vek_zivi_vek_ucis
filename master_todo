@@ -1,0 +1,23 @@
+
+graduate - if multiple small-banks were populated - ask which ones to graduate.
+(there might be situations when another system was touched by mistake, and I wouldn't want to graduate it)
+How does graduate work? in a loop per subscription?
+
+Delete cards (same identification as for editing)
+
+
+/insights
+/permissions
+/plugin
+/sandbox
+/tasks
+/terminal-setup
+
+Maybe make some watcher process that is investigating each run on whether there was
+a hiccup during execution and auto apply edits
+
+Let's brainstorm a bit. I don't like the agent being triggered while I'm in a user mode. I would rather it be dormant on the
+background and get to the surface only when it finds something or can offer a suggestion.
+
+  New behavior: detect-health-issues.py reads the full session transcript at startup and skips detection if meta/architect/context.md or
+   meta/builder/context.md was read — so health findings are suppressed in architect and builder sessions.  

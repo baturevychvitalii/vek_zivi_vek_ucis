@@ -10,6 +10,7 @@ or external integrations. Not for everyday card operations or architectural deci
 Before modifying any file under `.claude/` read:
     - `.claude/meta/builder/utilities.md`
     - `.claude/meta/builder/security.md`
+    - `.claude/meta/builder/user_experience.md`
     - `.claude/meta/builder/mcp.md`
 
 ## What Builder Mode Covers

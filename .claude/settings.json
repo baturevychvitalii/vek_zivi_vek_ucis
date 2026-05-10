@@ -62,16 +62,35 @@
       "Write(/tmp/card-input.txt)",
       "Write(/tmp/card-generation-context.md)",
       "Read(/tmp/card-generation-context.md)",
-      "Bash(claude -p --bare *)"
+      "Bash(claude -p --bare *)",
+      "Write(.claude/health-agent/health-findings.jsonl)"
     ]
   },
   "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/health-agent/hooks/observe-session-health.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 .claude/health-agent/hooks/detect-health-issues.py"
+          }
+        ]
+      }
+    ],
     "UserPromptSubmit": [
       {
         "hooks": [
           {
             "type": "command",
             "command": "python3 .claude/hooks/debug/turn-tracker.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 .claude/health-agent/hooks/surface-session-health.py"
           }
         ]
       }
@@ -92,6 +111,10 @@
           {
             "type": "command",
             "command": "python3 .claude/hooks/debug/log-permission-request.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 .claude/health-agent/hooks/log-permission-request.py"
           }
         ]
       }
@@ -121,6 +144,15 @@
           {
             "type": "command",
             "command": "python3 .claude/mem-bank/small-bank.py --subscriptions .claude/mem-bank/subscriptions.json"
+          }
+        ]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/health-agent/hooks/observe-skill-start-natural.py"
           }
         ]
       }
