@@ -1,23 +1,11 @@
+Brainstorm cloze before the big one.
 
-graduate - if multiple small-banks were populated - ask which ones to graduate.
-(there might be situations when another system was touched by mistake, and I wouldn't want to graduate it)
-How does graduate work? in a loop per subscription?
+Brainstorm boox selecting ereader text to anki
+When dealing with red flags - unsuspend & unburry
 
-Delete cards (same identification as for editing)
+One field with original sentence - custom note. Can be used later to improve generation.
+Also, red edit accumulation can be used as well
 
-
-/insights
-/permissions
-/plugin
-/sandbox
-/tasks
-/terminal-setup
-
-Maybe make some watcher process that is investigating each run on whether there was
-a hiccup during execution and auto apply edits
-
-Let's brainstorm a bit. I don't like the agent being triggered while I'm in a user mode. I would rather it be dormant on the
-background and get to the surface only when it finds something or can offer a suggestion.
-
-  New behavior: detect-health-issues.py reads the full session transcript at startup and skips detection if meta/architect/context.md or
-   meta/builder/context.md was read — so health findings are suppressed in architect and builder sessions.  
+Llm -> opencode -> gemini - youtube video extract
+Or are there claude native youtube mcp?
+https://youtu.be/2vcL8Q7H8ow?is=97Hgi1yAodP0haNM
