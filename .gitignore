@@ -35,7 +35,10 @@ __pycache__/
 # gemini subsystem — venv (reproducible via .claude/gemini/README.md)
 .claude/gemini/.venv/
 
-# Depolymorphized context snapshots (generated, not source)
-depolymorphized.md
-compiled.md
+# Generated context snapshots (preprocessed/compiled output, not source)
+*.preprocessed.md
+*.compiled.md
+
+# Skill scratch space (generated temp files)
+.claude/tmp/
 

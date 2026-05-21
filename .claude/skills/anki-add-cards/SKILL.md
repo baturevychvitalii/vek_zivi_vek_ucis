@@ -1,7 +1,7 @@
 ---
 name: anki-add-cards
 description: Generate Anki cards for a deck and push to Anki
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 Generate Anki cards for any deck and push them to Anki.
@@ -40,13 +40,13 @@ a new model — provide a name and field list and the orchestrator will handle c
 - **<other model>**: <field1>, <field2>, ...
 ```
 
-Read `decks/<deck>/compiled.md`. Read `/tmp/card-generation-context.md` (ignore contents — satisfies read-first constraint). Write the compiled context followed by the Available Note Types section to `/tmp/card-generation-context.md`.
+Read `decks/<deck>/compiled.md`. Read `.claude/tmp/card-generation-context.md` (ignore contents — satisfies read-first constraint). Write the compiled context followed by the Available Note Types section to `.claude/tmp/card-generation-context.md`.
 
 ## Step 4 — Generate Cards (isolated subagent)
 
 Invoke the `/generate-cards` skill with the card input as its arguments.
 
-The skill runs in a forked subagent with no conversation history. It reads `/tmp/card-generation-context.md` as its system context and receives the card input as its prompt.
+The skill runs in a forked subagent with no conversation history. It reads `.claude/tmp/card-generation-context.md` as its system context and receives the card input as its prompt.
 
 Capture the skill output — this is the generated card output.
 

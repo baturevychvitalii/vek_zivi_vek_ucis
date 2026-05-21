@@ -2,11 +2,11 @@
 name: generate-cards
 description: Generate Anki cards from a compiled deck context and user input. Internal skill — invoked by the anki-add-cards pipeline step only.
 context: fork
-disable-model-invocation: true
+disable-model-invocation: false
 user-invocable: false
 ---
 
-!`cat /tmp/card-generation-context.md`
+!`cat .claude/tmp/card-generation-context.md`
 
 $ARGUMENTS
 

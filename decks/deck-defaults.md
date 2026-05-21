@@ -1,11 +1,12 @@
 ### Input Rules
 - One card input per line break — **multiple sentences on one line = one input**
 
-### User Input Syntax
+### User Input Syntax - very strict
 
-- `| extra text` — append everything after `|` to the back of the card in addition to what you've generated.
+- `$ text` — append everything after `$` to the back of the card in addition to what you've generated.
 - `[instruction]` — process and apply the instruction to this input line **before** preparing a card.
 - `"quoted text"` - don't modify it, keep as is and put it on the front.
+- `front | back` - Take front and back 1:1. **don't change anything**. You might add some details on the **back**, though.
 
 ### Card Design Rules
 - Generate as many cards as the input warrants; never fewer than implied; no filler cards

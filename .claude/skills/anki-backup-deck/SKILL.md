@@ -1,7 +1,7 @@
 ---
 name: anki-backup-deck
 description: Back up a single Anki deck to a dated .apkg file
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 Back up a single Anki deck to a dated .apkg file.

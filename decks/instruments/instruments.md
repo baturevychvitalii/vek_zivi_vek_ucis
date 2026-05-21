@@ -1,3 +1,5 @@
+#include decks/deck-defaults.md
+
 ## Card Type
 
 Single type: **visual identification**.

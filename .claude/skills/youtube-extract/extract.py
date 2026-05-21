@@ -18,7 +18,8 @@ MODEL = "gemini-flash-latest"
 
 def build_prompt(context: str, bias_hint: str | None) -> str:
     hint = f"\n\nAdditional focus: {bias_hint}" if bias_hint else ""
-    return f"""You are analyzing a Spanish video to extract phrases worth learning for an Anki deck.
+    return f"""
+You are analyzing a Spanish video to extract phrases worth learning for an Anki deck.
 
 ## Deck Context
 
@@ -41,7 +42,9 @@ Skip phrases that:
 - Are too basic for the deck's current level
 - Are proper-noun-heavy with no reusable structure
 - Are isolated filler unlikely to generalize ("bueno", "dale", "okay")
-- Repeat a structure already extracted from this video{hint}"""
+- Repeat a structure already extracted from this video
+{hint}
+"""
 
 
 def main():

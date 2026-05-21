@@ -1,3 +1,5 @@
+#include decks/deck-defaults.md
+
 ### User Input Syntax
 
 - `{word}` — explicit cloze deletion. Always generate a cloze card for this word. If no cue is provided, generate one. 

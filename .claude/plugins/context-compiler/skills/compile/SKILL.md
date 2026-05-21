@@ -1,24 +1,25 @@
 ---
 name: compile
-description: Merge a depolymorphized file into one human-readable document
-disable-model-invocation: true
+description: Merge a preprocessed file into one human-readable document
+disable-model-invocation: false
+context: fork
 ---
 
-Merge a depolymorphized file into a single coherent, human-readable document — no layers, no inheritance markers.
+Merge a preprocessed file into a single coherent, human-readable document — no layers, no include markers.
 
-Usage: `/compile <path-to-depolymorphized.md>`
+Usage: `/context-compiler:compile <path-to-file.preprocessed.md>`
 
-e.g. `/compile decks/languages/spanish/depolymorphized.md`
+e.g. `/context-compiler:compile decks/languages/spanish/spanish.preprocessed.md`
 
-**Prerequisite:** The `depolymorphized.md` file must already exist at the given path. If it does not, tell the user to run `/depolymorphize <directory>` first.
+**Prerequisite:** The `.preprocessed.md` file must already exist. If it does not, tell the user to run `/context-compiler:compile-context <file.md>` first.
 
-## Step 1 — Read the Raw Depolymorphized File
+## Step 1 — Read the Raw Preprocessed File
 
-Read the file at `<path-to-depolymorphized.md>`.
+Read the file at `<path-to-file.preprocessed.md>`.
 
 ## Step 2 — Merge into a Single Document
 
-Your primary job is **reordering and grouping**, not pruning. The depolymorphized file is ordered general → specific; the compiled file should read as one coherent spec where related content from every layer sits together.
+Your primary job is **reordering and grouping**, not pruning. The preprocessed file is ordered general → specific; the compiled file should read as one coherent spec where related content from every layer sits together.
 
 ### Merge rules
 
@@ -30,8 +31,8 @@ Your primary job is **reordering and grouping**, not pruning. The depolymorphize
    - A rule the specific layer explicitly supersedes (e.g., *"ignore the shared Tagging cap of 3–6; this deck uses 4–8"*).
    Non-exclusive elaborations — a new tag family, a new card type, an additional quality check — are **additive**. Keep both.
 4. **Deduplicate only verbatim or near-verbatim repeats.** If the same bullet appears in two layers with identical meaning, keep one copy at its earliest applicable layer.
-5. **Strip scaffolding.** Remove `# inheritable-*.md` headers and `---` separators entirely.
-6. **Single unified document.** Output one H1 (the deck's name, e.g. `# Spanish Deck`) — not one H1 per layer. H2s are merged semantic sections (`Deck Config`, `Card Generation Rules`, `Tagging`, `Output Format`, `Quality Check`, …), each containing the merged content from every layer that contributed.
+5. **Strip scaffolding.** Remove `# *.md` headers and `---` separators entirely.
+6. **Single unified document.** Output one H1 (the subject's name, e.g. `# Spanish`) — not one H1 per layer. H2s are merged semantic sections (`Card Generation Rules`, `Tagging`, `Output Format`, `Quality Check`, …), each containing the merged content from every layer that contributed.
 
 ### Worked examples
 
@@ -73,11 +74,13 @@ The final file should read as a single, self-contained specification that someon
 
 ## Step 3 — Write Output
 
-Read the existing `compiled.md` if it exists — this satisfies the Write tool's read-first constraint. Ignore its contents entirely; do not compare, diff, or merge.
+The output path is derived from the input: replace `.preprocessed.md` with `.compiled.md`.
 
-Write to `<dir>/compiled.md` — in the same directory as the input file.
+e.g. `spanish.preprocessed.md` → `spanish.compiled.md`
 
-Example: `decks/languages/spanish/depolymorphized.md` → `decks/languages/spanish/compiled.md`
+Read the existing output file if it exists — this satisfies the Write tool's read-first constraint. Ignore its contents entirely; do not compare, diff, or merge.
+
+Write to the derived output path.
 
 ## Step 4 — Report
 
