@@ -1,7 +1,7 @@
 ---
 name: anki-process-red-edit
 description: Find RED-flagged cards and apply edit instructions
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 Find all RED-flagged cards in a deck, apply the `[instruction]` written in any field to that very field, then flip the flag to GREEN.
@@ -26,18 +26,19 @@ Skip cards with no instruction — include in final report as "no instruction fo
 
 ## Step 3 — Edit Cards
 
-Write `decks/<deck>/compiled.md` contents to `/tmp/card-edit-context.md`.
-
-Invoke `/edit-card` once with all cards as one batch. Per-card block format:
+Invoke `/edit-card` once with all cards as one batch. The **first line** of arguments must be the path to the compiled context file (`decks/<deck>/compiled.md`), followed by a blank line, then the card batch. Per-card block format:
 
 ```
 [note_id: <note_id>] <model_name> card
-<field_name>: <value>
-<field_name>: <value>
+<field_name1>: <value>
+<field_name2>: <value>
 ... (all fields, using their real Anki names)
 Tags: <tags>
-Instruction: <instruction>
 
+Instruction1: <instruction>
+<edited field>
+Instruction2: <instruction>
+<edited thing>
 ```
 
 Parse output by `note_id` anchor (not position). Display all proposed edits numbered.

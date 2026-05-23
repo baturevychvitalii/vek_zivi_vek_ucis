@@ -2,11 +2,11 @@
 name: edit-card
 description: Apply an edit instruction to an existing Anki card using compiled deck guidelines. Internal skill — invoked by anki-process-red-edit only.
 context: fork
-disable-model-invocation: true
+disable-model-invocation: false
 user-invocable: false
 ---
 
-!`cat /tmp/card-edit-context.md`
+!`cat $(printf '%s' '$ARGUMENTS' | head -1)`
 
 $ARGUMENTS
 

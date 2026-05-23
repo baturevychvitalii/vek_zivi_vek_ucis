@@ -6,8 +6,10 @@ disable-model-invocation: false
 user-invocable: false
 ---
 
-!`cat .claude/tmp/card-generation-context.md`
+!`cat $(printf '%s' '$ARGUMENTS' | head -1)`
 
 $ARGUMENTS
+
+The first line above is the context file path (already loaded). The Available Note Types section and card input follow it.
 
 Output ONLY the cards in the exact format specified. No preamble, no commentary, no explanation.

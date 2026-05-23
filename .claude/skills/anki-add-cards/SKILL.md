@@ -40,23 +40,20 @@ a new model — provide a name and field list and the orchestrator will handle c
 - **<other model>**: <field1>, <field2>, ...
 ```
 
-Read `decks/<deck>/compiled.md`. Read `.claude/tmp/card-generation-context.md` (ignore contents — satisfies read-first constraint). Write the compiled context followed by the Available Note Types section to `.claude/tmp/card-generation-context.md`.
+Invoke the `/generate-cards` skill with arguments structured as:
+- Line 1: `decks/<deck>/compiled.md` (context file path, loaded via `!cat` by the skill)
+- Blank line
+- The Available Note Types section (markdown, built above)
+- Blank line
+- The card input
 
-## Step 4 — Generate Cards (isolated subagent)
+Capture the skill output. If empty or failed: report the error and stop.
 
-Invoke the `/generate-cards` skill with the card input as its arguments.
-
-The skill runs in a forked subagent with no conversation history. It reads `.claude/tmp/card-generation-context.md` as its system context and receives the card input as its prompt.
-
-Capture the skill output — this is the generated card output.
-
-If the skill fails or returns empty output: report the error and stop.
-
-## Step 5 — Preview
+## Step 4 — Preview
 
 Display the generated cards to the user using the numbered format as compiled context specifies.
 
-## Step 6 — User Confirmation
+## Step 5 — User Confirmation
 
 Ask the user: **"Apply these N change(s)? [yes / no]"**
 

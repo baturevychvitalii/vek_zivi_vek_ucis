@@ -13,6 +13,9 @@ Before modifying any file under `.claude/` read:
     - `user_experience.md`
     - `mcp.md`
 
+When creating or modifying skills or pipelines, also read:
+    - `scalability.md`
+
 ## What Builder Mode Covers
 
 - **Skills** — generic operations that pipelines compose
