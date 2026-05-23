@@ -1,0 +1,1 @@
+extract all phrases that the author emphasizes from this video: https://youtu.be/c5jBEAnBLCY?is=fU_QFKOP0p3TdMDnc. Print output as one phrase per line. Focus on rioplatense spanish. If the author gives nice rioplatense definition - write the line in a format <definition> | <phrase>

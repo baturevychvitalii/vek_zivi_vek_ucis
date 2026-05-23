@@ -1,0 +1,9 @@
+# Youtube Gemini Context Compiler Refactor
+
+<2026-05-23 — branch master — sessions 0531a3, fcdea3, 16949c, c99276, a8255f, d51a45, 86b40c, 9fa9bb, 5125d0, f372a1, fde48b, ef71d8, bbbd0c, d7c0ed, 196d54>
+
+## Summary
+The branch established a YouTube-to-Anki phrase extraction pipeline using Google's Gemini API, implemented as a clean subsystem under `.claude/gemini/` with typed Part constructors and venv isolation. A key debugging insight emerged during testing: video mode via FileData correctly accesses YouTube video content, while text mode hallucinates from training data and must not be used for video extraction. The pipeline integration hit a timeout wall because the Gemini video processing takes 2–3 minutes, exceeding the default 120s Bash timeout, requiring the skill spec to be updated to enforce foreground-only execution with a 300s timeout. A security bug was also discovered and fixed where skills attempted to write temporary files to `/tmp/` (blocked), requiring a shift to `.claude/tmp/` for all intermediate context files. In parallel, the deck configuration inheritance system was redesigned: the old `inheritable-` naming convention was replaced with explicit `#include` directives, and a plugin-based context-compiler subsystem was built at `.claude/plugins/context-compiler/` to handle preprocessing (include resolution) and compilation (semantic merging) as distinct phases. The `#include` graph traversal was extracted into `include_graph.py` for modularity, with path resolution semantics clarified so `./`-prefixed paths resolve relative to the including file while bare paths resolve from the project root. A new `.claude/world_adoption/` mode was also scaffolded, mirroring the architect/builder mode pattern with its own isolated memory bank for go-to-market strategy work.
+
+## Archive
+[Small bank sessions](small-bank-archive/20260523T085902-small-bank.md)

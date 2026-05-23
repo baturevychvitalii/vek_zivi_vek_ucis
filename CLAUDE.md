@@ -17,3 +17,4 @@ The longer-term direction is a generalized **learning conductor** — an interfa
 | `decks/instruments/instruments.md` | Instruments deck — visual identification, image handling, IPA |
 | `.claude/meta/builder/context.md` | Builder mode — read before creating or modifying files outside of user areas |
 | `.claude/meta/architect/context.md` | Architect mode — read before any structural or design decisions |
+| `.claude/world_adoption/context.md` | World adoption mode — strategy, outreach, and go-to-market thinking |

@@ -1,0 +1,1 @@
+This is the world adoption memory bank. Only capture sessions related to: how the project reaches the world, adoption strategy, handoff to universities or collaborators, open-source positioning, partnerships, grants, or go-to-market thinking. Ignore sessions about card creation, language learning, deck maintenance, or infrastructure development.
