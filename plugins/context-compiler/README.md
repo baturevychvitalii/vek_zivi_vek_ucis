@@ -11,6 +11,7 @@ General-purpose preprocessor for resolving `#include` directives in markdown fil
 | `compiled-is-fresh.py` | Freshness check — exits 0 if compiled output is up-to-date |
 | `skills/compile/` | LLM merge step — collapses preprocessed layers into one readable doc |
 | `skills/compile-context/` | Orchestrator — freshness check → preprocess → compile |
+| `skills/reverse-propagate/` | Inverse — back-propagates hand-edits in a `compiled.md` to its source layers |
 
 ## `#include` directive
 
@@ -43,6 +44,7 @@ python3 .claude/plugins/context-compiler/preprocess.py <entry-file>
 |---|---|
 | `/context-compiler:compile <preprocessed.md>` | LLM merge into `compiled.md` (fork context) |
 | `/context-compiler:compile-context <deck>` | Full pipeline: freshness check → preprocess → compile |
+| `/context-compiler:reverse-propagate <compiled.md>` | Inverse: back-propagate hand-edits in a compiled file to its source layers |
 
 ## Notes
 

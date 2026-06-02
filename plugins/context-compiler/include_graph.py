@@ -28,3 +28,34 @@ def collect_inputs(entry: Path, project_root: Path, seen: set[Path]) -> list[Pat
             child = resolve_include_path(path_str, resolved, project_root)
             results.extend(collect_inputs(child, project_root, seen))
     return results
+
+
+def _main() -> None:
+    """CLI: list all transitive #include inputs of an entry file, one per line.
+
+    First line is the entry file itself; the rest are its dependencies in DFS
+    order. Paths are printed project-root-relative when possible. Used by the
+    propagate skill to discover which source layers compose a compiled file.
+    """
+    import sys
+
+    if len(sys.argv) != 2:
+        print(f"Usage: {sys.argv[0]} <entry-file>", file=sys.stderr)
+        sys.exit(2)
+
+    entry = Path(sys.argv[1])
+    project_root = Path.cwd()
+
+    if not entry.exists():
+        print(f"entry file not found: {entry}", file=sys.stderr)
+        sys.exit(1)
+
+    for f in collect_inputs(entry, project_root, set()):
+        try:
+            print(f.relative_to(project_root))
+        except ValueError:
+            print(f)
+
+
+if __name__ == "__main__":
+    _main()

@@ -51,3 +51,5 @@ sessoin crawler modes are hardcoded. Shall be picked by the system. Modes thus h
 cyclic dependency utils <-> gemini plugin
 
 consider skill to create wonderful navigation layer directive
+
+make scalable Anki add cards section where it checks quality control at the end
