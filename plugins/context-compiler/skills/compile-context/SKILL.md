@@ -17,7 +17,7 @@ If `<file.md>` does not exist, report "File not found: <file.md>" and stop.
 
 Run:
 ```bash
-python3 .claude/plugins/context-compiler/compiled-is-fresh.py <file.md>
+python3 <plugin dir>/context-compiler/compiled-is-fresh.py <file.md>
 ```
 
 - Exit code 0 → already up-to-date. Report and stop:
@@ -29,7 +29,7 @@ python3 .claude/plugins/context-compiler/compiled-is-fresh.py <file.md>
 ## Step 3 — Preprocess
 
 ```bash
-python3 .claude/plugins/context-compiler/preprocess.py <file.md> <dir>/<stem>.preprocessed.md
+python3 <plugin dir>/context-compiler/preprocess.py <file.md> <dir>/<stem>.preprocessed.md
 ```
 
 Where `<dir>` is the directory containing `<file.md>` and `<stem>` is the filename without `.md`.

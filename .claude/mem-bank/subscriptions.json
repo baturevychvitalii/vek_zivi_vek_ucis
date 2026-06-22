@@ -12,8 +12,7 @@
       "name": "spanish-reading",
       "bank": "decks/languages/spanish/reading-log",
       "patterns": [
-        "decks/languages/spanish/reading-log/context\\.md",
-        "decks/languages/spanish/resources\\.md"
+        "spanish/reading-log/context\\.md"
       ]
     },
     {
