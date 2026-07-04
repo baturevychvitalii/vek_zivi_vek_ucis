@@ -250,6 +250,10 @@ def main(argv):
             return 1
         overall = 0
         for bank in banks:
+            if not bank.get("graduate", True):
+                name = bank.get("name", "")
+                print(f"[{name}] graduate=false, skipping")
+                continue
             archive_dir = bank_archive_dir(bank)
             source = Path(bank["bank"]) / "small-bank.md"
             backup_dir = archive_dir / "small-bank-archive"
