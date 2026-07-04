@@ -11,7 +11,7 @@ Extract learnable content from a YouTube video and write it for review.
 `/youtube-extract <url> <context_file> [bias_hint]`
 
 - `<url>` — YouTube video URL
-- `<context_file>` — deck context file (e.g. `decks/languages/spanish/compiled.md`)
+- `<context_file>` — context file (used for path deduction)
 - `[bias_hint]` — optional free-text focus hint appended to the extraction prompt (e.g. `focus on subjunctive`)
 
 Output is written to `<context_file_dir>/youtube-phrases.txt`.

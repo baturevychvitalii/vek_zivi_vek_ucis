@@ -1,4 +1,4 @@
-#include decks/languages/language-defaults.md
+#include groves/languages/language-defaults.md
 
 ## Card Generation Rules
 

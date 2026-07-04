@@ -1,6 +1,6 @@
 ---
 name: edit-card
-description: Apply an edit instruction to an existing Anki card using compiled deck guidelines. Internal skill — invoked by anki-process-red-edit only. ARGUMENTS: compiled deck context and card batch — passed inline by the orchestrator.
+description: Apply an edit instruction to an existing Anki card using deck guidelines. Internal skill — invoked by anki-process-red-edit only. ARGUMENTS: deck context and card batch — passed inline by the orchestrator.
 context: fork
 disable-model-invocation: false
 user-invocable: false

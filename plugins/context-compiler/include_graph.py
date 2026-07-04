@@ -17,8 +17,10 @@ def resolve_include_path(path_str: str, from_file: Path, project_root: Path) -> 
 def collect_inputs(entry: Path, project_root: Path, seen: set[Path]) -> list[Path]:
     """Return all files reachable from entry via #include, in DFS order."""
     resolved = entry.resolve()
-    if resolved in seen or not resolved.exists():
+    if resolved in seen:
         return []
+    if not resolved.exists():
+        raise FileNotFoundError(f"included file not found: {resolved}")
     seen.add(resolved)
     results = [resolved]
     for line in resolved.read_text().splitlines():
@@ -50,7 +52,13 @@ def _main() -> None:
         print(f"entry file not found: {entry}", file=sys.stderr)
         sys.exit(1)
 
-    for f in collect_inputs(entry, project_root, set()):
+    try:
+        inputs = collect_inputs(entry, project_root, set())
+    except FileNotFoundError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    for f in inputs:
         try:
             print(f.relative_to(project_root))
         except ValueError:

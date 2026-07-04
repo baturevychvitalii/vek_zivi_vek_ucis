@@ -1,4 +1,4 @@
-# Spanish Deck — Reading Resources
+# Spanish grove — Reading Resources
 
 Reading material for Rioplatense Spanish (River Plate dialect, Argentine/Uruguayan authors).
 This file is read during lit-search sessions — not part of the card-generation compile chain.
@@ -11,11 +11,11 @@ When recommending books:
 1. Read the user's situation (level, recent reads, theme request).
 2. Use discovery sources to build a thematic candidate pool.
 3. Check fetch sources for availability and EPUB download links.
-4. Fetch a short sample passage from each top candidate, assess difficulty against deck level.
+4. Fetch a short sample passage from each top candidate, assess difficulty against reading journal (this dir memory bank).
 5. Present 3–5 options with title, author, difficulty verdict, and direct download link.
 6. On confirmation, download EPUB to `cache/epubs/spanish/`.
 
-**Deck level context:** Run `compile-deck-context` (or read `compiled.md` if fresh) to confirm
+**Area level context:** Read `focus-area.md` (or read `compiled.md` if fresh) to confirm
 current level before making difficulty assessments.
 
 ---

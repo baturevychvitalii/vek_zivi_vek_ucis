@@ -10,9 +10,9 @@ Card generation runs in an isolated subprocess with only compiled context — no
 
 ## Resolve Deck
 
-Parse `$ARGUMENTS`: the first word is the deck name, everything after is the card input.
+Parse `$ARGUMENTS`: the first word is the <deck> name, everything after is the card input.
 
-Locate the deck directory by searching `decks/` for a subdirectory named `<deck>` at any depth. If not found or no deck name given: report "Deck '<deck>' not found. Available decks: [list all leaf deck dirs]" and stop.
+Locate the deck directory by searching `groves/` for a subdirectory named `<deck>` at any depth. If not found or no deck name given: report "Deck '<deck>' not found. Available decks: [list all leaf deck dirs]" and stop.
 
 The compiled context file is `<deck-dir>/<deck>.compiled.md`.
 

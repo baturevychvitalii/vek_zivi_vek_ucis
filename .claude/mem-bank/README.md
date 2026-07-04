@@ -32,7 +32,7 @@ Each bank lives at a fixed path and follows this layout:
 
 To register a new bank add one entry to `subscriptions.json`:
 ```json
-{ "name": "spanish", "bank": "decks/languages/spanish" }
+{ "name": "spanish", "bank": "<directory where the bank resides>" }
 ```
 The default trigger pattern is `<bank>/context\.md`. Override with `"patterns"` for broader matching.
 
@@ -42,7 +42,7 @@ If `this-bank-prompt.md` is present in the bank directory, its contents are inje
 
 The filter instruction should describe what qualifies for capture. The script automatically appends: *"If this filter excludes the session, respond with exactly SKIP."* Workers that receive `SKIP` log the exclusion and skip appending.
 
-Example (`decks/languages/spanish/reading-log/this-bank-prompt.md`):
+Example (`<grove>/languages/spanish/reading-log/this-bank-prompt.md`):
 ```
 This is the Spanish reading history bank. Only capture if the session involved
 selecting a book to read or reporting back on a completed book. Sessions about

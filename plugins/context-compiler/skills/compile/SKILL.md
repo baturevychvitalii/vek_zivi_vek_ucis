@@ -9,7 +9,7 @@ Merge a preprocessed file into a single coherent, human-readable document — no
 
 Usage: `/context-compiler:compile <path-to-file.preprocessed.md>`
 
-e.g. `/context-compiler:compile decks/languages/spanish/spanish.preprocessed.md`
+e.g. `/context-compiler:compile path/to/file.preprocessed.md`
 
 **Prerequisite:** The `.preprocessed.md` file must already exist. If it does not, tell the user to run `/context-compiler:compile-context <file.md>` first.
 
@@ -26,13 +26,13 @@ Your primary job is **reordering and grouping**, not pruning. The preprocessed f
 1. **Default = preserve.** Every rule, bullet, code-block entry, and prose line from every layer is carried into the output. Losing non-conflicting content is a bug.
 2. **Group by semantic category.** When the same heading (e.g., `Input Rules`, `User Input Syntax`, `Tagging`, `Output Format`, `Quality Check`, `Card Design Rules`) appears in multiple layers, merge them into a single section of that name. Concatenate the content from general → specific inside the merged section.
 3. **Override only on mutually exclusive conflicts.** A conflict is mutually exclusive when the two statements cannot both hold at once. When detected, the later (more specific) layer wins and the earlier statement is dropped. Examples:
-   - Scalar config sharing a key: two different `deckName:` or `basicModel:` values.
+   - Scalar config sharing a key: two different values for the same key (e.g. `theme:` or `outputFormat:`).
    - Direct contradiction in prose: `Always generate X` vs `Do NOT generate X` targeting the same object.
-   - A rule the specific layer explicitly supersedes (e.g., *"ignore the shared Tagging cap of 3–6; this deck uses 4–8"*).
+   - A rule the specific layer explicitly supersedes (e.g., *"ignore the shared tag limit of 3–6; this context uses 4–8"*).
    Non-exclusive elaborations — a new tag family, a new card type, an additional quality check — are **additive**. Keep both.
 4. **Deduplicate only verbatim or near-verbatim repeats.** If the same bullet appears in two layers with identical meaning, keep one copy at its earliest applicable layer.
 5. **Strip scaffolding.** Remove `# *.md` headers and `---` separators entirely.
-6. **Single unified document.** Output one H1 (the subject's name, e.g. `# Spanish`) — not one H1 per layer. H2s are merged semantic sections (`Card Generation Rules`, `Tagging`, `Output Format`, `Quality Check`, …), each containing the merged content from every layer that contributed.
+6. **Single unified document.** Output one H1 (the subject's name, e.g. `# Spanish`) — not one H1 per layer. H2s are merged semantic sections (`Processing Rules`, `Output Format`, `Quality Check`, …), each containing the merged content from every layer that contributed.
 
 ### Worked examples
 
@@ -40,35 +40,35 @@ Your primary job is **reordering and grouping**, not pruning. The preprocessed f
 
 Input:
 ```
-### Quality Check          (from language layer)
-- Is cloze actually improving retention?
+### Quality Check          (from shared layer)
+- Is the content accurate?
 
-### Quality Check          (from Spanish layer)
-- Would a real Argentine say this?
+### Quality Check          (from specific layer)
+- Does the phrasing match the target audience?
 ```
 
 Correct output:
 ```
 ### Quality Check
-- Is cloze actually improving retention?
-- Would a real Argentine say this?
+- Is the content accurate?
+- Does the phrasing match the target audience?
 ```
 
-Wrong output (drops the language-layer bullet):
+Wrong output (drops the shared-layer bullet):
 ```
 ### Quality Check
-- Would a real Argentine say this?
+- Does the phrasing match the target audience?
 ```
 
 **Mutually exclusive override** (same key, different concrete value):
 
 Input:
 ```
-cardtype::<type>     (from shared layer — placeholder)
-cardtype::production / pattern / cloze     (from Spanish layer — concrete enumeration)
+outputType::<type>     (from shared layer — placeholder)
+outputType::summary / analysis / report     (from specific layer — concrete enumeration)
 ```
 
-Correct output keeps only the Spanish line: the two cannot both be the enumeration of allowed `cardtype` values.
+Correct output keeps only the specific-layer line: the two cannot both be the enumeration of allowed `outputType` values.
 
 The final file should read as a single, self-contained specification that someone unfamiliar with the layering system can understand without any context about how it was assembled.
 

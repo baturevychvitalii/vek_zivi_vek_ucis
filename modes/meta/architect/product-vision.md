@@ -12,7 +12,7 @@ seamlessly, without interruptions. The flashcard generation use case remains rea
 it is one capability among several; the system's shape is becoming domain-agnostic.
 
 The product is an AI agent running in **user mode**, operating over a tree of
-**areas** (currently named `decks/`, rename to `areas/` pending) where each leaf
+**areas** (now named `groves/`) where each leaf
 directory is a self-contained learning domain — Spanish, English, instruments, and more
 to come. An area is no longer just "an Anki deck"; it is a learning workspace that may
 include intake (sourcing material), encoding (cards, notes), execution (study sessions),

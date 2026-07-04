@@ -30,7 +30,11 @@ if __name__ == "__main__":
         sys.exit(1)
 
     compiled_mtime = compiled.stat().st_mtime
-    inputs = collect_inputs(source, project_root, set())
+    try:
+        inputs = collect_inputs(source, project_root, set())
+    except FileNotFoundError as e:
+        print(f"broken include — {e}", file=sys.stderr)
+        sys.exit(3)
 
     for f in inputs:
         if f.stat().st_mtime > compiled_mtime:

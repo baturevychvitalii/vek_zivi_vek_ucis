@@ -1,7 +1,8 @@
-# Spanish Area
+# Spanish Grove
 
-Rioplatense Spanish (Argentine/River Plate dialect) Anki deck — vocabulary, grammar patterns,
-and production cards targeting spoken Buenos Aires register.
+Rioplatense Spanish (Argentine/River Plate dialect) knowledge enclave.
+Anki card specification and overall progression.
+Literature search and analysis.
 
 ## Files in this area
 

@@ -1,4 +1,4 @@
-#include decks/deck-defaults.md
+#include groves/deck-defaults.md
 
 ## Card Type
 

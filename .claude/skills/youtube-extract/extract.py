@@ -5,7 +5,7 @@ Extract learnable content from a YouTube video.
 Usage:
     python3 extract.py <url> <context_file> [bias_hint]
 
-Requires <context_file_dir>/focus_area.md — extraction criteria for the deck area.
+Requires <context_file_dir>/focus_area.md — extraction criteria for the area of knowledge.
 Writes extracted content to <context_file_dir>/youtube-phrases.txt and prints to stdout.
 """
 import sys
@@ -41,7 +41,7 @@ def main():
     focus_area_path = context_file.parent / "focus_area.md"
     if not focus_area_path.exists():
         print(f"Error: focus_area.md not found at {focus_area_path}", file=sys.stderr)
-        print("Create focus_area.md in the deck directory to define extraction criteria.", file=sys.stderr)
+        print("Create focus_area.md in the area directory to define extraction criteria.", file=sys.stderr)
         sys.exit(1)
     focus_area = focus_area_path.read_text()
 

@@ -43,8 +43,28 @@ python3 .claude/plugins/context-compiler/preprocess.py <entry-file>
 | Command | What it does |
 |---|---|
 | `/context-compiler:compile <preprocessed.md>` | LLM merge into `compiled.md` (fork context) |
-| `/context-compiler:compile-context <deck>` | Full pipeline: freshness check → preprocess → compile |
+| `/context-compiler:compile-context <entry-file>` | Full pipeline: freshness check → preprocess → compile |
 | `/context-compiler:reverse-propagate <compiled.md>` | Inverse: back-propagate hand-edits in a compiled file to its source layers |
+
+## Tests
+
+```
+tests/
+  test_include_graph.py     collect_inputs, resolve_include_path
+  test_compiled_is_fresh.py exit codes 0 / 1 / 3
+  test_preprocess.py        content merging, deduplication, error cases
+```
+
+**Run:**
+```bash
+plugins/context-compiler/.venv/bin/python3 -m pytest plugins/context-compiler/tests/ -v
+```
+
+**Setup (one-time):**
+```bash
+python3 -m venv plugins/context-compiler/.venv
+plugins/context-compiler/.venv/bin/pip install pytest
+```
 
 ## Notes
 

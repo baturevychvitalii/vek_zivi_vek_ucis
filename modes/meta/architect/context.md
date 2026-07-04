@@ -80,7 +80,7 @@ using the system. Architectural context should not be present.
 
 **Builder mode** — extending current infrastructure along established patterns.
 The entry points are the governance contracts (for modifying skills/pipelines) and
-domain context files (for modifying decks). No architectural decisions needed.
+domain context files. No architectural decisions needed.
 
 **Architect mode** — you are here. Changing how the system grows: new layers,
 new primitives, new governance patterns, reconsidering structure.

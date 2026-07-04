@@ -6,7 +6,7 @@
 
 ## Steps
 
-- read `<deck-dir>/context.md` [mandatory] — identify the deck config file and derive `<backupDir>` = `<deck-dir>/backups`
+- read `<grove-dir>/context.md` [mandatory] — identify the deck config file and derive `<backupDir>` = `<grove-dir>/backups`
   Why: deck config filename may not match the deck directory name; context.md is the authoritative index
 
 - skill: compile-context `<resolved anki deck specification file>` [mandatory] — fire as background fork

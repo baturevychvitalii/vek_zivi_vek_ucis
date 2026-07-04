@@ -50,10 +50,8 @@
       "Bash(git diff *)",
       "Bash(git add *)",
       "Bash(git check-ignore *)",
-      "Write(decks/**/*.compiled.md)",
-      "Write(decks/**/*.preprocessed.md)",
-      "Read(decks/**/*.compiled.md)",
-      "Read(decks/**/context.md)",
+      "Write(**/*.compiled.md)",
+      "Write(**/*.preprocessed.md)",
       "Write(/tmp/card-edit-context.md)",
       "Read(/tmp/card-edit-context.md)",
       "Write(/tmp/card-input.txt)",
@@ -65,7 +63,7 @@
       "Bash(python3 plugins/context-compiler/preprocess.py:*)",
       "Bash(python3 plugins/context-compiler/include_graph.py:*)",
       "Bash(python3 plugins/context-compiler/compiled-is-fresh.py:*)",
-      "Bash(cp decks/**)"
+      "Bash(cp groves/**)"
     ]
   },
   "hooks": {

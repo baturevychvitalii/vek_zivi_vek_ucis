@@ -25,6 +25,11 @@ python3 <plugin dir>/context-compiler/compiled-is-fresh.py <file.md>
   ✓ <file.md> already up-to-date — <stem>.compiled.md is newer than all inputs.
   ```
 - Exit code 1 → proceed to Step 3.
+- Exit code 3 → broken include. Report and stop:
+  ```
+  ✗ <file.md> has a broken #include — fix the path before recompiling.
+  <stderr output from the script>
+  ```
 
 ## Step 3 — Preprocess
 

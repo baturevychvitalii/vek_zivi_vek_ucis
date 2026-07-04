@@ -14,11 +14,11 @@ in the real sources, so a future compile reproduces them.
 **This is a lossy inverse.** Compilation reorders, groups, and merges layers, so a line in
 the compiled file does not map mechanically to one source line. Your job is to land each
 hand-edit **verbatim** in the **one** source file it belongs to — the rules below exist to
-pick that file correctly and to keep shared layers (which other decks depend on) safe.
+pick that file correctly and to keep shared layers (which other contexts depend on) safe.
 
 Usage: `/context-compiler:reverse-propagate <path-to-file.compiled.md>`
 
-e.g. `/context-compiler:reverse-propagate decks/languages/spanish/rioplatense-anki.compiled.md`
+e.g. `/context-compiler:reverse-propagate path/to/file.compiled.md`
 
 ## Validate Input and Resolve the Source Entry
 
@@ -29,8 +29,8 @@ Derive the **source entry file** by stripping the suffix: `<stem>.compiled.md` �
 
 If the entry file does not exist, report "Source entry not found: <entry>" and stop.
 
-The **deck directory** is the entry file's parent directory. Remember it — it is how you
-tell deck-local layers from shared layers later.
+The **context directory** is the entry file's parent directory. Remember it — it is how you
+tell context-local layers from shared layers later.
 
 ## Back Up the Edited Compiled File
 
@@ -52,10 +52,9 @@ This prints the entry file followed by every transitive `#include` dependency, o
 per line. These are the only candidate targets for every edit.
 
 Classify each listed file:
-- **Deck-local** — path is under the deck directory. Safe to edit freely.
-- **Shared** — path is outside the deck directory (e.g. `decks/languages/language-defaults.md`,
-  `decks/deck-defaults.md`, `decks/languages/cloze-deletion.md`). These compile into **other
-  decks too** — editing them changes rules for every deck. Treat as protected (see the
+- **Context-local** — path is under the context directory. Safe to edit freely.
+- **Shared** — path is outside the context directory. These compile into **other contexts
+  too** — editing them changes rules for every context. Treat as protected (see the
   Shared-layer guard).
 
 ## Establish the Edit Set
@@ -81,17 +80,17 @@ exact edited text, the surrounding section/heading}`.
 
 For every edit, decide which single source file owns it:
 
-- **Default to the most specific (entry) deck-local file.** Genuinely new, deck-specific
-  content goes to the entry file — or to a deck-local include like `focus_area.md` when it
-  plainly belongs to that file's topic (e.g. a dialect rule → the dialect file).
+- **Default to the most specific (entry) context-local file.** Genuinely new, context-specific
+  content goes to the entry file — or to a context-local include like `focus_area.md` when it
+  plainly belongs to that file's topic.
 - **To modify or remove existing text**, find the source file whose text matches the
   *pre-edit* content (use the source-truth as the bridge). That file owns the line.
 - **Shared-layer guard.** If the owner is a **shared** file, do not auto-apply. A hand-edit
-  can reword an upstream line using a deck-specific concept (e.g. elaborating a shared
-  "Is cloze improving retention?" bullet with "…or duplicating the *production card*?" —
-  "production card" is a Spanish-layer notion). For each such edit, use AskUserQuestion to
-  confirm: write into the shared file (changes all decks) **or** override it deck-locally in
-  the entry file. Default to the deck-local override. Never silently write a shared layer.
+  can reword an upstream line using a context-specific concept (e.g. elaborating a shared
+  rule with terminology that only belongs to the local context). For each such edit, use
+  AskUserQuestion to confirm: write into the shared file (changes all contexts) **or**
+  override it context-locally in the entry file. Default to the context-local override.
+  Never silently write a shared layer.
 
 ## Apply the Edits Verbatim
 
@@ -101,7 +100,7 @@ layer's style. The compiled wording is what the user chose; reproduce it charact
 - **modify** → replace the owning file's old line with the user's exact new text.
 - **remove** → delete the line.
 
-Deck-local edits: apply directly. Shared-layer edits: apply only the resolution the user
+Context-local edits: apply directly. Shared-layer edits: apply only the resolution the user
 confirmed.
 
 ## Verify Deterministically
