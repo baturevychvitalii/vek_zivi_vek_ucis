@@ -1,3 +1,6 @@
 [submodule "anki-mcp"]
 	path = anki-mcp
 	url = git@github.com:baturevychvitalii/anki-mcp.git
+[submodule ".claude/utils"]
+	path = .claude/utils
+	url = git@github.com:baturevychvitalii/python-utils.git
