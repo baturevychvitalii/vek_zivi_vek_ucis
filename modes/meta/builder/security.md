@@ -21,7 +21,7 @@ The current set of whitelisted rules is the source of truth: `.claude/settings.j
 
 ## Git Policy
 
-`git add`, `git commit`, and `git push` must **never** be run by Claude in this project — not even when asked generically. All git staging, committing, and pushing is the user's responsibility exclusively. Do not suggest or offer to run these commands.
+`git push` must **never** be run by Claude in this project — not even when asked generically. 
 
 Read-only git commands (`git log`, `git diff`, `git status`) are fine and whitelisted.
 

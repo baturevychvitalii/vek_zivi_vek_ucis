@@ -1,0 +1,14 @@
+{
+  "managed_note_types": [
+    {
+      "name": "Production",
+      "fields": ["Front", "Back", "Hint", "Interesting Facts"],
+      "is_cloze": false
+    },
+    {
+      "name": "Cloze",
+      "fields": ["Text", "Back Extra"],
+      "is_cloze": true
+    }
+  ]
+}
