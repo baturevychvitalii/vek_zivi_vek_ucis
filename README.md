@@ -79,6 +79,38 @@ worked example of a domain.
 
 ---
 
+## Where this is going: a grove marketplace
+
+The obvious "marketplace" idea for a project like this would be a **shared library of Anki
+decks**. I think a **library of shared *groves*** is the better primitive — and it's the
+direction I want to take this.
+
+A deck is a frozen output: someone's finished cards, take them or leave them. A grove is
+the *generative spec* — the approach to a domain. It encodes how a knowledgeable person
+chose to break the subject down: what's worth a card, what card types fit, what "good"
+looks like, how source material gets pulled in. Sharing that is sharing the *method*, not
+just the result, and the method is what's actually hard to reproduce.
+
+The baseline for this already exists. Configuring a grove is deliberately easy, the
+context-compiler and pipeline infrastructure are built, and grove authoring is done
+through the same artifacts everything else uses. So a marketplace here isn't a new system
+to build from scratch — it's mostly a distribution layer over a format that already works.
+
+What that unlocks is **fork-and-refocus**. Because a grove is easy to point an LLM at, you
+don't adopt it wholesale — you remix it:
+
+> *Say someone publishes a history grove — its whole approach is populating an Anki deck
+> with the important dates and pulling in matching images from Wikipedia. You point the
+> LLM at it and say: "I like how they approach history knowledge at Harvard; take their
+> grove, but let's focus it on the history of mathematics instead."*
+
+The LLM reads their spec, keeps the parts that make it good — the date-first framing, the
+Wikipedia image handling, the card-quality rules — and re-aims it at your subject. You
+inherit an expert's *encoding of a domain* and redirect it at what you actually want to
+learn, in one sentence.
+
+---
+
 ## Status: works on my machine — and that's exactly where help is wanted
 
 Honest disclosure, because it changes what you should expect: **this is a power-user
