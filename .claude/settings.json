@@ -63,6 +63,11 @@
       "Bash(python3 plugins/context-compiler/preprocess.py:*)",
       "Bash(python3 plugins/context-compiler/include_graph.py:*)",
       "Bash(python3 plugins/context-compiler/compiled-is-fresh.py:*)",
+      "Bash(plugins/anki-mcp/.venv/bin/python3 plugins/anki-mcp/skills/process-user-feedback-on-deck/extract.py:*)",
+      "Bash(plugins/anki-mcp/.venv/bin/python3 plugins/anki-mcp/skills/process-user-feedback-on-deck/apply.py:*)",
+      "Read(/tmp/anki-mcp-feedback-edit-input.json)",
+      "Read(/tmp/anki-mcp-feedback-edit-output.json)",
+      "Write(/tmp/anki-mcp-feedback-edit-output.json)",
       "Bash(cp groves/**)"
     ]
   },
