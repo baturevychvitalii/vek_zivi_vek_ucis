@@ -6,7 +6,7 @@ collaboration models, handoff options, grants, partners, and go-to-market paths.
 Use it to brainstorm freely: drafting emails, evaluating universities, scoping open-source
 positioning, considering co-maintainer candidates, writing specs for public consumption.
 
-Read `.claude/world_adoption/memory/context.md` on entry.
+Read `./memory/context.md` on entry.
 
 ---
 

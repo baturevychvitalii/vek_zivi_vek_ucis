@@ -1,0 +1,28 @@
+Hi
+
+I used to study at FIT quite some time ago (obor: teoreticka informatika, uid: baturvit)
+I'm doing fine ;)
+
+Practicing context engineering I've created quite an impressive & in my opinion enormously useful project
+that helps me to utilize my ability of working with human memory & boost the research.
+Long story short it is a context engineering structured directory architecture with deep integration of
+spaced repetition database (Anki).
+
+The thing is, I don't have much time to develop it and deal with it's adoption.
+Quite sad, considering the potential...
+
+I believe it would be mutually benefitial if you considered it for future opportunities leveraging your infrastructure.
+
+The project can be used as a base for
+* thesis on applied machine learning & context engineering
+	- improving project architecture
+	- making cross platform & llm provider agnostic (opencode migration)
+	- packaging project into single deliverable for end-user convenience
+* thesis on marketing & community work, namely by onboarding & tailoring to specific use case in
+	- other faculties of your university
+	- other universities
+	- organizations with complex & lengthy employee onboarding processes
+	  (for example in some infrastructural old institutions, banks)
+* by students themselves in their day to day studies
+  In fact, I'm can't even imagine what will the future of education be like if such receive mass adoption...
+
