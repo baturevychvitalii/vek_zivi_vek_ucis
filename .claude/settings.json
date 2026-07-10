@@ -58,7 +58,6 @@
       "Write(/tmp/card-generation-context.md)",
       "Read(/tmp/card-generation-context.md)",
       "Bash(claude -p --bare *)",
-      "Write(.claude/health-agent/health-findings.jsonl)",
       "Bash(python3 .claude/skills/youtube-extract/extract.py:*)",
       "Bash(plugins/context-compiler/.venv/bin/python3 plugins/context-compiler/preprocess.py:*)",
       "Bash(plugins/context-compiler/.venv/bin/python3 plugins/context-compiler/include_graph.py:*)",

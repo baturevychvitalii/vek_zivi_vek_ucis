@@ -17,12 +17,6 @@ __pycache__/
 **/mem-bank/small-jobs.json
 **/small-bank.md
 
-## Health agent
-.claude/health-agent/run-summary.json
-.claude/health-agent/permission-events.jsonl
-.claude/health-agent/pending-ai-review.flag
-
-
 # Anki MCP subsystem — venv (reproducible via README setup step)
 # session_crawler subsystem — venv (reproducible via README setup step)
 # gemini subsystem — venv (reproducible via .claude/gemini/README.md)
