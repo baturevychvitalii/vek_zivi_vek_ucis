@@ -16,7 +16,7 @@
   Why: ensure local Anki state is current before reading or modifying any cards
 
 - mcp__anki__deck_names → fuzzy-match `<deck>` → `<ankiDeckName>` [mandatory]
-  Why: resolves once at pipeline level; threads through to backup and red-edit
+  Why: resolves once at pipeline level; threads through to subtasks
 
 - skill: anki-backup-deck `<ankiDeckName>` `<backupDir>` [mandatory]
 
@@ -24,7 +24,7 @@
   Why: compiled context must be ready before card processing begins
 
 - skill: anki-mcp:process-user-feedback-on-deck `<compiled context file path>` `<ankiDeckName>` [mandatory]
-  Why: the actual red-flag processing and in-place edits
+  Why: the actual processing and card edits
 
 - skill: anki-process-purple-delete [mandatory]
   Why: cleanup unneeded cards
