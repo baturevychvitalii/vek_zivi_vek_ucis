@@ -6,6 +6,16 @@ The subsystem is consolidated under `.claude/mem-bank/`. Outside that folder, th
 
 Graduation is user-triggered (run `/mem-bank-big-bank` while on the feature branch, before merging into master). The graduated `<topic>.md` then travels into master as part of the normal merge — no git hook involved.
 
+## Example: graduation in action
+
+Invoke the slash command while on your feature branch:
+
+![Invoking the /mem-bank-big-bank command](assets/graduation-01-invoke.png)
+
+The graduation run iterates every bank in `subscriptions.json`, summarizes each non-empty `small-bank.md` into a `big-bank/<topic>.md`, archives the source, and skips banks whose per-bank filter opts out (`graduate=false`):
+
+![Graduation output: two small-banks graduated into big-bank, one skipped](assets/graduation-02-output.png)
+
 ## Subsystem files (this folder)
 
 | Path | What |
