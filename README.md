@@ -52,10 +52,12 @@ prompt, backs up the deck, generates cards at your skill level, and syncs them i
 
 <img width="1893" height="803" alt="YouTube extraction via Gemini" src="https://github.com/user-attachments/assets/d5b4c3bf-2a11-4372-a009-214192da60fc" />
 
-A feedback loop runs the other direction too: write a plain-language fix onto any card
-in Anki, and the system finds it, edits the fields, and keeps an append-only log of
-every change. One card's full round trip, screenshotted:
-[`plugins/anki-mcp/README.md` → Example: feedback loop in action](plugins/anki-mcp/README.md#example-feedback-loop-in-action).
+### A feedback loop runs the other direction, too
+
+Write a plain-language fix onto any card in Anki, and the system finds it, edits the
+fields, and keeps an append-only log of every change. One card's full round trip,
+screenshotted:
+[`plugins/anki-mcp/README.md` → Example: feedback loop in action](https://github.com/diotima-garden/anki-mcp/blob/main/README.md#example-feedback-loop-in-action).
 
 ---
 
