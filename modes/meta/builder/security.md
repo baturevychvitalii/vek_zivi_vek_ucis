@@ -39,21 +39,6 @@ These must never be added to the allow list — they should always surface for u
 
 ---
 
-## Pipeline Authoring
-
-Pipeline specifications live in `.claude/pipeline-specifications/`. Each step must be
-tagged `[mandatory]` or `[optional]` — no untagged steps allowed.
-
-- `[mandatory]` — stop immediately on failure, notify user with step name and error
-- `[optional]` — notify user with step name and error, ask whether to continue
-- Never silently swallow failures
-- Only compose existing skills and MCP tools — no inline logic in pipeline definitions
-- Pipeline steps must follow the same security rules as atomic skills
-
-Pipeline entry points (thin wrappers) live in `.claude/commands/pipe/`.
-
----
-
 ## Checklist Before Saving a Skill
 
 - [ ] Every bash block contains exactly one command (see `.claude/rules/bash-commands.md`)

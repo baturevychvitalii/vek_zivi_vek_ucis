@@ -1,7 +1,35 @@
-Execute the process-flags pipeline.
+Usage: `/pipe:anki-process-flags <grove-dir>`
 
-Usage: `/pipe:anki-process-flags <deck>`
+# Pipeline: process-flags
 
-Read `.claude/pipeline-specifications/process-flags.md`. Execute each step in the defined order,
-passing `<deck>` through to the relevant steps. Follow the
-mandatory/optional and error handling rules defined in the pipeline file exactly.
+- mandatory step fails → notify user with the step name and error, stop immediately
+- optional step fails → notify user with the step name and error, ask whether to continue
+- never silently swallow failures
+
+## Steps
+
+- read `<grove-dir>/context.md` [mandatory] — identify the deck config file and derive `<backupDir>` = `<grove-dir>/backups`
+  Why: deck config filename may not match the deck directory name; context.md is the authoritative index
+
+- skill: compile-context `<resolved anki deck specification file>` [mandatory] — fire as background fork
+  Why: no dependency on sync or deck name resolution
+
+- mcp__anki__sync [mandatory]
+  Why: ensure local Anki state is current before reading or modifying any cards
+
+- mcp__anki__deck_names → fuzzy-match `<deck>` → `<ankiDeckName>` [mandatory]
+  Why: resolves once at pipeline level; threads through to subtasks
+
+- skill: anki-backup-deck `<ankiDeckName>` `<backupDir>` [mandatory]
+
+- await compile-context result [mandatory]
+  Why: compiled context must be ready before card processing begins
+
+- skill: anki-mcp:process-user-feedback-on-deck `<compiled context file path>` `<ankiDeckName>` [mandatory]
+  Why: the actual processing and card edits
+
+- skill: anki-process-purple-delete [mandatory]
+  Why: cleanup unneeded cards
+
+- mcp__anki__sync [mandatory]
+  Why: push changes to Anki
