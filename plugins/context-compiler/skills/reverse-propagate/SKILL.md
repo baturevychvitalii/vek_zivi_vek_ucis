@@ -45,7 +45,7 @@ Do this before touching anything else, so the edits can never be lost mid-run.
 
 Run:
 ```bash
-python3 plugins/context-compiler/include_graph.py <entry>
+plugins/context-compiler/.venv/bin/python3 plugins/context-compiler/include_graph.py <entry>
 ```
 
 This prints the entry file followed by every transitive `#include` dependency, one path
@@ -61,7 +61,7 @@ Classify each listed file:
 
 Generate the current source-truth deterministically:
 ```bash
-python3 plugins/context-compiler/preprocess.py <entry>
+plugins/context-compiler/.venv/bin/python3 plugins/context-compiler/preprocess.py <entry>
 ```
 This is the flat concatenation of every layer as the sources stand now. Read it and read
 the edited `*.compiled.md`.
@@ -107,7 +107,7 @@ confirmed.
 
 Re-run the preprocessor:
 ```bash
-python3 plugins/context-compiler/preprocess.py <entry>
+plugins/context-compiler/.venv/bin/python3 plugins/context-compiler/preprocess.py <entry>
 ```
 Confirm each propagated edit's exact text now appears in the fresh preprocessed output (and
 each removal is gone). This deterministically proves the content landed in a source file —

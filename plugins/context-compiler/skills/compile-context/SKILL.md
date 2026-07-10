@@ -15,26 +15,16 @@ If `<file.md>` does not exist, report "File not found: <file.md>" and stop.
 
 ## Step 2 — Freshness Check
 
-Run:
 ```bash
-python3 <plugin dir>/context-compiler/compiled-is-fresh.py <file.md>
+plugins/context-compiler/.venv/bin/python3 plugins/context-compiler/compiled-is-fresh.py <file.md>
 ```
 
-- Exit code 0 → already up-to-date. Report and stop:
-  ```
-  ✓ <file.md> already up-to-date — <stem>.compiled.md is newer than all inputs.
-  ```
-- Exit code 1 → proceed to Step 3.
-- Exit code 3 → broken include. Report and stop:
-  ```
-  ✗ <file.md> has a broken #include — fix the path before recompiling.
-  <stderr output from the script>
-  ```
+Its stdout/stderr message tells you what to do next. Follow it.
 
 ## Step 3 — Preprocess
 
 ```bash
-python3 <plugin dir>/context-compiler/preprocess.py <file.md> <dir>/<stem>.preprocessed.md
+plugins/context-compiler/.venv/bin/python3 plugins/context-compiler/preprocess.py <file.md> <dir>/<stem>.preprocessed.md
 ```
 
 Where `<dir>` is the directory containing `<file.md>` and `<stem>` is the filename without `.md`.

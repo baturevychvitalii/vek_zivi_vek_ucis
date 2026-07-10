@@ -1,8 +1,7 @@
 """
-Tests for compiled-is-fresh.py exit codes:
-  0 — up-to-date
-  1 — stale (compiled missing or an input is newer)
-  3 — broken #include (referenced file does not exist)
+Tests for compiled-is-fresh.py: exit 0 with a FRESH/STALE stdout token for the two
+normal outcomes; non-zero with a stderr token for a genuine error (missing source,
+broken #include).
 """
 import subprocess
 import sys
@@ -23,7 +22,7 @@ def run(source: Path) -> subprocess.CompletedProcess:
 
 
 class TestUpToDate:
-    def test_exit_0_when_compiled_newer(self, tmp_path):
+    def test_exit_0_with_fresh_token(self, tmp_path):
         source = tmp_path / "doc.md"
         source.write_text("# no includes\n")
         compiled = tmp_path / "doc.compiled.md"
@@ -31,27 +30,28 @@ class TestUpToDate:
         compiled.write_text("compiled\n")
         result = run(source)
         assert result.returncode == 0
-        assert "up-to-date" in result.stdout
+        assert "FRESH" in result.stdout
 
 
 class TestStale:
-    def test_exit_1_when_compiled_missing(self, tmp_path):
+    def test_exit_0_with_stale_token_when_compiled_missing(self, tmp_path):
         source = tmp_path / "doc.md"
         source.write_text("# no includes\n")
         result = run(source)
-        assert result.returncode == 1
+        assert result.returncode == 0
+        assert "STALE" in result.stdout
 
-    def test_exit_1_when_source_newer_than_compiled(self, tmp_path):
+    def test_exit_0_with_stale_token_when_source_newer_than_compiled(self, tmp_path):
         source = tmp_path / "doc.md"
         compiled = tmp_path / "doc.compiled.md"
         compiled.write_text("compiled\n")
         time.sleep(0.01)
         source.write_text("# updated\n")
         result = run(source)
-        assert result.returncode == 1
-        assert "stale" in result.stdout
+        assert result.returncode == 0
+        assert "STALE" in result.stdout
 
-    def test_exit_1_when_included_file_newer(self, tmp_path):
+    def test_exit_0_with_stale_token_when_included_file_newer(self, tmp_path):
         included = tmp_path / "base.md"
         included.write_text("# base\n")
         source = tmp_path / "doc.md"
@@ -61,17 +61,25 @@ class TestStale:
         time.sleep(0.01)
         included.write_text("# base updated\n")
         result = run(source)
-        assert result.returncode == 1
-        assert "stale" in result.stdout
+        assert result.returncode == 0
+        assert "STALE" in result.stdout
 
 
 class TestBrokenInclude:
-    def test_exit_3_when_include_missing(self, tmp_path):
+    def test_nonzero_exit_when_include_missing(self, tmp_path):
         source = tmp_path / "doc.md"
         source.write_text("#include does-not-exist.md\n")
         compiled = tmp_path / "doc.compiled.md"
         time.sleep(0.01)
         compiled.write_text("compiled\n")
         result = run(source)
-        assert result.returncode == 3
-        assert "broken include" in result.stderr
+        assert result.returncode != 0
+        assert "BROKEN_INCLUDE" in result.stderr
+
+
+class TestSourceNotFound:
+    def test_nonzero_exit_when_source_missing(self, tmp_path):
+        source = tmp_path / "does-not-exist.md"
+        result = run(source)
+        assert result.returncode != 0
+        assert "SOURCE_NOT_FOUND" in result.stderr

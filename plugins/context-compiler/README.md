@@ -8,7 +8,7 @@ General-purpose preprocessor for resolving `#include` directives in markdown fil
 |---|---|
 | `include_graph.py` | Shared `#include` graph traversal (`resolve_include_path`, `collect_inputs`) |
 | `preprocess.py` | CLI preprocessor — resolves `#include` chains |
-| `compiled-is-fresh.py` | Freshness check — exits 0 if compiled output is up-to-date |
+| `compiled-is-fresh.py` | Freshness check — prints `FRESH`/`STALE`/an error token to stdout/stderr; exit 0 unless the check itself failed |
 | `skills/compile/` | LLM merge step — collapses preprocessed layers into one readable doc |
 | `skills/compile-context/` | Orchestrator — freshness check → preprocess → compile |
 | `skills/reverse-propagate/` | Inverse — back-propagates hand-edits in a `compiled.md` to its source layers |
@@ -32,10 +32,10 @@ Each file is included at most once (keyed by canonical resolved path). Circular 
 
 ```bash
 # Write to file
-python3 .claude/plugins/context-compiler/preprocess.py <entry-file> <output-file>
+plugins/context-compiler/.venv/bin/python3 plugins/context-compiler/preprocess.py <entry-file> <output-file>
 
 # Print to stdout
-python3 .claude/plugins/context-compiler/preprocess.py <entry-file>
+plugins/context-compiler/.venv/bin/python3 plugins/context-compiler/preprocess.py <entry-file>
 ```
 
 ## Skills
@@ -51,7 +51,7 @@ python3 .claude/plugins/context-compiler/preprocess.py <entry-file>
 ```
 tests/
   test_include_graph.py     collect_inputs, resolve_include_path
-  test_compiled_is_fresh.py exit codes 0 / 1 / 3
+  test_compiled_is_fresh.py FRESH/STALE tokens, error cases
   test_preprocess.py        content merging, deduplication, error cases
 ```
 
