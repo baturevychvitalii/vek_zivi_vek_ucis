@@ -3,6 +3,8 @@
 >
 > *Learning itself is a mere waste of time dictated by biology of mind.*
 
+`[Hmm... the second part doesn't age well...]`
+
 Imagine, Aristotele sharing his reasoning dogmas with you and approaches on how
 exactly he filters information, and in what format he would like to preserve it in his being.
 What if he could share it with you via one thin 'plugin'?
