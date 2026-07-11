@@ -1,8 +1,38 @@
-# Вік живи, вік учись — a learning conductor
+# Choosing what you add to your knowledge - is your taste;
+# Learning it - waste of time dictated by biology of mind.
+# Every step pushing us towards that biological frontier is precious.
 
-> *Вік живи, вік учись!* — "Live a lifetime, learn a lifetime."
+# Fire -> Society -> Writing -> Welcome to anothe step, Diotima
 
-An AI-powered **learning conductor**: a generalized interface for learning any skill,
+Think of it this way:
+
+Instead of sharing what to learn - (exchanging concrete books)
+Share **how** one can lern - (exchange principles on how books shall be selected)
+
+
+Basically one abstraction layer higher
+
+Instead of sharing domain knowledge
+We share a knowledge filter & generator.
+
+
+
+Imagine, Aristotele sharing his thinking dogmas with you and approaches to how
+exactly he filters information, and in what format he would like to preserve it in his memory.
+What if he could share it with you via one thin 'plugin'?
+
+Imagine the most efficient way for Aristotele to learn himself would be to build this 'plugin'
+for his own daily use and reasoning. This way, sharing it would cost him nothing.
+
+Something like sharing the minimal golden essence of {browser history, architectural vision, gemini memory}.
+
+
+In a way, Internet itself does it's but how many sailors have it's tide consumed, for the amount of noise...
+In a way - universities are quite good at it...
+Enough words, go, explore!!
+
+## details for nerds ;)
+An AI-powered **learning conductor**: a generalized interface for learning any skill.
 built on top of spaced repetition (Anki) and context engineering. You describe a domain
 once — its card types, its quality rules, what "good" looks like — and the system takes
 over the boring machinery: extracting material, generating cards tuned to your current
