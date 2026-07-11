@@ -43,7 +43,8 @@ provider-agnostic runtime. This shapes the project layout directly:
 
 - **`.claude/` holds only what is Claude-specific** — things that cannot be abstracted
   to a generic AI agent: Claude's slash-command skills, hooks, `settings.json`, and
-  agent definitions. Everything else migrates out.
+  agent definitions. Everything else migrates out (anki-mcp already moved to `plugins/`;
+  more follows).
 - **System infrastructure, modes, and plugins live at the project root** — visible,
   portable, not buried in a vendor-specific directory. A port to another provider touches
   only `.claude/`; the rest of the system is unchanged.
