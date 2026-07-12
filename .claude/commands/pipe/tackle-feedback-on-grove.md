@@ -1,4 +1,4 @@
-Usage: `/pipe:anki-process-flags <grove-dir>`
+Usage: `/pipe:tackle-feedback-on-grove <grove-dir>`
 
 # Pipeline: process-flags
 
