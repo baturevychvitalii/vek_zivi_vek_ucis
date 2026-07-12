@@ -54,11 +54,8 @@ repo is built, from the ground up, to be *legible to a model reading it cold*.
 per-domain knowledge spec) and an input, and it compiles the domain's rules into the
 prompt, backs up the deck, generates cards at your skill level, and syncs them in.
 
-<img width="1098" height="353" alt="Adding cards to a Spanish deck" src="https://github.com/user-attachments/assets/8c1054c0-a974-42bf-9472-a408b3abb5b9" />
-
-<img width="1917" height="941" alt="Card generation pipeline in action" src="https://github.com/user-attachments/assets/0b7b77c5-ec3e-4983-923c-13426e248e39" />
-
-<img width="1069" height="221" alt="Generated cards synced into Anki" src="https://github.com/user-attachments/assets/379a10c7-c385-4fb1-a386-2878791dc90a" />
+One real run, start to finish, is narrated in
+[Example: adding two sentences to the Spanish deck](#example-adding-two-sentences-to-the-spanish-deck).
 
 **Context-aware extraction from YouTube**, specific to the area you're focusing on
 (via the Gemini API) — turn a video into deck-ready material without watching it end to end.
@@ -71,6 +68,49 @@ Write a plain-language fix onto any card in Anki, and the system finds it, edits
 fields, and keeps an append-only log of every change. One card's full round trip,
 screenshotted:
 [`plugins/anki-mcp/README.md` → Example: feedback loop in action](https://github.com/diotima-garden/anki-mcp/blob/main/README.md#example-feedback-loop-in-action).
+
+---
+
+## Example: adding two sentences to the Spanish deck
+
+The whole interface is one casual message — two phrases jotted down mid-conversation,
+one of them with a typo and no accents:
+
+```
+add these to my spanish deck:
+Monsieur es todo un conocedor de la alta cocina.
+Estas hecho un limon
+```
+
+That's enough to launch the `/pipe:anki-add-cards` pipeline. Before anything is
+generated, the trust machinery runs: the grove's context compiles in the background
+while the collection syncs, "spanish" fuzzy-matches to the actual deck name
+**Español**, and the deck is backed up to a dated `.apkg` — every run, not just risky
+ones:
+
+![Deck names resolved via MCP, "spanish" matched to Español, backup skill launching](assets/add-cards-01-resolve-backup.png)
+
+Generation happens in an isolated subprocess that sees only the compiled grove
+context — the deck's dialect rules (Rioplatense, voseo), card-design constraints, and
+tagging taxonomy. The two sentences come back as five proposed cards: each input's
+primary production card plus supporting pattern cards, already scanned against known
+quality leaks. Nothing has touched Anki yet — the batch stops at an approval gate, and
+the answer doesn't have to be yes or no:
+
+![The five generated cards previewed with an approval prompt, the user typing "only add 1 and 4"](assets/add-cards-02-preview-approve.png)
+
+`only add 1 and 4` is respected exactly — the two chosen cards are pushed, the three
+others dropped, and the collection syncs back to AnkiWeb:
+
+![Report: added 2 cards to Español and synced, listing both cards](assets/add-cards-03-report.png)
+
+The result, rendered live in Anki. Note what the pipeline did beyond translation: the
+front is a *situational English cue* (per the grove's rule that idiom fronts must
+trigger production, not recognition), the input's missing accents came back as *Estás
+hecho un limón* on card 4, and the etymology landed in a collapsible
+"interesting facts" section that stays out of the way during review:
+
+![The Monsieur card rendered in Anki: English cue on front, Spanish answer, collapsible interesting-facts section](assets/add-cards-04-rendered.png)
 
 ---
 

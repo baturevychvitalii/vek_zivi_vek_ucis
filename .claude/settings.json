@@ -65,7 +65,8 @@
       "Bash(plugins/anki-mcp/.venv/bin/python3 plugins/anki-mcp/skills/process-user-feedback-on-deck/apply.py:*)",
       "Bash(plugins/anki-mcp/.venv/bin/python3 plugins/anki-mcp/skills/process-user-feedback-on-deck/edit.py:*)",
       "Bash(plugins/anki-mcp/.venv/bin/python3 plugins/anki-mcp/skills/process-user-feedback-on-deck/reset-test-deck.py:*)",
-      "Bash(cp groves/**)"
+      "Bash(cp groves/**)",
+      "Bash(cp ~/Pictures/screenshots/*)"
     ],
     "_note_external_writes": [
       "Writes to /tmp or ANY path outside the project root always trigger a manual write-confirmation, regardless of a Write(...) allow rule.",
