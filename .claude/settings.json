@@ -109,6 +109,17 @@
         ]
       }
     ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 system/scm-integration/gh-issue-label-gate.py"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Read",
