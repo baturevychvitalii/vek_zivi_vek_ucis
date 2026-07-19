@@ -24,20 +24,25 @@ to re-read it):
 *Nothing moves until the "before" state is frozen and the one unverified assumption is
 checked.*
 
-- [ ] Commit the pending architect-mode files (this plan, `interaction_north_star.md`,
-      record amendments).
-- [ ] **Golden snapshot:** compile every production entry file with the current
-      context-compiler and store outputs under
-      `modes/meta/architect/golden/` (or scratch, but committed is safer):
-      `rioplatense-anki.md`, `english.md`, `instruments.md`. These are the byte-identity
-      oracle for Phases 1–2.
-- [ ] **Spike (D0's "VERIFY"):** confirm a session-start context-injection point exists —
-      Claude Code hook events (`settings.json` currently uses `UserPromptSubmit`,
-      `InstructionsLoaded`, …) and the opencode equivalent — and whether a *plugin* can
-      ship it. Write the finding into D0's paragraph in the decision record. Blocks only
-      Phase 3's injection step; everything else proceeds regardless.
+- [x] Commit the pending architect-mode files (this plan, `interaction_north_star.md`,
+      record amendments). — `7ce9675`
+- [x] **Golden snapshot:** preprocessed (deterministic `#include`-resolved) output for
+      every production entry file, stored at `modes/meta/architect/golden/`:
+      `spanish.golden.md`, `english.golden.md`, `instruments.golden.md` (named off
+      `*.golden.md`, not `*.preprocessed.md`, since the latter is project-gitignored as
+      a regenerable build artifact — these are a deliberate committed oracle). This is
+      the byte-identity oracle for Phases 1–2. **Bonus verification run now:**
+      `dafne_simulation/spanish`'s `.`-relative rewrite recompiles byte-identical to
+      `golden/spanish.golden.md` — the DAFNE amendments' claim is confirmed against
+      production content, not just the sandbox's own fixtures.
+- [x] **Spike (D0's "VERIFY"):** confirmed via Claude Code docs. `SessionStart` is a
+      native hook event (distinct from `UserPromptSubmit`), fires once per session before
+      the first prompt, supports `additionalContext` injection, and plugins ship it via
+      `hooks/hooks.json` with automatic merge on install — no grove-level config needed.
+      Finding written into D0's paragraph in the decision record. opencode's equivalent
+      remains unverified but is not architecture-blocking.
 
-**Exit:** golden outputs committed; D0 spike note written.
+**Exit:** golden outputs committed; D0 spike note written. **Phase 0 complete.**
 
 ---
 
@@ -130,8 +135,11 @@ edits; master's `groves/` holds only submodule mounts; context-compiler is gone.
 - [ ] **`requires:` refusal:** opening a grove whose effective (unioned) requires
       includes `anki` in a runtime without anki-mcp produces a plain, early message —
       not a deep pipeline failure. A grove requiring nothing is first-class.
-- [ ] **Manifest injection at session start**, per the Phase 0 spike finding. Claude
-      Code port lives in `.claude/`; the mechanism itself is vendor-neutral.
+- [ ] **Manifest injection at session start:** `plugins/dafne` ships a `SessionStart`
+      hook (`hooks/hooks.json`) that reads `DAFNE.md` from cwd and returns it as
+      `additionalContext` — confirmed viable in Phase 0, no grove-side files needed. The
+      Claude Code hook is the vendor-specific port; opencode gets its own when that
+      migration starts.
 - [ ] **Assisted update (D4's second half):** a "tend parents" flow — fetch upstreams of
       everything under `parents/` (recursively), nudge on new commits, show the
       **compiled-output diff**, and on acceptance commit the new pin. Runtime-side, so
@@ -180,8 +188,9 @@ Building any of these before its trigger is designing from zero instances.
 
 ```
 Phase 0 ──> Phase 1 ──> Phase 2 ──> Phase 3 ──> Phase 4
-   └── spike blocks only Phase 3's injection step
 ```
+
+Phase 0 is complete; no open spike remains blocking any later phase.
 
 Phases 1–2 are the irreversible core (published-format discipline); 3–4 are runtime-side
 and stay cheap to revise. When Phase 2 completes, `major_architectural_decision_to_be_made.md`

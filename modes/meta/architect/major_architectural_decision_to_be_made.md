@@ -199,14 +199,18 @@ answers the either/or without reintroducing the runtime→grove-internals coupli
 *The sugar layer is now settled — see `interaction_north_star.md` (2026-07-18): git-model
 primitive now, garden default-dir as sugar, managed-library verbs deferred to D5.*
 
-**How the manifest gets loaded — VERIFY, do not treat as settled.** The runtime injects
-the grove's manifest at session start via the harness's context mechanism. `.claude/`
-hooks are the Claude-specific port of this; opencode gets its own. **The exact hook event
-is unverified** — `settings.json` today uses `UserPromptSubmit`, `InstructionsLoaded`,
-`PreToolUse`, `PostToolUse`, `SessionEnd`; whether a session-start injection point exists
-and whether a *plugin* can ship it needs checking before anything depends on it. The
-architecture does not rest on the answer — this is a port detail, and it belongs behind
-the `.claude/`-is-vendor-specific line.
+**How the manifest gets loaded — verified 2026-07-19.** The runtime injects the grove's
+manifest at session start via the harness's context mechanism. `.claude/` hooks are the
+Claude-specific port of this; opencode gets its own. **Claude Code confirmed:**
+`SessionStart` is a native hook event, distinct from `UserPromptSubmit` — it fires once
+per session (startup, resume, post-`/clear`, post-compaction), and a hook on it can
+return `additionalContext` injected *before the first prompt*. Plugins ship hooks via
+`hooks/hooks.json` at the plugin root, and plugin-declared hooks merge automatically with
+user/project hooks on install — **no grove-level configuration required**. `plugins/dafne`
+can therefore ship a `SessionStart` hook that reads `DAFNE.md` from cwd and injects it,
+satisfying the payoff below with zero vendor-specific files in the grove itself. This is a
+port detail confined behind the `.claude/`-is-vendor-specific line; opencode's equivalent
+is unverified but the architecture does not rest on it.
 
 **The payoff:** the grove contains **zero** vendor-specific files. No `.claude/`, no
 `CLAUDE.md`, no env var. Pure text, memory, and parents.
