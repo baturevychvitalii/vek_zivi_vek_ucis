@@ -1,0 +1,7 @@
+# Scraped subject/people data — kept locally, never tracked (contains personal names).
+*.csv
+*.json
+*.jsonl
+
+# Per-subject outreach draft — kept locally; carries named contacts.
+drafts/cvut-per-subject-outreach.md
