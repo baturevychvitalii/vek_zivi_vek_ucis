@@ -36,14 +36,15 @@ the system takes over the boring machinery.
 
 ## You don't operate this — an LLM does
 
-**This is not a tool you drive by hand.** There are no commands to memorize and no UI to
-learn. You talk to an LLM (today, Claude Code); it reads `CLAUDE.md`, sees the available
-skills and MCP tools, and from that alone has *full coverage of the project*. The whole
+**This is not a tool you drive by hand** — I built it exactly so I wouldn't have to. There
+are no commands to memorize and no UI to learn. You talk to an LLM (today, Claude Code); it
+reads `CLAUDE.md`, sees the available skills and MCP tools, and from that alone it knows its
+way around the whole thing. The whole
 repo is built, from the ground up, to be *legible to a model reading it cold*.
 
 - **For a curious user:** don't judge it by the install length below. Once it's running,
   you don't wrangle it — you ask, and it acts.
-- **For a contributor:** the same property makes it unusually easy to work on. Point an
+- **For a contributor:** the same property makes it easy to work on. Point an
   LLM at the repo and it will orient itself the same way it orients an end user.
 
 ---
