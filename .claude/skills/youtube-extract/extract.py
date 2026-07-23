@@ -50,7 +50,8 @@ def main():
     prompt = build_prompt(focus_area, bias_hint)
     result = call_gemini_video(url, prompt, MODEL)
 
-    output_path.write_text(result + "\n")
+    with output_path.open("a") as f:
+        f.write(result + "\n")
     print(result)
 
 
